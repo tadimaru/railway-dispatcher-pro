@@ -206,9 +206,43 @@
     font-size:17px;letter-spacing:.06em;
   }
 
+  /* ---- systems（輸送障害と指令） ---- */
+  .inc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+  .inc-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:22px 24px;border-left:4px solid var(--inc,var(--accent));
+  }
+  .inc-card h3{font-size:17px;margin:0 0 6px}
+  .inc-card p{margin:0;color:var(--sub);font-size:13.8px}
+  .sandbox-note{
+    margin-top:22px;background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    padding:20px 26px;font-size:14.5px;
+  }
+  .sandbox-note b{color:var(--accent)}
+  .cmd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+  .cmd-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px 24px;
+  }
+  .cmd-card h3{
+    font-size:15px;margin:0 0 14px;display:flex;align-items:center;gap:9px;
+  }
+  .cmd-card h3::before{
+    content:"";width:9px;height:9px;border-radius:50%;background:var(--cg,var(--accent));flex:none;
+  }
+  .cmd-list{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .cmd-list li{
+    background:var(--wash);border:1px solid var(--line);border-radius:999px;
+    padding:5px 14px;font-size:13px;font-weight:600;
+  }
+  .cmd-note{margin:18px 0 0;color:var(--sub);font-size:13px}
+  .cmd-note kbd{
+    font-family:"Segoe UI",system-ui,sans-serif;border:1px solid var(--line);border-bottom-width:2px;
+    border-radius:4px;padding:1px 7px;font-size:12px;background:var(--wash);
+  }
+
   /* ---- episodes ---- */
   .tut-box{
-    background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
     padding:30px 34px;margin-top:44px;
   }
   .tut-box h3{margin-bottom:6px}
@@ -316,6 +350,8 @@
     h2{font-size:27px}
     .hero-content{padding-top:150px;padding-bottom:56px}
     .epi-grid{grid-template-columns:1fr}
+    .inc-grid{grid-template-columns:1fr}
+    .cmd-grid{grid-template-columns:1fr}
     .tut-box{padding:24px 22px}
     .feat{grid-template-columns:1fr;gap:26px;padding:44px 0}
     .feat.rev .feat-txt{order:1}
@@ -343,6 +379,7 @@
     <div class="nav-links">
       <a href="#features">特徴</a>
       <a href="#howto">遊び方</a>
+      <a href="#systems">障害と指令</a>
       <a href="#episodes">エピソード</a>
       <a href="#gallery">ギャラリー</a>
       <a href="#product">製品情報</a>
@@ -472,7 +509,81 @@
   </div>
 </section>
 
-<section id="episodes">
+<section id="systems">
+  <div class="wrap">
+    <p class="eyebrow">Incidents &amp; Commands</p>
+    <h2>起きる障害と、打てる手。</h2>
+    <p class="lead" style="margin-top:14px">指令員の仕事は、障害と手札の知恵くらべ。本作には4種類の輸送障害と、実際の運転整理を再現した指令の数々を収録しています。</p>
+
+    <h3 style="margin-top:44px">4つの輸送障害</h3>
+    <div class="inc-grid">
+      <div class="inc-card" style="--inc:var(--sig-red)">
+        <h3>車両故障</h3>
+        <p>列車が本線上で制御不能停止。復旧までは1ミリも動かせません。高密度ダイヤなら、数分の停止が全線の乱れに変わります。</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-amber)">
+        <h3>線路・信号の故障（軌道回路通行不能）</h3>
+        <p>ポイント不転換や線路支障で、特定の区間が通れなくなり進路が組めなくなります。限られた番線のやりくりが試されます。</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-cyan)">
+        <h3>区間速度制限</h3>
+        <p>大雨などで駅間に徐行制限。一部の列車の遅れにとどまらず、間隔と接続を乱しながらじわじわと全線へ波及します。</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-pink)">
+        <h3>区間運転見合わせ</h3>
+        <p>強風などで駅間が進入禁止に。路線は分断され、両側それぞれで折返し運転を仕立てる大規模な運転整理が始まります。</p>
+      </div>
+    </div>
+    <div class="sandbox-note">
+      障害はシナリオで襲ってくるだけではありません。<b>メニューの「インシデント発令」から、好きな場所・好きなタイミングで自分でも起こせます</b>。故障させる列車も、速度制限の区間・制限値も自由。「最悪の一日」を自分で設計して、指令の腕試しをする遊び方もできます。
+    </div>
+
+    <h3 style="margin-top:52px">指令の手札</h3>
+    <div class="cmd-grid">
+      <div class="cmd-card" style="--cg:var(--sig-amber)">
+        <h3>止める・遅らせる</h3>
+        <ul class="cmd-list">
+          <li>抑止（指定駅で止め置き）</li>
+          <li>全列車を一括抑止</li>
+          <li>延発（発車を＋1〜5分）</li>
+          <li>通知運転（定刻後、次駅が空き次第発車）</li>
+        </ul>
+      </div>
+      <div class="cmd-card" style="--cg:var(--sig-pink)">
+        <h3>停車駅を変える</h3>
+        <ul class="cmd-list">
+          <li>臨時停車</li>
+          <li>臨時通過</li>
+          <li>ダイヤどおりに戻す</li>
+        </ul>
+        <p class="cmd-note">走行中の列車は、いまの速度と残り距離で停止に間に合うかが変わります。判断はお早めに。</p>
+      </div>
+      <div class="cmd-card" style="--cg:var(--sig-cyan)">
+        <h3>運用を組み替える</h3>
+        <ul class="cmd-list">
+          <li>この駅で打ち切り（終着に変更）</li>
+          <li>折返し運用を新規作成</li>
+          <li>続行（同方向）運用を新規作成</li>
+          <li>別運用への連結</li>
+          <li>連結の解除（次運用のキャンセル）</li>
+          <li>未出発運用の乗っ取り</li>
+          <li>残区間の分岐・停車秒を編集</li>
+        </ul>
+        <p class="cmd-note">打ち切った車両はその駅の番線に残ります。どかすのも指令の仕事。</p>
+      </div>
+      <div class="cmd-card" style="--cg:var(--sig-green)">
+        <h3>上級・現場対応</h3>
+        <ul class="cmd-list">
+          <li>駅扱い（進路の自動構成を止め、てこで手動開通）</li>
+          <li>車両故障の復旧操作</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cmd-note">打った手はすべて <kbd>Ctrl</kbd>+<kbd>Z</kbd> で1手ずつ取り消せます。試して、戻して、また試す——運転整理は思考のゲームです。</p>
+  </div>
+</section>
+
+<section class="wash" id="episodes">
   <div class="wrap">
     <p class="eyebrow">Episodes</p>
     <h2>五つの「乱れ」が、あなたを待つ。</h2>
@@ -531,7 +642,7 @@
   </div>
 </section>
 
-<section class="wash" id="gallery">
+<section id="gallery">
   <div class="wrap">
     <p class="eyebrow">Gallery</p>
     <h2>スクリーンショット</h2>
@@ -546,7 +657,7 @@
   </div>
 </section>
 
-<section id="product">
+<section class="wash" id="product">
   <div class="wrap">
     <p class="eyebrow">Product</p>
     <h2>製品情報</h2>
@@ -569,7 +680,7 @@
   </div>
 </section>
 
-<section class="wash" id="sister">
+<section id="sister">
   <div class="wrap">
     <p class="eyebrow">Series</p>
     <h2>姉妹作</h2>
@@ -583,7 +694,7 @@
   </div>
 </section>
 
-<section id="faq">
+<section class="wash" id="faq">
   <div class="wrap">
     <p class="eyebrow">FAQ</p>
     <h2>よくある質問</h2>
