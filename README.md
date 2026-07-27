@@ -15,7 +15,7 @@ assets/img/       スクショ・ロゴ・OGP画像（元素材は共有ドラ�
 
 ## 運用メモ
 
-- **正式告知時にやること**: `index.html` の `<meta name="robots" content="noindex">` の行を削除する
+- 2026-07-27 正式公開済み（noindex 解除済み・検索インデックス許可）
 - Steamリンクは必ず `?utm_source=official-site` を付ける（マーケティング課のUTM運用ルール参照）
 - スクショ差し替え時は共有ドライブの元素材を更新してから、同名で `assets/img/` に書き出す
 - 文中に実在の駅名・路線名・地名を出さない（Steamページと同じ方針）
