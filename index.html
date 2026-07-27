@@ -220,6 +220,7 @@
   }
   .sandbox-note b{color:var(--accent)}
   .cmd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+  .cmd-card.tall{grid-column:2;grid-row:1 / span 2}
   .cmd-card{
     background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px 24px;
   }
@@ -352,6 +353,7 @@
     .epi-grid{grid-template-columns:1fr}
     .inc-grid{grid-template-columns:1fr}
     .cmd-grid{grid-template-columns:1fr}
+    .cmd-card.tall{grid-column:auto;grid-row:auto}
     .tut-box{padding:24px 22px}
     .feat{grid-template-columns:1fr;gap:26px;padding:44px 0}
     .feat.rev .feat-txt{order:1}
@@ -558,7 +560,7 @@
         </ul>
         <p class="cmd-note">走行中の列車は、いまの速度と残り距離で停止に間に合うかが変わります。判断はお早めに。</p>
       </div>
-      <div class="cmd-card" style="--cg:var(--sig-cyan)">
+      <div class="cmd-card tall" style="--cg:var(--sig-cyan)">
         <h3>運用を組み替える</h3>
         <ul class="cmd-list">
           <li>この駅で打ち切り（終着に変更）</li>
@@ -570,13 +572,6 @@
           <li>残区間の分岐・停車秒を編集</li>
         </ul>
         <p class="cmd-note">打ち切った車両はその駅の番線に残ります。どかすのも指令の仕事。</p>
-      </div>
-      <div class="cmd-card" style="--cg:var(--sig-green)">
-        <h3>上級・現場対応</h3>
-        <ul class="cmd-list">
-          <li>駅扱い（進路の自動構成を止め、てこで手動開通）</li>
-          <li>車両故障の復旧操作</li>
-        </ul>
       </div>
     </div>
   </div>
