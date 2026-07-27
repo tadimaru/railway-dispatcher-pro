@@ -63,10 +63,10 @@
     border-bottom:1px solid var(--line);backdrop-filter:blur(6px);
   }
   .nav-in{
-    max-width:1060px;margin:0 auto;padding:10px 24px;
+    max-width:1060px;margin:0 auto;padding:8px 24px;
     display:flex;align-items:center;gap:26px;
   }
-  .nav-in img{height:30px;width:auto}
+  .nav-in img{height:44px;width:auto}
   .nav-links{display:flex;gap:22px;margin-left:auto;flex-wrap:wrap}
   .nav-links a{
     color:var(--ink);text-decoration:none;font-size:13.5px;letter-spacing:.04em;
@@ -249,6 +249,19 @@
   .gal img{transition:transform .18s;border:1px solid var(--line)}
   .gal img:hover{transform:scale(1.025)}
 
+  /* ---- lightbox（スクショのクリック拡大） ---- */
+  .feat-img img,.gal img{cursor:zoom-in}
+  .lightbox{
+    position:fixed;inset:0;z-index:100;background:rgba(10,16,22,.93);
+    display:flex;align-items:center;justify-content:center;
+    padding:3vmin;cursor:zoom-out;
+  }
+  .lightbox[hidden]{display:none}
+  .lightbox img{
+    max-width:100%;max-height:100%;width:auto;height:auto;
+    border-radius:6px;box-shadow:0 24px 80px rgba(0,0,0,.6);
+  }
+
   /* ---- product info ---- */
   .spec{
     margin-top:44px;border-top:1px solid var(--line);
@@ -324,7 +337,7 @@
 
 <nav>
   <div class="nav-in">
-    <img src="assets/img/logo-black.png" alt="鉄道運行管理シミュレーターPro">
+    <img src="assets/img/logo-nav.png" alt="鉄道運行管理シミュレーターPro">
     <div class="nav-links">
       <a href="#features">特徴</a>
       <a href="#howto">遊び方</a>
@@ -521,11 +534,11 @@
     <p class="eyebrow">Gallery</p>
     <h2>スクリーンショット</h2>
     <div class="gal">
-      <img src="assets/img/thumb-overview.jpg" alt="路線俯瞰" loading="lazy">
-      <img src="assets/img/thumb-dia.jpg" alt="ダイヤグラム" loading="lazy">
-      <img src="assets/img/thumb-incident.jpg" alt="インシデント対応" loading="lazy">
-      <img src="assets/img/thumb-edit.jpg" alt="ダイヤ編集" loading="lazy">
-      <img src="assets/img/thumb-windows.jpg" alt="マルチウィンドウ" loading="lazy">
+      <img src="assets/img/thumb-overview.jpg" data-full="assets/img/large-overview.jpg" alt="路線俯瞰" loading="lazy">
+      <img src="assets/img/thumb-dia.jpg" data-full="assets/img/feature-diagram.jpg" alt="ダイヤグラム" loading="lazy">
+      <img src="assets/img/thumb-incident.jpg" data-full="assets/img/feature-incident.jpg" alt="インシデント対応" loading="lazy">
+      <img src="assets/img/thumb-edit.jpg" data-full="assets/img/feature-edit.jpg" alt="ダイヤ編集" loading="lazy">
+      <img src="assets/img/thumb-windows.jpg" data-full="assets/img/feature-overview.jpg" alt="マルチウィンドウ" loading="lazy">
       <div class="ph">発売時に最新UIで<br>10〜15枚へ拡充予定</div>
     </div>
   </div>
@@ -592,7 +605,7 @@
 
 <footer>
   <div class="wrap">
-    <img src="assets/img/logo-white.png" alt="鉄道運行管理シミュレーターPro">
+    <img src="assets/img/logo-footer.png" alt="鉄道運行管理シミュレーターPro">
     <div class="links">
       <a href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steam ストアページ</a>
       <a href="#">X（開発情報）</a>
@@ -603,6 +616,24 @@
     <p class="copy">© 合同会社たでぃまる　画面写真は開発中のものです。</p>
   </div>
 </footer>
+
+<div class="lightbox" id="lightbox" hidden><img alt=""></div>
+<script>
+(function () {
+  var lb = document.getElementById('lightbox');
+  var im = lb.querySelector('img');
+  function close() { lb.hidden = true; im.src = ''; document.body.style.overflow = ''; }
+  document.querySelectorAll('.feat-img img, .gal img').forEach(function (el) {
+    el.addEventListener('click', function () {
+      im.src = el.getAttribute('data-full') || el.src;
+      lb.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  lb.addEventListener('click', close);
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();
+</script>
 
 </body>
 </html>
