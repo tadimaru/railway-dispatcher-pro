@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><!-- TODO: 正式告知時にこの行を削除して検索に載せる -->
+<meta name="description" content="路線全体を俯瞰する指令台から、何十本もの列車を裁く運行管理シミュレーター。ダイヤグラムを読み、抑止・延発・折返しの指令でダイヤの乱れを収束させろ。Steamにて2026年7月末アーリーアクセス開始。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="鉄道運行管理シミュレーターPro - Railway Dispatcher Pro - 公式サイト">
+<meta property="og:description" content="路線全体を俯瞰する指令台から、何十本もの列車を裁く運行管理シミュレーター。ダイヤグラムを読み、抑止・延発・折返しの指令でダイヤの乱れを収束させろ。Steamにて2026年7月末アーリーアクセス開始。">
+<meta property="og:url" content="https://tadimaru.github.io/railway-dispatcher-pro/">
+<meta property="og:image" content="https://tadimaru.github.io/railway-dispatcher-pro/assets/img/ogp.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<title>鉄道運行管理シミュレーターPro 公式サイト（モック v0）</title>
+<style>
+  :root{
+    --paper:#ffffff;
+    --wash:#f2f5f8;
+    --ink:#17232d;
+    --sub:#5a6b76;
+    --line:#dbe2e8;
+    --accent:#0a5cab;
+    --accent-deep:#084a8a;
+    --amber:#b97708;
+    --amber-bg:#fdf4e3;
+    --dark:#10181f;
+    /* ゲーム画面由来のシグナルカラー */
+    --sig-cyan:#1fb6cb;
+    --sig-amber:#dfa010;
+    --sig-red:#d9433a;
+    --sig-green:#149e62;
+    --sig-pink:#e05fa8;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.85;
+    margin:0;
+    font-size:16px;
+  }
+  img{max-width:100%;display:block}
+  a{color:var(--accent)}
+
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+  /* ---- mock note ---- */
+  .mocknote{
+    background:var(--amber-bg);color:var(--amber);
+    font-size:12.5px;text-align:center;padding:7px 16px;letter-spacing:.02em;
+  }
+  .chip{
+    display:inline-block;background:var(--amber-bg);color:var(--amber);
+    border:1px solid #ecd9ad;border-radius:3px;
+    font-size:11px;padding:0 6px;margin-left:6px;vertical-align:2px;letter-spacing:.05em;
+  }
+
+  /* ---- nav ---- */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
+    border-bottom:1px solid var(--line);backdrop-filter:blur(6px);
+  }
+  .nav-in{
+    max-width:1060px;margin:0 auto;padding:10px 24px;
+    display:flex;align-items:center;gap:26px;
+  }
+  .nav-in img{height:30px;width:auto}
+  .nav-links{display:flex;gap:22px;margin-left:auto;flex-wrap:wrap}
+  .nav-links a{
+    color:var(--ink);text-decoration:none;font-size:13.5px;letter-spacing:.04em;
+  }
+  .nav-links a:hover{color:var(--accent)}
+  .btn{
+    display:inline-block;color:#fff;text-decoration:none;
+    background:linear-gradient(135deg,#0d6fd1,#00a7d0);
+    padding:10px 26px;border-radius:4px;font-weight:700;letter-spacing:.04em;
+    box-shadow:0 6px 22px -8px rgba(0,140,190,.65);
+    transition:filter .15s,transform .15s;
+  }
+  .btn:hover{filter:brightness(1.12)}
+  .btn.small{padding:7px 18px;font-size:13.5px}
+  .btn.big{padding:15px 44px;font-size:17px}
+
+  /* ---- section furniture ---- */
+  section{padding:88px 0}
+  section.wash{background:var(--wash)}
+  .eyebrow{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size:11.5px;font-weight:600;letter-spacing:.22em;color:var(--accent);
+    text-transform:uppercase;margin:0 0 10px;
+  }
+  h1,h2,h3{line-height:1.35;text-wrap:balance;margin:0}
+  h2{font-size:34px;font-weight:800;letter-spacing:.01em}
+  h3{font-size:21px;font-weight:700}
+  .lead{color:var(--sub);max-width:38em}
+
+  /* 駅ドット区切り：CTC盤面モチーフ（軌道回路の在線表示風に色分け） */
+  .trackline{
+    display:flex;align-items:center;gap:0;margin:26px 0 0;height:10px;
+  }
+  .trackline .rail{height:2px;background:var(--line);flex:1}
+  .trackline .st{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--accent);margin:0 4px;flex:none;
+  }
+  .trackline .st.fill{background:var(--accent)}
+  .trackline .st.c{border-color:var(--sig-cyan);background:var(--sig-cyan)}
+  .trackline .st.a{border-color:var(--sig-amber);background:var(--sig-amber)}
+  .trackline .st.r{border-color:var(--sig-red);background:var(--sig-red)}
+
+  /* ---- hero：CTC盤面フルブリード＋オーバーレイ ---- */
+  .hero{position:relative;background:#0b1218;color:#fff;overflow:hidden}
+  .hero-img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 22%;
+  }
+  .hero-shade{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(11,18,24,.30) 0%,rgba(11,18,24,.06) 34%,rgba(11,18,24,.60) 68%,rgba(11,18,24,.92) 100%);
+  }
+  .hero-content{position:relative;padding-top:230px;padding-bottom:72px}
+  .hero .eyebrow{color:var(--sig-cyan);letter-spacing:.3em}
+  .hero h1{
+    font-size:clamp(40px,6.2vw,64px);font-weight:800;letter-spacing:.02em;
+    text-shadow:0 2px 26px rgba(0,0,0,.6);
+  }
+  .hero .lead{
+    color:#cfdae2;font-size:17.5px;margin:22px 0 32px;max-width:34em;
+    text-shadow:0 1px 14px rgba(0,0,0,.55);
+  }
+  .hero-cta{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .hero-cta .sub{font-size:13px;color:#a4b6c1;line-height:1.6}
+  .price{font-family:"Segoe UI",system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#fff;font-weight:700}
+
+  /* ---- concept ---- */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+  .vs-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:28px 30px;
+  }
+  .vs-card.pro{border-color:var(--accent);border-width:2px}
+  .vs-card .tag{
+    font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--sub);
+    font-family:"Segoe UI",system-ui,sans-serif;
+  }
+  .vs-card.pro .tag{color:var(--accent)}
+  .vs-card h3{margin:8px 0 10px}
+  .vs-card p{margin:0;color:var(--sub);font-size:14.5px}
+
+  /* ---- features ---- */
+  .feat{
+    display:grid;grid-template-columns:5fr 6fr;gap:54px;align-items:center;
+    padding:58px 0;
+  }
+  .feat + .feat{border-top:1px solid var(--line)}
+  .feat.rev .feat-txt{order:2}
+  .feat.rev .feat-img{order:1}
+  .feat-no{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size:12px;font-weight:600;letter-spacing:.2em;color:var(--accent);
+    display:inline-flex;align-items:center;gap:9px;
+  }
+  /* 各特徴に信号灯モチーフ（該当スクショの色と対応） */
+  .feat-no::before{
+    content:"";width:9px;height:9px;border-radius:50%;background:var(--lamp,var(--accent));
+    box-shadow:0 0 8px color-mix(in srgb,var(--lamp,var(--accent)) 60%,transparent);
+  }
+  .feat h3{font-size:26px;margin:8px 0 16px}
+  .feat p{color:var(--sub);margin:0;font-size:15.5px}
+  .feat-img img,.ph{
+    border-radius:6px;border:1px solid var(--line);
+    box-shadow:0 18px 44px -18px rgba(16,35,54,.35);
+  }
+  .ph{
+    aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(-45deg,#f6f8fa 0 14px,#eef2f5 14px 28px);
+    color:var(--sub);font-size:13.5px;letter-spacing:.06em;
+    border-style:dashed;box-shadow:none;text-align:center;line-height:1.7;
+  }
+
+  /* ---- how to play ---- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+  .step{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 28px;
+  }
+  /* 遊び方の丸数字＝信号現示（赤→黄→青）で進行していく */
+  .step-badge{
+    width:44px;height:44px;border-radius:50%;
+    border:3px solid var(--accent);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:19px;font-weight:700;
+    margin-bottom:16px;
+  }
+  .step.s1 .step-badge{border-color:var(--sig-red);color:var(--sig-red)}
+  .step.s2 .step-badge{border-color:var(--sig-amber);color:var(--sig-amber)}
+  .step.s3 .step-badge{border-color:var(--sig-green);color:var(--sig-green)}
+  .step h3{font-size:18px;margin-bottom:8px}
+  .step p{margin:0;color:var(--sub);font-size:14px}
+  .flow-note{
+    margin:40px auto 0;text-align:center;color:var(--accent);font-weight:700;
+    font-size:17px;letter-spacing:.06em;
+  }
+
+  /* ---- episodes ---- */
+  .tut-box{
+    background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    padding:30px 34px;margin-top:44px;
+  }
+  .tut-box h3{margin-bottom:6px}
+  .tut-box>p{margin:0 0 18px;color:var(--sub);font-size:14.5px}
+  .tut-list{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+  .tut-list li{
+    background:var(--paper);border:1px solid var(--line);border-radius:999px;
+    padding:7px 18px;font-size:13.5px;font-weight:600;
+  }
+  .tut-list li b{color:var(--accent);font-family:"Segoe UI",system-ui,sans-serif;margin-right:6px}
+  .epi-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+  .epi-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:26px 28px;border-top:3px solid var(--epi,var(--accent));
+  }
+  .epi-card .kicker{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:600;
+    letter-spacing:.2em;color:var(--epi,var(--accent));
+  }
+  .epi-card h3{font-size:19px;margin:6px 0 8px}
+  .epi-card p{margin:0;color:var(--sub);font-size:13.8px;line-height:1.8}
+  .epi-card.more{
+    border-style:dashed;border-top-style:solid;display:flex;align-items:center;justify-content:center;
+    color:var(--sub);font-size:14px;text-align:center;line-height:1.8;
+  }
+  .cond-box{margin-top:44px}
+  .cond-box h3{margin-bottom:12px}
+  .cond-chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 12px}
+  .cond-chips span{
+    border:1.5px solid var(--sig-green);color:var(--sig-green);
+    border-radius:4px;padding:6px 14px;font-size:13.5px;font-weight:700;
+  }
+  .cond-chips span.f{border-color:var(--sig-red);color:var(--sig-red)}
+  .cond-box p{color:var(--sub);font-size:14.5px;margin:0;max-width:44em}
+
+  /* ---- gallery ---- */
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+  .gal img,.gal .ph{border-radius:5px;box-shadow:none;width:100%}
+  .gal .ph{aspect-ratio:16/9;font-size:12px}
+  .gal img{transition:transform .18s;border:1px solid var(--line)}
+  .gal img:hover{transform:scale(1.025)}
+
+  /* ---- product info ---- */
+  .spec{
+    margin-top:44px;border-top:1px solid var(--line);
+  }
+  .spec-row{
+    display:grid;grid-template-columns:180px 1fr;gap:20px;
+    padding:16px 4px;border-bottom:1px solid var(--line);font-size:15px;
+  }
+  .spec-row dt{color:var(--sub);font-weight:600;margin:0}
+  .spec-row dd{margin:0;font-variant-numeric:tabular-nums}
+  .roadmap{display:flex;gap:0;margin-top:52px;align-items:flex-start}
+  .rm{flex:1;position:relative;padding-top:26px}
+  .rm::before{
+    content:"";position:absolute;top:5px;left:0;right:0;height:2px;background:var(--line);
+  }
+  .rm::after{
+    content:"";position:absolute;top:0;left:0;width:12px;height:12px;border-radius:50%;
+    background:var(--paper);border:3px solid var(--accent);box-sizing:border-box;
+  }
+  .rm.now::after{background:var(--accent)}
+  .rm b{display:block;font-size:15px}
+  .rm span{font-size:13px;color:var(--sub)}
+
+  /* ---- sister ---- */
+  .sister{
+    display:flex;gap:30px;align-items:center;margin-top:40px;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:30px 34px;
+  }
+  .sister p{margin:6px 0 14px;color:var(--sub);font-size:14.5px}
+
+  /* ---- faq ---- */
+  .faq{margin-top:40px;border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line);padding:4px 2px}
+  .faq summary{
+    cursor:pointer;font-weight:700;padding:14px 4px;list-style:none;
+    display:flex;align-items:center;gap:12px;font-size:15.5px;
+  }
+  .faq summary::before{content:"Q";color:var(--accent);font-family:"Segoe UI",system-ui,sans-serif;font-weight:700}
+  .faq details p{margin:0 4px 16px 30px;color:var(--sub);font-size:14.5px}
+
+  /* ---- footer ---- */
+  footer{background:var(--dark);color:#aebbc4;padding:64px 0 40px}
+  footer img{height:46px;width:auto;margin-bottom:22px}
+  footer .links{display:flex;gap:24px;font-size:13.5px;flex-wrap:wrap;margin-bottom:30px}
+  footer a{color:#aebbc4;text-decoration:none}
+  footer a:hover{color:#fff}
+  footer .copy{font-size:12px;color:#6d7d89}
+
+  @media (max-width:820px){
+    h2{font-size:27px}
+    .hero-content{padding-top:150px;padding-bottom:56px}
+    .epi-grid{grid-template-columns:1fr}
+    .tut-box{padding:24px 22px}
+    .feat{grid-template-columns:1fr;gap:26px;padding:44px 0}
+    .feat.rev .feat-txt{order:1}
+    .feat.rev .feat-img{order:2}
+    .vs{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .gal{grid-template-columns:1fr 1fr}
+    .spec-row{grid-template-columns:1fr;gap:2px}
+    .sister{flex-direction:column;align-items:flex-start}
+    section{padding:60px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .gal img{transition:none}
+  }
+</style>
+</head>
+<body>
+
+
+
+<nav>
+  <div class="nav-in">
+    <img src="assets/img/logo-black.png" alt="鉄道運行管理シミュレーターPro">
+    <div class="nav-links">
+      <a href="#features">特徴</a>
+      <a href="#howto">遊び方</a>
+      <a href="#episodes">エピソード</a>
+      <a href="#gallery">ギャラリー</a>
+      <a href="#product">製品情報</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="btn small" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steamで購入</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <img class="hero-img" src="assets/img/hero.jpg" alt="路線全体を俯瞰するCTC画面">
+  <div class="hero-shade"></div>
+  <div class="wrap hero-content">
+    <p class="eyebrow">Railway Dispatcher Pro — Official Site</p>
+    <h1>駅を捌くから、<br>路線を統べるへ。</h1>
+    <p class="lead">あなたは運転指令員。路線全体を見渡す指令台に座り、何十本もの列車を時間どおりに走らせる。乱れたダイヤを、あなたの指令で取り戻せ。</p>
+    <div class="hero-cta">
+      <a class="btn big" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steamで購入する</a>
+      <div class="sub">
+        <span class="price">アーリーアクセス ¥6,000</span><br>
+        2026年7月末 配信開始 / Windows
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="wash" id="concept">
+  <div class="wrap">
+    <p class="eyebrow">Concept</p>
+    <h2>一駅から、全線へ。</h2>
+    <div class="trackline" aria-hidden="true">
+      <span class="st c"></span><span class="rail"></span><span class="st r"></span><span class="rail"></span><span class="st"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st fill"></span>
+    </div>
+    <p class="lead" style="margin-top:26px">「鉄道運行管理シミュレーター」で駅構内の信号扱いを極めたら、次はその上のレイヤーへ。Proが預かるのは、一つの駅ではなく<b>路線のすべて</b>。信号・進路・ダイヤ・車両運用——全部があなたの盤面です。</p>
+    <div class="vs">
+      <div class="vs-card">
+        <span class="tag">鉄道運行管理シミュレーター</span>
+        <h3>駅を、捌く。</h3>
+        <p>駅構内の信号・進路を手動で操作し、列車を定時に送り出す「信号扱い所」の体験。</p>
+      </div>
+      <div class="vs-card pro">
+        <span class="tag">PRO — 本作</span>
+        <h3>路線を、統べる。</h3>
+        <p>路線全体を俯瞰し、ダイヤグラムを読み、運転整理の指令で乱れを収束させる「輸送指令所」の体験。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <p class="eyebrow">Features</p>
+    <h2>指令台の上に、すべてがある。</h2>
+
+    <div class="feat" style="margin-top:20px">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-cyan)">FEATURE 01</span>
+        <h3>全線を、ひと目で。</h3>
+        <p>路線全体の在線・信号・開通進路をリアルタイムに映すCTC盤。どの駅で列車が詰まり、遅れがどこへ波及していくのか——盤面がすべてを教えてくれます。留置線や車庫の入出庫まで、運行のすべてがここに。</p>
+      </div>
+      <div class="feat-img"><img src="assets/img/feature-overview.jpg" alt="CTC盤で路線全体を俯瞰" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-pink)">FEATURE 02</span>
+        <h3>スジを、読む。</h3>
+        <p>指令員の武器はダイヤグラム。計画のスジに、遅延を織り込んだ予測、そして実績が重なって描かれ、乱れの行き先を先読みできます。盤面とスジ、2つの画面を行き来しながら次の一手を組み立てる——それが指令の醍醐味。</p>
+      </div>
+      <div class="feat-img"><img src="assets/img/feature-diagram.jpg" alt="ダイヤグラム画面" loading="lazy"></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-red)">FEATURE 03</span>
+        <h3>指令で、流れを取り戻す。</h3>
+        <p>車両故障——朝ラッシュの本線上で。そんな最悪の瞬間から、指令の仕事は始まります。抑止・延発・臨時停車・臨時通過・折返し・打ち切り。運転整理の手札を切って、雪崩れていくダイヤを立て直してください。</p>
+      </div>
+      <div class="feat-img"><img src="assets/img/feature-incident.jpg" alt="車両故障発生時の指令画面" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-amber)">FEATURE 04</span>
+        <h3>結果は、数字で返ってくる。</h3>
+        <p>各エピソードにはクリア条件と評価があり、遅延をどこまで抑え込めたかが数字で示されます。同じ乱れでも、指令が違えば結果が変わる。何度でも挑んで、最善の運転整理を見つけてください。</p>
+      </div>
+      <div class="feat-img"><div class="ph">エピソード評価画面<br>（新規撮影予定）</div></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-green)">FEATURE 05</span>
+        <h3>ダイヤは、自分で書ける。</h3>
+        <p>ダイヤ編集機能で、スジを一本一本自分の手で設計できます。停車時分、行き違い、折返し運用まで自由自在。「自分のダイヤ」が何百本の列車になって走り出す瞬間は、この上ない快感です。</p>
+      </div>
+      <div class="feat-img"><img src="assets/img/feature-edit.jpg" alt="ダイヤ編集画面" loading="lazy"></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="wash" id="howto">
+  <div class="wrap">
+    <p class="eyebrow">How to Play</p>
+    <h2>指令員の仕事は、3つ。</h2>
+    <p class="lead" style="margin-top:14px">むずかしい操作はありません。見て、決めて、指令する。その繰り返しが、そのまま運行管理の面白さです。</p>
+    <div class="steps">
+      <div class="step s1">
+        <div class="step-badge">1</div>
+        <h3>見る</h3>
+        <p>CTC盤とダイヤグラムで状況を把握。どこで遅れが生まれ、どこへ広がろうとしているか。</p>
+      </div>
+      <div class="step s2">
+        <div class="step-badge">2</div>
+        <h3>決める</h3>
+        <p>どの列車を先に通すか、どこで折り返すか。正解は一つではありません。あなたの判断がダイヤになります。</p>
+      </div>
+      <div class="step s3">
+        <div class="step-badge">3</div>
+        <h3>指令する</h3>
+        <p>抑止、延発、臨時停車、折返し——指令メニューから即座に実行。列車たちが応えてくれます。</p>
+      </div>
+    </div>
+    <p class="flow-note">見る → 決める → 指令する。そして、ダイヤが回復していく。</p>
+    <p style="text-align:center;color:var(--sub);font-size:13px;margin-top:8px">※ v2でここに「ある朝の指令業務」を追体験する読み物コンテンツを追加予定</p>
+  </div>
+</section>
+
+<section id="episodes">
+  <div class="wrap">
+    <p class="eyebrow">Episodes</p>
+    <h2>五つの「乱れ」が、あなたを待つ。</h2>
+    <p class="lead" style="margin-top:14px">本作の舞台は、架空の地方私鉄。車両故障、大雨、強風、ポイント不転換——現実の鉄道で実際に起きる運行障害をモチーフにしたエピソードに、指令員として挑みます。</p>
+
+    <div class="tut-box">
+      <h3>まずは、チュートリアルで指令デビュー。</h3>
+      <p>鉄道知識ゼロでも大丈夫。5本のチュートリアルが基本操作から上級の駅扱いまで段階的に案内します。<b>画面上の赤枠ガイドが「次に押す場所」をそのまま指し示す</b>ので、説明書を読まなくても手が覚えていきます。</p>
+      <ul class="tut-list">
+        <li><b>1</b>画面と時間の見方</li>
+        <li><b>2</b>抑止と運転再開</li>
+        <li><b>3</b>延発・臨時停車・臨時通過</li>
+        <li><b>4</b>打ち切りと折返し</li>
+        <li><b>5</b>駅扱い（手動進路）</li>
+      </ul>
+    </div>
+
+    <div class="epi-grid">
+      <div class="epi-card" style="--epi:var(--sig-red)">
+        <span class="kicker">SCENARIO 01</span>
+        <h3>朝靄の五分</h3>
+        <p>朝ラッシュのさなか、上り列車が本線上で車両故障。復旧までわずか5分——それでも高密度ダイヤでは後続がみるみる詰まる。運転整理の、はじめの一歩。</p>
+      </div>
+      <div class="epi-card" style="--epi:var(--sig-cyan)">
+        <span class="kicker">SCENARIO 02</span>
+        <h3>雨の帳</h3>
+        <p>大雨による25km/hの速度規制。徐行の影響は一部にとどまらず、間隔と接続を乱して全線へ広がる。規制が解けるまでの約30分、路線全体の遅れを最小に抑えよ。</p>
+      </div>
+      <div class="epi-card" style="--epi:var(--sig-amber)">
+        <span class="kicker">SCENARIO 03</span>
+        <h3>閉ざされた待避線</h3>
+        <p>夕ラッシュ、ポイント不転換で待避線が使用不能に。駅扱いで手動進路を操り、限られた番線をやりくりして、帰宅の波をさばききれ。</p>
+      </div>
+      <div class="epi-card" style="--epi:var(--sig-pink)">
+        <span class="kicker">SCENARIO 04</span>
+        <h3>北風、線を断つ</h3>
+        <p>強風で一部区間が運転見合わせ。復旧の見込みは立たない。分断された路線の両側に折返し運転を仕立て、終わりの見えない見合わせに輸送を保ち続ける。</p>
+      </div>
+      <div class="epi-card" style="--epi:var(--sig-green)">
+        <span class="kicker">SCENARIO 05</span>
+        <h3>動かぬ快速</h3>
+        <p>早朝、快速が単線区間の入口で立ち往生。以北は封鎖同然に。すべての列車を手前で折り返し、限られた線路の上で輸送を組み立て直す。</p>
+      </div>
+      <div class="epi-card more">アーリーアクセス期間中も<br>エピソードを拡充予定<span class="chip">要確認：EA中の更新計画</span></div>
+    </div>
+
+    <div class="cond-box">
+      <h3>クリア条件は、指令員の成績表。</h3>
+      <div class="cond-chips">
+        <span>終了時の最大遅延 ◯分以内</span>
+        <span class="f">機外停車（駅間での立ち往生）を出さない</span>
+        <span>発車間隔を◯分以上あけない</span>
+      </div>
+      <p>エピソードごとに複数のクリア条件が設定され、プレイ中は条件窓に達成状況が<b>リアルタイムの数値</b>で表示されます。「あと何分の遅れまで耐えられるか」を横目に指令を打つ緊張感——同じ乱れでも、指令が違えば結果は変わります。</p>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="gallery">
+  <div class="wrap">
+    <p class="eyebrow">Gallery</p>
+    <h2>スクリーンショット</h2>
+    <div class="gal">
+      <img src="assets/img/thumb-overview.jpg" alt="路線俯瞰" loading="lazy">
+      <img src="assets/img/thumb-dia.jpg" alt="ダイヤグラム" loading="lazy">
+      <img src="assets/img/thumb-incident.jpg" alt="インシデント対応" loading="lazy">
+      <img src="assets/img/thumb-edit.jpg" alt="ダイヤ編集" loading="lazy">
+      <img src="assets/img/thumb-windows.jpg" alt="マルチウィンドウ" loading="lazy">
+      <div class="ph">発売時に最新UIで<br>10〜15枚へ拡充予定</div>
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="wrap">
+    <p class="eyebrow">Product</p>
+    <h2>製品情報</h2>
+    <dl class="spec">
+      <div class="spec-row"><dt>タイトル</dt><dd>鉄道運行管理シミュレーターPro - Railway Dispatcher Pro -</dd></div>
+      <div class="spec-row"><dt>価格</dt><dd>アーリーアクセス ¥6,000（正式版 ¥7,500 予定）</dd></div>
+      <div class="spec-row"><dt>配信開始</dt><dd>2026年7月末（Steam アーリーアクセス）</dd></div>
+      <div class="spec-row"><dt>プラットフォーム</dt><dd>Steam（Windows）<span class="chip">要確認：動作環境の詳細</span></dd></div>
+      <div class="spec-row"><dt>対応言語</dt><dd>日本語<span class="chip">要確認：英語対応の時期</span></dd></div>
+      <div class="spec-row"><dt>開発・販売</dt><dd>合同会社たでぃまる</dd></div>
+    </dl>
+    <div class="roadmap">
+      <div class="rm now"><b>2026年7月末</b><span>アーリーアクセス開始<br>¥6,000</span></div>
+      <div class="rm"><b>EA期間中</b><span>収録エピソード拡充ほか<br><span class="chip" style="margin-left:0">要確認：EA中の更新計画</span></span></div>
+      <div class="rm"><b>2026年12月頃</b><span>正式版リリース<br>¥7,500</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="sister">
+  <div class="wrap">
+    <p class="eyebrow">Series</p>
+    <h2>姉妹作</h2>
+    <div class="sister">
+      <div>
+        <h3>鉄道運行管理シミュレーター</h3>
+        <p>駅構内の信号・進路を手動で操作する、シリーズ第1作。まず「駅を捌く」面白さから入りたい方はこちらから。Proと両方遊ぶと、鉄道運行の全レイヤーが見えてきます。</p>
+        <a class="btn small" href="https://store.steampowered.com/app/4282480/?utm_source=official-site" target="_blank" rel="noopener">Steamストアページへ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow">FAQ</p>
+    <h2>よくある質問</h2>
+    <div class="faq">
+      <details>
+        <summary>鉄道の知識がなくても遊べますか？</summary>
+        <p>遊べます。チュートリアルが基本操作から順に案内するので、信号やダイヤグラムが初めてでも大丈夫。慣れてきたら、より難しい乱れに挑戦してください。</p>
+      </details>
+      <details>
+        <summary>前作（鉄道運行管理シミュレーター）を遊んでいなくても大丈夫？</summary>
+        <p>大丈夫です。本作は独立した作品で、ストーリーやデータの引き継ぎはありません。</p>
+      </details>
+      <details>
+        <summary>実況・配信はできますか？</summary>
+        <p>動画配信・実況・切り抜き・収益化は、すべて事前許諾不要で自由に行っていただけます。収益はすべて配信者様のものです。<span class="chip">要確認：Pro向け配信ガイドライン文言</span></p>
+      </details>
+      <details>
+        <summary>アーリーアクセス版と正式版の違いは？</summary>
+        <p>アーリーアクセス期間中は収録内容を順次拡充し、正式版で完成となります。EA版をご購入いただくと、そのまま正式版までアップデートで遊べます。<span class="chip">要確認：EA収録内容の確定</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/img/logo-white.png" alt="鉄道運行管理シミュレーターPro">
+    <div class="links">
+      <a href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steam ストアページ</a>
+      <a href="#">X（開発情報）</a>
+      <a href="#">YouTube</a>
+      <a href="#">note（開発日誌）</a>
+      <a href="#">サポート</a>
+    </div>
+    <p class="copy">© 合同会社たでぃまる　画面写真は開発中のものです。</p>
+  </div>
+</footer>
+
+</body>
+</html>
