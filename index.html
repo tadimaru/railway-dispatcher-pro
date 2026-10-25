@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="路線全体を俯瞰する指令台から、何十本もの列車を裁く運行管理シミュレーター。5つの路線と22本のシナリオ、ダイヤ作成、そして路線を一から作れるマップ作成（β版）。Steamにてアーリーアクセス配信中。">
+<meta name="description" content="路線全体を俯瞰する指令台から、何十本もの列車を裁く運行管理シミュレーター。5つの路線と22本のシナリオ、ダイヤ作成、マップ作成（β版）とSteam Workshop、そしてSteamの友だちと最大4人で指令できるオンライン協力プレイ。Steamにてアーリーアクセス配信中。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="鉄道運行管理シミュレーターPro - Railway Dispatcher Pro - 公式サイト">
-<meta property="og:description" content="路線全体を俯瞰する指令台から、何十本もの列車を裁く運行管理シミュレーター。5つの路線と22本のシナリオ、ダイヤ作成、そして路線を一から作れるマップ作成（β版）。Steamにてアーリーアクセス配信中。">
+<meta property="og:description" content="路線全体を俯瞰する指令台から、何十本もの列車を裁く運行管理シミュレーター。5つの路線と22本のシナリオ、ダイヤ作成、マップ作成（β版）とSteam Workshop、そしてSteamの友だちと最大4人で指令できるオンライン協力プレイ。Steamにてアーリーアクセス配信中。">
 <meta property="og:url" content="https://tadimaru.com/railway-dispatcher-pro/">
 <meta property="og:image" content="https://tadimaru.com/railway-dispatcher-pro/assets/img/ogp.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -340,6 +340,49 @@
   .beta li{margin:3px 0}
   .beta p{margin:12px 0 0}
 
+  /* ---- co-op（オンライン協力プレイ） ---- */
+  .coop-head{display:grid;grid-template-columns:6fr 5fr;gap:48px;align-items:center}
+  .coop-art{
+    background:#0f171e;border-radius:8px;padding:26px 22px 20px;margin:0;
+    box-shadow:0 18px 44px -18px rgba(16,35,54,.45);
+  }
+  .coop-art svg{width:100%;height:auto;display:block}
+  .coop-art .cap{margin:10px 2px 0;color:#7f919d;font-size:11.5px;letter-spacing:.04em}
+  .coop-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+  .coop-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:24px 24px 22px;
+    border-top:3px solid var(--cc,var(--accent));
+  }
+  .coop-card .no{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;
+    color:var(--cc,var(--accent));
+  }
+  .coop-card h3{font-size:18px;margin:6px 0 10px}
+  .coop-card p{margin:0;color:var(--sub);font-size:14px}
+  .coop-card kbd{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:12px;font-weight:700;
+    border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 6px;background:var(--wash);color:var(--ink);
+  }
+  .coop-note{
+    margin-top:22px;background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    padding:18px 24px;font-size:14px;color:var(--sub);
+  }
+  .coop-note b{color:var(--ink)}
+  .coop-note ul{margin:0;padding-left:1.2em}
+  .coop-note li{margin:2px 0}
+
+  /* ---- workshop（マップ作成の中） ---- */
+  .ws{
+    margin-top:34px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:26px 28px;
+    border-left:4px solid var(--sig-pink);
+  }
+  .ws h3{font-size:19px;margin:0 0 8px}
+  .ws>p{margin:0 0 18px;color:var(--sub);font-size:14.5px}
+  .ws-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0;padding:0;list-style:none}
+  .ws-steps li{background:var(--wash);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:13.5px;color:var(--sub);line-height:1.7}
+  .ws-steps b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  .ws-steps i{font-style:normal;font-family:"Segoe UI",system-ui,sans-serif;font-weight:700;color:var(--sig-pink);margin-right:6px}
+
   /* ---- gallery ---- */
   .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
   .gal img,.gal .ph{border-radius:5px;box-shadow:none;width:100%}
@@ -425,6 +468,9 @@
     .route{grid-template-columns:1fr;gap:18px;padding:22px 20px}
     .mm-grid,.mm-shots{grid-template-columns:1fr}
     .mm-more{grid-template-columns:1fr}
+    .coop-head{grid-template-columns:1fr;gap:28px}
+    .coop-cards{grid-template-columns:1fr}
+    .ws-steps{grid-template-columns:1fr}
     .feat{grid-template-columns:1fr;gap:26px;padding:44px 0}
     .feat.rev .feat-txt{order:1}
     .feat.rev .feat-img{order:2}
@@ -451,11 +497,12 @@
   <div class="nav-in">
     <img src="assets/img/logo-nav.png" alt="鉄道運行管理シミュレーターPro">
     <div class="nav-links">
+      <a href="#coop" class="new">協力プレイ</a>
       <a href="#features">特徴</a>
       <a href="#howto">遊び方</a>
       <a href="#systems">障害と指令</a>
       <a href="#routes">路線とシナリオ</a>
-      <a href="#mapmaker" class="new">マップ作成</a>
+      <a href="#mapmaker">マップ作成</a>
       <a href="#gallery">ギャラリー</a>
       <a href="#product">製品情報</a>
       <a href="#faq">FAQ</a>
@@ -468,7 +515,7 @@
   <img class="hero-img" src="assets/img/hero.jpg" alt="路線全体を俯瞰するCTC画面">
   <div class="hero-shade"></div>
   <div class="wrap hero-content">
-    <a class="hero-news" href="#mapmaker"><b>UPDATE</b>マップ作成（β版）を公開しました — 自分で作った路線で指令できます</a>
+    <a class="hero-news" href="#coop"><b>UPDATE</b>オンライン協力プレイを公開しました — Steam の友だちと最大4人で一緒に指令</a>
     <p class="eyebrow">Railway Dispatcher Pro — Official Site</p>
     <h1>駅を捌くから、<br>路線を統べるへ。</h1>
     <p class="lead">あなたは運転指令員。路線全体を見渡す指令台に座り、何十本もの列車を時間どおりに走らせる。乱れたダイヤを、あなたの指令で取り戻せ。</p>
@@ -481,6 +528,69 @@
     </div>
   </div>
 </header>
+
+<section id="coop">
+  <div class="wrap">
+    <div class="coop-head">
+      <div>
+        <p class="eyebrow">Online Co-op</p>
+        <h2>一人の指令台から、<br>みんなの指令所へ。</h2>
+        <div class="trackline" aria-hidden="true">
+          <span class="st c"></span><span class="rail"></span><span class="st c"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st r"></span>
+        </div>
+        <p class="lead" style="margin-top:26px">Steam の友だちと最大4人で、同じ路線・同じダイヤを一緒に指令。駅ごとに担当を決めて分担し、ピンで「ここを見てください」と知らせ合いながら、全員で運行を守ります。ひとりでは手が回らない朝ラッシュも、声をかけ合えば立て直せる。</p>
+      </div>
+      <figure class="coop-art">
+        <svg viewBox="0 0 440 200" role="img" aria-label="担当者の色で塗り分けた駅名と、3人のカーソル、ピンのイメージ">
+          <g font-family="Hiragino Sans,Yu Gothic UI,Meiryo,sans-serif" font-size="12" font-weight="700">
+            <line x1="20" y1="96" x2="420" y2="96" stroke="#3b4a55" stroke-width="3"/>
+            <line x1="20" y1="114" x2="420" y2="114" stroke="#3b4a55" stroke-width="3"/>
+            <line x1="40" y1="96" x2="400" y2="96" stroke="#149e62" stroke-width="3" stroke-dasharray="46 22" opacity=".85"/>
+            <rect x="22" y="62" width="62" height="22" rx="3" fill="#1fb6cb" opacity=".22"/><text x="53" y="77" fill="#6fe0ef" text-anchor="middle">駅 A</text>
+            <rect x="118" y="62" width="62" height="22" rx="3" fill="#1fb6cb" opacity=".22"/><text x="149" y="77" fill="#6fe0ef" text-anchor="middle">駅 B</text>
+            <rect x="214" y="62" width="62" height="22" rx="3" fill="#dfa010" opacity=".22"/><text x="245" y="77" fill="#f3c24a" text-anchor="middle">駅 C</text>
+            <rect x="310" y="62" width="62" height="22" rx="3" fill="#e05fa8" opacity=".22"/><text x="341" y="77" fill="#f08cc4" text-anchor="middle">駅 D</text>
+            <g fill="#1fb6cb"><path d="M96 128 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="112" y="146" width="44" height="18" rx="3"/><text x="134" y="159" fill="#0f171e" text-anchor="middle" font-size="11">Aさん</text></g>
+            <g fill="#dfa010"><path d="M226 134 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="242" y="152" width="44" height="18" rx="3"/><text x="264" y="165" fill="#0f171e" text-anchor="middle" font-size="11">Bさん</text></g>
+            <g fill="#e05fa8"><path d="M330 124 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="346" y="142" width="44" height="18" rx="3"/><text x="368" y="155" fill="#0f171e" text-anchor="middle" font-size="11">Cさん</text></g>
+            <circle cx="245" cy="105" r="9" fill="none" stroke="#dfa010" stroke-width="2.5"/>
+            <line x1="245" y1="44" x2="245" y2="96" stroke="#dfa010" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <rect x="180" y="20" width="130" height="24" rx="12" fill="#dfa010"/>
+            <text x="245" y="36" fill="#0f171e" text-anchor="middle" font-size="11.5">抑止します — Bさん</text>
+          </g>
+        </svg>
+        <figcaption class="cap">イメージ図：駅名が担当者の色に。ほかの人のカーソルとピンが見えます。</figcaption>
+      </figure>
+    </div>
+
+    <div class="coop-cards">
+      <div class="coop-card" style="--cc:var(--sig-cyan)">
+        <span class="no">01</span>
+        <h3>合言葉で、すぐ集まる</h3>
+        <p>部屋を作ると6桁の合言葉が出ます。伝えるだけで入れて、Steam のフレンドでなくても大丈夫。Steam の招待からも入れます。遊んでいる途中の部屋にも、あとから合流できます。</p>
+      </div>
+      <div class="coop-card" style="--cc:var(--sig-amber)">
+        <span class="no">02</span>
+        <h3>担当を決めて、分担する</h3>
+        <p>ホストが駅ごとに担当者を決めると、マップの駅名がその人の色に。ほかの人のマウスカーソルも名前つきで見えるので、誰がどこを見ているかがひと目で分かります。</p>
+      </div>
+      <div class="coop-card" style="--cc:var(--sig-pink)">
+        <span class="no">03</span>
+        <h3>ピンで、知らせ合う</h3>
+        <p><kbd>Q</kbd> を押したままマップをクリックすると、「ここを見てください」「抑止します」「進路を引きます」などの定型文のピンが、全員の画面に立ちます。</p>
+      </div>
+    </div>
+
+    <div class="coop-note">
+      <ul>
+        <li>協力プレイは<b>フリー運転（サンドボックス）</b>で遊べます。ゲームに入っている路線のほか、<b>Workshop の路線</b>でも遊べます（持っていない人は、参加するときに購読できます）。</li>
+        <li>参加する<b>全員がこのゲームを持っている</b>必要があります（Steam・Windows）。</li>
+        <li>てこ・進路・抑止・ダイヤ変更などの指令は誰でも出せます。倍率の変更・インシデントの発生・セーブはホストが行います。</li>
+        <li>ゲーム内のボイスチャットはありません。Discord などと一緒にお楽しみください。遊び方は<a href="https://tadimaru.com/pro-support/coop.html" target="_blank" rel="noopener">取扱説明書（協力プレイ編）</a>にまとめています。</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 <section class="wash" id="concept">
   <div class="wrap">
@@ -664,7 +774,7 @@
   <div class="wrap">
     <p class="eyebrow">Routes &amp; Scenarios</p>
     <h2>5つの路線、22の「乱れ」。</h2>
-    <p class="lead" style="margin-top:14px">郊外の地方私鉄から、都心の地下鉄、空港アクセス線、そして新幹線まで。性格の違う5つの路線に、現実の鉄道で実際に起きる運行障害をモチーフにしたシナリオが待っています。どの路線もサンドボックスで自由に指令できます。</p>
+    <p class="lead" style="margin-top:14px">郊外の地方私鉄から、都心の地下鉄、空港アクセス線、そして新幹線まで。性格の違う5つの路線に、現実の鉄道で実際に起きる運行障害をモチーフにしたシナリオが待っています。どの路線もサンドボックスで自由に指令できます。Steam Workshop では、ほかのプレイヤーが作った路線も遊べます。</p>
 
     <div class="tut-box">
       <h3>まずは、チュートリアルで指令デビュー。</h3>
@@ -777,7 +887,7 @@
   <div class="wrap">
     <p class="eyebrow">Map Maker <span style="text-transform:none">β</span></p>
     <h2>路線は、自分で作れる。</h2>
-    <p class="lead" style="margin-top:14px">タイトル画面の「マップ作成（β版）」から、路線を一から作れるようになりました。駅を置き、駅と駅をつなげば、信号・てこ・進路まで自動で組み上がります。作った路線はそのままサンドボックスとダイヤ作成に並び、ダイヤを引いて指令に就くところまで一続きで遊べます。</p>
+    <p class="lead" style="margin-top:14px">タイトル画面の「マップ作成（β版）」から、路線を一から作れるようになりました。駅を置き、駅と駅をつなげば、信号・てこ・進路まで自動で組み上がります。作った路線はそのままサンドボックスとダイヤ作成に並び、ダイヤを引いて指令に就くところまで一続きで遊べます。Steam Workshop に投稿すれば、ほかのプレイヤーにも遊んでもらえます。</p>
 
     <div class="mm-grid">
       <div class="mm-card" style="--mc:var(--sig-green)">
@@ -808,6 +918,16 @@
       <li><b>元に戻す／やり直し</b>Ctrl+Z／Ctrl+Shift+Z に対応。思い切って試せます。</li>
       <li><b>路線の写真を自動撮影</b>保存すると路線全体の写真が撮られ、路線選択画面に並びます。</li>
     </ul>
+
+    <div class="ws">
+      <h3>Steam Workshop で、路線を分け合う。</h3>
+      <p>作った路線は Steam Workshop に投稿でき、ほかのプレイヤーが作った路線は購読するだけで路線選択に並びます。Workshop の路線は、協力プレイの部屋にも使えます。</p>
+      <ul class="ws-steps">
+        <li><b><i>1</i>探す・購読する</b>ゲームの中から Workshop を開いて、気になる路線を購読。</li>
+        <li><b><i>2</i>遊ぶ</b>購読した路線は、サンドボックス・ダイヤ作成にそのまま並びます。</li>
+        <li><b><i>3</i>投稿する</b>自作の路線を、マップ作成から Workshop へ。更新もできます。</li>
+      </ul>
+    </div>
 
     <div class="beta">
       <h3>β版についてのお願い</h3>
@@ -848,8 +968,8 @@
       <div class="spec-row"><dt>タイトル</dt><dd>鉄道運行管理シミュレーターPro - Railway Dispatcher Pro -</dd></div>
       <div class="spec-row"><dt>価格</dt><dd>アーリーアクセス ¥6,480</dd></div>
       <div class="spec-row"><dt>配信</dt><dd>2026年7月末より Steam アーリーアクセスで配信中</dd></div>
-      <div class="spec-row"><dt>収録内容</dt><dd>路線 5（ダイヤ 9本）／シナリオ 22本／チュートリアル 5本<br>サンドボックス・ダイヤ作成・マップ作成（β版）</dd></div>
-      <div class="spec-row"><dt>プラットフォーム</dt><dd>Steam（Windows）</dd></div>
+      <div class="spec-row"><dt>収録内容</dt><dd>路線 5（ダイヤ 9本）／シナリオ 22本／チュートリアル 5本<br>サンドボックス・ダイヤ作成・マップ作成（β版）・Steam Workshop（マップの共有）・オンライン協力プレイ（最大4人）</dd></div>
+      <div class="spec-row"><dt>プラットフォーム</dt><dd>Steam（Windows）<br><span style="font-size:13px;color:var(--sub)">協力プレイは、参加する全員がこのゲームを持っている必要があります</span></dd></div>
       <div class="spec-row"><dt>動作環境</dt><dd>Windows 10 / Intel Core i5・AMD Ryzen 5 / DirectX 11 対応 GPU（内蔵GPU可・Intel UHD Graphics 相当以上）</dd></div>
       <div class="spec-row"><dt>推奨環境</dt><dd>解像度 1920×1080 以上。ダイヤ・指令などのウィンドウはサブモニターへ移動できるため、デュアルモニター環境を推奨</dd></div>
       <div class="spec-row"><dt>対応言語</dt><dd>日本語（英語は正式版までに対応予定）</dd></div>
@@ -858,8 +978,9 @@
     <div class="roadmap">
       <div class="rm done"><b>2026年7月末<i>済</i></b><span>アーリーアクセス開始<br>¥6,480</span></div>
       <div class="rm done"><b>2026年8月〜9月<i>済</i></b><span>路線を4つ追加<br>シナリオを17本追加</span></div>
-      <div class="rm now"><b>2026年9月<i>NEW</i></b><span>マップ作成（β版）公開</span></div>
-      <div class="rm"><b>EA期間中</b><span>英語対応<br>Steam Workshop 連携<br>（マップ共有）<br>マップ作成の対応範囲の拡大</span></div>
+      <div class="rm done"><b>2026年9月〜10月<i>済</i></b><span>マップ作成（β版）公開<br>Steam Workshop 連携</span></div>
+      <div class="rm now"><b>2026年10月<i>NEW</i></b><span>オンライン協力プレイ<br>（最大4人）</span></div>
+      <div class="rm"><b>EA期間中</b><span>英語対応<br>マップ作成の対応範囲の拡大</span></div>
       <div class="rm"><b>2026年12月頃</b><span>正式版リリース</span></div>
     </div>
     <p style="margin:36px 0 0;font-size:12.5px;color:var(--sub)">※記載の開発予定・スケジュールは変更になる場合があります。掲載中の画面写真はすべて開発中のもので、変更される場合があります。</p>
@@ -887,7 +1008,7 @@
     <div class="faq">
       <details>
         <summary>鉄道の知識がなくても遊べますか？</summary>
-        <p>遊べます。チュートリアルが基本操作から順に案内するので、信号やダイヤグラムが初めてでも大丈夫。慣れてきたら、難易度★の高い路線やシナリオに挑戦してください。</p>
+        <p>遊べます。チュートリアルが基本操作から順に案内するので、信号やダイヤグラムが初めてでも大丈夫。慣れてきたら、難易度★の高い路線やシナリオに挑戦してください。慣れた人と協力プレイで一緒に指令してみるのもおすすめです。</p>
       </details>
       <details>
         <summary>前作（鉄道運行管理シミュレーター）を遊んでいなくても大丈夫？</summary>
@@ -899,7 +1020,15 @@
       </details>
       <details>
         <summary>作った路線をほかの人と共有できますか？</summary>
-        <p>現在は、ご自身の環境で遊んでいただく形です。Steam Workshop でのマップ共有は、正式版までに対応する予定です。※開発予定は変更になる場合があります。</p>
+        <p>できます。マップ作成から Steam Workshop に投稿すると、ほかのプレイヤーが購読して遊べます。Workshop に投稿した路線は、協力プレイの部屋にも使えます。</p>
+      </details>
+      <details>
+        <summary>友だちと一緒に遊べますか？</summary>
+        <p>遊べます。オンライン協力プレイで、Steam の友だちと最大4人まで同じ路線・同じダイヤを一緒に指令できます。タイトルの「協力プレイ」から部屋を作り、6桁の合言葉か Steam の招待で呼んでください（合言葉なら Steam のフレンドでなくても入れます）。参加する全員がこのゲームを持っている必要があります。ゲーム内のボイスチャットはないので、Discord などと一緒にお楽しみください。</p>
+      </details>
+      <details>
+        <summary>協力プレイで遊べる路線は？</summary>
+        <p>ゲームに入っている5つの路線と、Steam Workshop の路線です。モードはフリー運転（サンドボックス）で、シナリオとチュートリアルは1人用です。ホストが Workshop の路線を選んだときに持っていない人は、参加するときにその場で購読できます。</p>
       </details>
       <details>
         <summary>実況・配信はできますか？</summary>
@@ -907,7 +1036,7 @@
       </details>
       <details>
         <summary>アーリーアクセス版と正式版の違いは？</summary>
-        <p>アーリーアクセス期間中に、これまで路線の追加（4路線・シナリオ17本）とマップ作成（β版）を実装してきました。今後、英語対応と Steam Workshop でのマップ共有を実装し、すべて揃った段階で正式版となります。EA版をご購入いただくと、追加費用なしで正式版までアップデートで遊べます。※開発予定は変更になる場合があります。</p>
+        <p>アーリーアクセス期間中に、これまで路線の追加（4路線・シナリオ17本）、マップ作成（β版）、Steam Workshop でのマップ共有、オンライン協力プレイを実装してきました。今後、英語対応などを実装し、すべて揃った段階で正式版となります。EA版をご購入いただくと、追加費用なしで正式版までアップデートで遊べます。※開発予定は変更になる場合があります。</p>
       </details>
     </div>
   </div>
