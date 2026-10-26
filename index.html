@@ -3,13 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="路線全体を俯瞰する指令台から、何十本もの列車を裁く運行管理シミュレーター。5つの路線と22本のシナリオ、ダイヤ作成、マップ作成（β版）とSteam Workshop、そしてSteamの友だちと最大4人で指令できるオンライン協力プレイ。Steamにてアーリーアクセス配信中。">
+<meta name="description" content="路線全体を俯瞰する指令台から、何十本もの列車を裁く運行管理シミュレーター。5つの路線と22本のシナリオ、ダイヤ作成、マップ作成とSteam Workshop、そしてSteamの友だちと最大4人で指令できるオンライン協力プレイ。日本語・英語など7言語、Windows と Mac に対応。Steamにて配信中。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="鉄道運行管理シミュレーターPro - Railway Dispatcher Pro - 公式サイト">
-<meta property="og:description" content="路線全体を俯瞰する指令台から、何十本もの列車を裁く運行管理シミュレーター。5つの路線と22本のシナリオ、ダイヤ作成、マップ作成（β版）とSteam Workshop、そしてSteamの友だちと最大4人で指令できるオンライン協力プレイ。Steamにてアーリーアクセス配信中。">
+<meta property="og:description" content="路線全体を俯瞰する指令台から、何十本もの列車を裁く運行管理シミュレーター。5つの路線と22本のシナリオ、ダイヤ作成、マップ作成とSteam Workshop、そしてSteamの友だちと最大4人で指令できるオンライン協力プレイ。日本語・英語など7言語、Windows と Mac に対応。Steamにて配信中。">
 <meta property="og:url" content="https://tadimaru.com/railway-dispatcher-pro/">
+<meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://tadimaru.com/railway-dispatcher-pro/assets/img/ogp.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://tadimaru.com/railway-dispatcher-pro/">
+<link rel="alternate" hreflang="ja" href="https://tadimaru.com/railway-dispatcher-pro/">
+<link rel="alternate" hreflang="en" href="https://tadimaru.com/railway-dispatcher-pro/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://tadimaru.com/railway-dispatcher-pro/zh-hans/">
+<link rel="alternate" hreflang="zh-Hant" href="https://tadimaru.com/railway-dispatcher-pro/zh-hant/">
+<link rel="alternate" hreflang="ko" href="https://tadimaru.com/railway-dispatcher-pro/ko/">
+<link rel="alternate" hreflang="de" href="https://tadimaru.com/railway-dispatcher-pro/de/">
+<link rel="alternate" hreflang="id" href="https://tadimaru.com/railway-dispatcher-pro/id/">
+<link rel="alternate" hreflang="x-default" href="https://tadimaru.com/railway-dispatcher-pro/en/">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <title>鉄道運行管理シミュレーターPro - Railway Dispatcher Pro - 公式サイト</title>
 <style>
@@ -52,19 +62,20 @@
   }
   .nav-in{
     max-width:1060px;margin:0 auto;padding:8px 24px;
-    display:flex;align-items:center;gap:26px;
+    display:flex;align-items:center;gap:16px;
   }
   .nav-in img{height:44px;width:auto}
-  .nav-links{display:flex;gap:20px;margin-left:auto;flex-wrap:wrap}
+  .nav-links{display:flex;gap:16px;margin-left:auto;flex-wrap:nowrap}
   .nav-links a{
-    color:var(--ink);text-decoration:none;font-size:13.5px;letter-spacing:.04em;
+    color:var(--ink);text-decoration:none;font-size:13.5px;letter-spacing:.04em;white-space:nowrap;
   }
+  .nav-in .btn.small{white-space:nowrap;flex:none}
   .nav-links a:hover{color:var(--accent)}
   nav{transition:transform .25s ease}
   section[id]{scroll-margin-top:72px}
   /* 狭い画面: ロゴ＋購入ボタンの1段と、横スクロールのリンク1段にまとめる。
      下へスクロール中は隠し、上へ戻すと出す（固定ヘッダーが画面を占有しないように） */
-  @media (max-width:1080px){
+  @media (max-width:1240px){
     .nav-in{flex-wrap:wrap;gap:4px 12px;padding:6px 16px 0}
     .nav-in img{height:34px}
     .nav-in .btn.small{margin-left:auto;padding:6px 14px;font-size:13px;white-space:nowrap}
@@ -77,6 +88,8 @@
     .nav-links a{white-space:nowrap;flex:none}
     .nav-links a:last-child{padding-right:28px}
     nav.nav-hidden{transform:translateY(-100%)}
+    .lang{margin-left:auto}
+    .nav-in .lang + .btn.small{margin-left:0}
   }
   .nav-links a.new::after{
     content:"NEW";font-family:"Segoe UI",system-ui,sans-serif;font-size:9.5px;font-weight:700;
@@ -92,6 +105,28 @@
   .btn:hover{filter:brightness(1.12)}
   .btn.small{padding:7px 18px;font-size:13.5px}
   .btn.big{padding:15px 44px;font-size:17px}
+
+  /* ---- 言語の切り替え（ナビのドロップダウン＋フッターの一覧） ---- */
+  .lang{position:relative;flex:none}
+  .lang summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;min-height:34px;box-sizing:border-box;
+    padding:4px 10px;border:1px solid var(--line);border-radius:4px;background:var(--paper);
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;
+  }
+  .lang summary::-webkit-details-marker{display:none}
+  .lang summary svg{width:16px;height:16px;flex:none}
+  .lang summary::after{content:"";border:4px solid transparent;border-top-color:currentColor;margin:4px 0 0 1px}
+  .lang summary:hover{border-color:var(--accent);color:var(--accent)}
+  .lang ul{
+    position:absolute;right:0;top:calc(100% + 6px);z-index:60;margin:0;padding:6px 0;list-style:none;min-width:200px;
+    background:var(--paper);border:1px solid var(--line);border-radius:6px;box-shadow:0 14px 36px -14px rgba(16,35,54,.4);
+  }
+  .lang li a{display:block;padding:9px 18px;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.5}
+  .lang li a:hover{background:var(--wash);color:var(--accent)}
+  .lang li a[aria-current]{color:var(--accent);font-weight:700}
+  footer .langs{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;margin:-8px 0 28px}
+  footer .langs a{padding:4px 0}
+  footer .langs a[aria-current]{color:#fff;font-weight:700}
 
   /* ---- section furniture ---- */
   section{padding:88px 0}
@@ -331,14 +366,14 @@
     color:var(--sub);line-height:1.7;
   }
   .mm-more b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
-  .beta{
+  .mm-note{
     margin-top:30px;background:var(--amber-bg);border:1px solid #ecd9ad;border-left:4px solid var(--sig-amber);
     border-radius:8px;padding:22px 28px;font-size:14.5px;
   }
-  .beta h3{font-size:17px;margin:0 0 10px;color:var(--amber)}
-  .beta ul{margin:0;padding-left:1.2em}
-  .beta li{margin:3px 0}
-  .beta p{margin:12px 0 0}
+  .mm-note h3{font-size:17px;margin:0 0 10px;color:var(--amber)}
+  .mm-note ul{margin:0;padding-left:1.2em}
+  .mm-note li{margin:3px 0}
+  .mm-note p{margin:12px 0 0}
 
   /* ---- co-op（オンライン協力プレイ） ---- */
   .coop-head{display:grid;grid-template-columns:6fr 5fr;gap:48px;align-items:center}
@@ -507,6 +542,18 @@
       <a href="#product">製品情報</a>
       <a href="#faq">FAQ</a>
     </div>
+    <details class="lang">
+      <summary aria-label="Language"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.6 2.6 3.9 5.6 3.9 9.2s-1.3 6.6-3.9 9.2M12 2.8C9.4 5.4 8.1 8.4 8.1 12s1.3 6.6 3.9 9.2"/></svg><span>日本語</span></summary>
+      <ul>
+        <li><a href="./" lang="ja" hreflang="ja" aria-current="page">日本語</a></li>
+        <li><a href="en/" lang="en" hreflang="en">English</a></li>
+        <li><a href="zh-hans/" lang="zh-Hans" hreflang="zh-Hans">简体中文</a></li>
+        <li><a href="zh-hant/" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a></li>
+        <li><a href="ko/" lang="ko" hreflang="ko">한국어</a></li>
+        <li><a href="de/" lang="de" hreflang="de">Deutsch</a></li>
+        <li><a href="id/" lang="id" hreflang="id">Bahasa Indonesia</a></li>
+      </ul>
+    </details>
     <a class="btn small" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steamで購入</a>
   </div>
 </nav>
@@ -515,15 +562,15 @@
   <img class="hero-img" src="assets/img/hero.jpg" alt="路線全体を俯瞰するCTC画面">
   <div class="hero-shade"></div>
   <div class="wrap hero-content">
-    <a class="hero-news" href="#coop"><b>UPDATE</b>オンライン協力プレイを公開しました — Steam の友だちと最大4人で一緒に指令</a>
+    <a class="hero-news" href="#product"><b>UPDATE</b>正式版になりました — 7つの言語と Mac に対応</a>
     <p class="eyebrow">Railway Dispatcher Pro — Official Site</p>
     <h1>駅を捌くから、<br>路線を統べるへ。</h1>
     <p class="lead">あなたは運転指令員。路線全体を見渡す指令台に座り、何十本もの列車を時間どおりに走らせる。乱れたダイヤを、あなたの指令で取り戻せ。</p>
     <div class="hero-cta">
       <a class="btn big" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steamで購入する</a>
       <div class="sub">
-        <span class="price">アーリーアクセス ¥6,480</span><br>
-        Steamにて配信中 / Windows
+        <span class="price">正式版 配信中</span><br>
+        Steam / Windows・Mac / 7言語対応
       </div>
     </div>
   </div>
@@ -584,7 +631,7 @@
     <div class="coop-note">
       <ul>
         <li>協力プレイは<b>フリー運転（サンドボックス）</b>で遊べます。ゲームに入っている路線のほか、<b>Workshop の路線</b>でも遊べます（持っていない人は、参加するときに購読できます）。</li>
-        <li>参加する<b>全員がこのゲームを持っている</b>必要があります（Steam・Windows）。</li>
+        <li>参加する<b>全員がこのゲームを持っている</b>必要があります。<b>Windows と Mac の人どうしでも</b>一緒に遊べます。</li>
         <li>てこ・進路・抑止・ダイヤ変更などの指令は誰でも出せます。倍率の変更・インシデントの発生・セーブはホストが行います。</li>
         <li>ゲーム内のボイスチャットはありません。Discord などと一緒にお楽しみください。遊び方は<a href="https://tadimaru.com/pro-support/coop.html" target="_blank" rel="noopener">取扱説明書（協力プレイ編）</a>にまとめています。</li>
       </ul>
@@ -793,7 +840,7 @@
       <div>
         <span class="kicker">ROUTE 01<span class="stars">難易度 ★1</span></span>
         <h3>単線区間をもつ、郊外の地方私鉄</h3>
-        <p class="facts"><b>仙台〜ひより台 13駅</b>　／　各停快速ダイヤ 384本・各停のみダイヤ 377本</p>
+        <p class="facts"><b>球場前〜仙台〜ひより台 13駅</b>　／　各停快速ダイヤ 384本・各停のみダイヤ 377本</p>
         <p>仙台の街から郊外へ延びる路線。いずみから先は単線で、行き違いの駅が輸送の要です。快速と各停の緩急接続が、毎日のダイヤを形づくります。チュートリアルの舞台もこの路線。</p>
         <ul class="sc-list">
           <li><span class="lv">★1</span><div><b>朝靄の五分</b><span>朝ラッシュの車両故障。復旧まで五分——それでも後続はみるみる詰まる。</span></div></li>
@@ -861,7 +908,7 @@
       <div>
         <span class="kicker">ROUTE 05<span class="stars">難易度 ★2</span></span>
         <h3>日本海に沿って北へ、フル規格の新幹線</h3>
-        <p class="facts"><b>金沢〜青森〜札幌 28駅</b>　／　閑散期ダイヤ 171本</p>
+        <p class="facts"><b>金沢〜新青森〜札幌 28駅</b>　／　閑散期ダイヤ 171本</p>
         <p>金沢から日本海に沿って青森へ、そして札幌まで。275km/hで駆ける列車を、赤と緑の2現示の信号（ATC）が守ります。駅間は長く、遅れは在来線とは桁違いの規模で積み上がる——距離も速度もスケールの違う運転整理です。</p>
         <ul class="sc-list">
           <li><span class="lv">★1</span><div><b>酒田、夜明けの停電</b><span>始発の時間帯に変電所が故障、上下とも3時間の不通。車庫の予備車両を起こして運用を組み替える。</span></div></li>
@@ -885,9 +932,9 @@
 
 <section id="mapmaker">
   <div class="wrap">
-    <p class="eyebrow">Map Maker <span style="text-transform:none">β</span></p>
+    <p class="eyebrow">Map Maker</p>
     <h2>路線は、自分で作れる。</h2>
-    <p class="lead" style="margin-top:14px">タイトル画面の「マップ作成（β版）」から、路線を一から作れるようになりました。駅を置き、駅と駅をつなげば、信号・てこ・進路まで自動で組み上がります。作った路線はそのままサンドボックスとダイヤ作成に並び、ダイヤを引いて指令に就くところまで一続きで遊べます。Steam Workshop に投稿すれば、ほかのプレイヤーにも遊んでもらえます。</p>
+    <p class="lead" style="margin-top:14px">タイトル画面の「マップ作成」から、路線を一から作れます。駅を置き、駅と駅をつなげば、信号・てこ・進路まで自動で組み上がります。作った路線はそのままサンドボックスとダイヤ作成に並び、ダイヤを引いて指令に就くところまで一続きで遊べます。Steam Workshop に投稿すれば、ほかのプレイヤーにも遊んでもらえます。</p>
 
     <div class="mm-grid">
       <div class="mm-card" style="--mc:var(--sig-green)">
@@ -929,16 +976,6 @@
       </ul>
     </div>
 
-    <div class="beta">
-      <h3>β版についてのお願い</h3>
-      <ul>
-        <li>公式マップにあるような路線は作れるようになっておりますが、全国には様々な配線があり、すべてを網羅はできておりません（例えば山手線のような、起点＝終点となる環状線は作れません）。</li>
-        <li>作ったマップは、今後の更新で手直しが必要になることがあります。</li>
-        <li>編集内容は自動では保存されません。こまめに保存（F5）してください。</li>
-        <li>シナリオモードとチュートリアルには、自作の路線は出ません。</li>
-      </ul>
-      <p>不具合や機能要望が、対応できる線形を広げるいちばんの手がかりになります。マップ作成画面の「ファイル」メニュー →「不具合・ご要望を送る…」からお寄せください。使い方は<a href="https://tadimaru.com/pro-support/map-editor.html" target="_blank" rel="noopener">取扱説明書（マップ作成編）</a>にまとめています。</p>
-    </div>
   </div>
 </section>
 
@@ -966,24 +1003,22 @@
     <h2>製品情報</h2>
     <dl class="spec">
       <div class="spec-row"><dt>タイトル</dt><dd>鉄道運行管理シミュレーターPro - Railway Dispatcher Pro -</dd></div>
-      <div class="spec-row"><dt>価格</dt><dd>アーリーアクセス ¥6,480</dd></div>
-      <div class="spec-row"><dt>配信</dt><dd>2026年7月末より Steam アーリーアクセスで配信中</dd></div>
-      <div class="spec-row"><dt>収録内容</dt><dd>路線 5（ダイヤ 9本）／シナリオ 22本／チュートリアル 5本<br>サンドボックス・ダイヤ作成・マップ作成（β版）・Steam Workshop（マップの共有）・オンライン協力プレイ（最大4人）</dd></div>
-      <div class="spec-row"><dt>プラットフォーム</dt><dd>Steam（Windows）<br><span style="font-size:13px;color:var(--sub)">協力プレイは、参加する全員がこのゲームを持っている必要があります</span></dd></div>
-      <div class="spec-row"><dt>動作環境</dt><dd>Windows 10 / Intel Core i5・AMD Ryzen 5 / DirectX 11 対応 GPU（内蔵GPU可・Intel UHD Graphics 相当以上）</dd></div>
+      <div class="spec-row"><dt>価格</dt><dd><a href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steam ストアページ</a>をご覧ください</dd></div>
+      <div class="spec-row"><dt>配信</dt><dd>Steam にて正式版を配信中</dd></div>
+      <div class="spec-row"><dt>収録内容</dt><dd>路線 5（ダイヤ 9本）／シナリオ 22本／チュートリアル 5本<br>サンドボックス・ダイヤ作成・マップ作成・Steam Workshop（マップの共有）・オンライン協力プレイ（最大4人）</dd></div>
+      <div class="spec-row"><dt>プラットフォーム</dt><dd>Steam（Windows・macOS）<br><span style="font-size:13px;color:var(--sub)">協力プレイは Windows と Mac の人どうしでも一緒に遊べます。参加する全員がこのゲームを持っている必要があります</span></dd></div>
+      <div class="spec-row"><dt>動作環境</dt><dd>Windows：Windows 10 / Intel Core i5・AMD Ryzen 5 / DirectX 11 対応 GPU（内蔵GPU可・Intel UHD Graphics 相当以上）<br>Mac：Intel・Apple シリコンの両方に対応</dd></div>
       <div class="spec-row"><dt>推奨環境</dt><dd>解像度 1920×1080 以上。ダイヤ・指令などのウィンドウはサブモニターへ移動できるため、デュアルモニター環境を推奨</dd></div>
-      <div class="spec-row"><dt>対応言語</dt><dd>日本語（英語は正式版までに対応予定）</dd></div>
+      <div class="spec-row"><dt>対応言語</dt><dd>日本語・英語・簡体字中国語・繁体字中国語・韓国語・ドイツ語・インドネシア語<br><span style="font-size:13px;color:var(--sub)">取扱説明書は日本語と英語です</span></dd></div>
       <div class="spec-row"><dt>開発・販売</dt><dd>合同会社たでぃまる</dd></div>
     </dl>
     <div class="roadmap">
-      <div class="rm done"><b>2026年7月末<i>済</i></b><span>アーリーアクセス開始<br>¥6,480</span></div>
+      <div class="rm done"><b>2026年7月末<i>済</i></b><span>Steam で配信開始</span></div>
       <div class="rm done"><b>2026年8月〜9月<i>済</i></b><span>路線を4つ追加<br>シナリオを17本追加</span></div>
-      <div class="rm done"><b>2026年9月〜10月<i>済</i></b><span>マップ作成（β版）公開<br>Steam Workshop 連携</span></div>
-      <div class="rm now"><b>2026年10月<i>NEW</i></b><span>オンライン協力プレイ<br>（最大4人）</span></div>
-      <div class="rm"><b>EA期間中</b><span>英語対応<br>マップ作成の対応範囲の拡大</span></div>
-      <div class="rm"><b>2026年12月頃</b><span>正式版リリース</span></div>
+      <div class="rm done"><b>2026年9月〜10月<i>済</i></b><span>マップ作成<br>Steam Workshop 連携</span></div>
+      <div class="rm done"><b>2026年10月<i>済</i></b><span>オンライン協力プレイ<br>（最大4人）</span></div>
+      <div class="rm now"><b>正式版<i>NEW</i></b><span>7つの言語に対応<br>Mac に対応</span></div>
     </div>
-    <p style="margin:36px 0 0;font-size:12.5px;color:var(--sub)">※記載の開発予定・スケジュールは変更になる場合があります。掲載中の画面写真はすべて開発中のもので、変更される場合があります。</p>
   </div>
 </section>
 
@@ -1016,7 +1051,7 @@
       </details>
       <details>
         <summary>自分で路線を作れますか？</summary>
-        <p>作れます。タイトル画面の「マップ作成（β版）」から、駅と線路を置いて路線を作り、そのままダイヤを組んで指令できます。β版のため、公式マップにあるような路線は作れますが、すべての配線には対応していません（例えば山手線のような環状線は作れません）。不具合やご要望は、マップ作成画面の「ファイル」メニューからお寄せください。</p>
+        <p>作れます。タイトル画面の「マップ作成」から、駅と線路を置いて路線を作り、そのままダイヤを組んで指令できます。公式マップにあるような路線は作れますが、起点と終点が同じ駅になる環状線など、作れない配線もあります。不具合やご要望は、取扱説明書の<a href="https://tadimaru.com/pro-support/contact.html" target="_blank" rel="noopener">お問い合わせ</a>からお寄せください。</p>
       </details>
       <details>
         <summary>作った路線をほかの人と共有できますか？</summary>
@@ -1024,7 +1059,7 @@
       </details>
       <details>
         <summary>友だちと一緒に遊べますか？</summary>
-        <p>遊べます。オンライン協力プレイで、Steam の友だちと最大4人まで同じ路線・同じダイヤを一緒に指令できます。タイトルの「協力プレイ」から部屋を作り、6桁の合言葉か Steam の招待で呼んでください（合言葉なら Steam のフレンドでなくても入れます）。参加する全員がこのゲームを持っている必要があります。ゲーム内のボイスチャットはないので、Discord などと一緒にお楽しみください。</p>
+        <p>遊べます。オンライン協力プレイで、Steam の友だちと最大4人まで同じ路線・同じダイヤを一緒に指令できます。タイトルの「協力プレイ」から部屋を作り、6桁の合言葉か Steam の招待で呼んでください（合言葉なら Steam のフレンドでなくても入れます）。参加する全員がこのゲームを持っている必要があります。Windows と Mac の人どうしでも一緒に遊べます。ゲーム内のボイスチャットはないので、Discord などと一緒にお楽しみください。</p>
       </details>
       <details>
         <summary>協力プレイで遊べる路線は？</summary>
@@ -1035,8 +1070,12 @@
         <p>動画配信・実況・切り抜き・収益化は、すべて事前許諾不要で自由に行っていただけます。収益はすべて配信者様のものです。Steamメンバーシップ限定配信もOKです。</p>
       </details>
       <details>
-        <summary>アーリーアクセス版と正式版の違いは？</summary>
-        <p>アーリーアクセス期間中に、これまで路線の追加（4路線・シナリオ17本）、マップ作成（β版）、Steam Workshop でのマップ共有、オンライン協力プレイを実装してきました。今後、英語対応などを実装し、すべて揃った段階で正式版となります。EA版をご購入いただくと、追加費用なしで正式版までアップデートで遊べます。※開発予定は変更になる場合があります。</p>
+        <summary>Mac でも遊べますか？</summary>
+        <p>遊べます。Steam で、Windows と macOS（Intel・Apple シリコンの両方）に対応しています。協力プレイも、Windows と Mac の人どうしで一緒に遊べます。</p>
+      </details>
+      <details>
+        <summary>日本語以外でも遊べますか？</summary>
+        <p>遊べます。日本語・英語・簡体字中国語・繁体字中国語・韓国語・ドイツ語・インドネシア語の7つの言語に対応しています。取扱説明書は日本語と英語で用意しています。</p>
       </details>
     </div>
   </div>
@@ -1052,7 +1091,16 @@
       <a href="https://note.com/tadimaru" target="_blank" rel="noopener">note（開発日誌）</a>
       <a href="https://tadimaru.com/pro-support/" target="_blank" rel="noopener">サポート・取扱説明書</a>
     </div>
-    <p class="copy">© 合同会社たでぃまる　画面写真はすべて開発中のものです。変更される場合があります。開発予定・スケジュールは変更になる場合があります。</p>
+    <div class="langs" aria-label="Language">
+      <a href="./" lang="ja" hreflang="ja" aria-current="page">日本語</a>
+      <a href="en/" lang="en" hreflang="en">English</a>
+      <a href="zh-hans/" lang="zh-Hans" hreflang="zh-Hans">简体中文</a>
+      <a href="zh-hant/" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a>
+      <a href="ko/" lang="ko" hreflang="ko">한국어</a>
+      <a href="de/" lang="de" hreflang="de">Deutsch</a>
+      <a href="id/" lang="id" hreflang="id">Bahasa Indonesia</a>
+    </div>
+    <p class="copy">© 合同会社たでぃまる</p>
   </div>
 </footer>
 
@@ -1073,7 +1121,10 @@
 
   // 狭い画面では、下へスクロールしている間ナビを隠し、上へ戻すと出す
   var nav = document.querySelector('nav');
-  var narrow = window.matchMedia('(max-width:1080px)');
+  // 言語メニューは外をクリックしたら閉じる
+  var lang = document.querySelector('details.lang');
+  document.addEventListener('click', function (e) { if (lang && lang.open && !lang.contains(e.target)) lang.open = false; });
+  var narrow = window.matchMedia('(max-width:1240px)');
   var lastY = window.scrollY, ticking = false;
   window.addEventListener('scroll', function () {
     if (ticking) return;
@@ -1083,11 +1134,12 @@
       if (Math.abs(y - lastY) < 6) { ticking = false; return; }
       var hide = narrow.matches && y > nav.offsetHeight && y > lastY;
       nav.classList.toggle('nav-hidden', hide);
+      if (hide && lang) lang.open = false;
       lastY = y;
       ticking = false;
     });
   }, { passive: true });
-  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); if (lang) lang.open = false; } });
 })();
 </script>
 

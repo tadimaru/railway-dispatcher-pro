@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="노선 전체를 내려다보는 관제석에서 수십 편의 열차를 지휘하는 운행 관리 시뮬레이터. 5개 노선과 22개 시나리오, 운행표 작성, 맵 제작과 Steam 창작마당, 그리고 Steam 친구와 최대 4명이 함께 관제하는 온라인 협동 플레이. 일본어·영어 등 7개 언어, Windows와 Mac 지원. Steam에서 판매 중.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Railway Dispatcher Pro - 공식 사이트">
+<meta property="og:description" content="노선 전체를 내려다보는 관제석에서 수십 편의 열차를 지휘하는 운행 관리 시뮬레이터. 5개 노선과 22개 시나리오, 운행표 작성, 맵 제작과 Steam 창작마당, 그리고 Steam 친구와 최대 4명이 함께 관제하는 온라인 협동 플레이. 일본어·영어 등 7개 언어, Windows와 Mac 지원. Steam에서 판매 중.">
+<meta property="og:url" content="https://tadimaru.com/railway-dispatcher-pro/ko/">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://tadimaru.com/railway-dispatcher-pro/assets/img/ogp.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://tadimaru.com/railway-dispatcher-pro/ko/">
+<link rel="alternate" hreflang="ja" href="https://tadimaru.com/railway-dispatcher-pro/">
+<link rel="alternate" hreflang="en" href="https://tadimaru.com/railway-dispatcher-pro/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://tadimaru.com/railway-dispatcher-pro/zh-hans/">
+<link rel="alternate" hreflang="zh-Hant" href="https://tadimaru.com/railway-dispatcher-pro/zh-hant/">
+<link rel="alternate" hreflang="ko" href="https://tadimaru.com/railway-dispatcher-pro/ko/">
+<link rel="alternate" hreflang="de" href="https://tadimaru.com/railway-dispatcher-pro/de/">
+<link rel="alternate" hreflang="id" href="https://tadimaru.com/railway-dispatcher-pro/id/">
+<link rel="alternate" hreflang="x-default" href="https://tadimaru.com/railway-dispatcher-pro/en/">
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+<title>Railway Dispatcher Pro - 공식 사이트</title>
+<style>
+  :root{
+    --paper:#ffffff;
+    --wash:#f2f5f8;
+    --ink:#17232d;
+    --sub:#5a6b76;
+    --line:#dbe2e8;
+    --accent:#0a5cab;
+    --accent-deep:#084a8a;
+    --amber:#b97708;
+    --amber-bg:#fdf4e3;
+    --dark:#10181f;
+    /* ゲーム画面由来のシグナルカラー */
+    --sig-cyan:#1fb6cb;
+    --sig-amber:#dfa010;
+    --sig-red:#d9433a;
+    --sig-green:#149e62;
+    --sig-pink:#e05fa8;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+    word-break:keep-all;
+    line-height:1.85;
+    margin:0;
+    font-size:16px;
+  }
+  img{max-width:100%;display:block}
+  a{color:var(--accent)}
+
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+  /* ---- nav ---- */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
+    border-bottom:1px solid var(--line);backdrop-filter:blur(6px);
+  }
+  .nav-in{
+    max-width:1060px;margin:0 auto;padding:8px 24px;
+    display:flex;align-items:center;gap:16px;
+  }
+  .nav-in img{height:44px;width:auto}
+  .nav-links{display:flex;gap:16px;margin-left:auto;flex-wrap:nowrap}
+  .nav-links a{
+    color:var(--ink);text-decoration:none;font-size:13.5px;letter-spacing:.04em;white-space:nowrap;
+  }
+  .nav-in .btn.small{white-space:nowrap;flex:none}
+  .nav-links a:hover{color:var(--accent)}
+  nav{transition:transform .25s ease}
+  section[id]{scroll-margin-top:72px}
+  /* 狭い画面: ロゴ＋購入ボタンの1段と、横スクロールのリンク1段にまとめる。
+     下へスクロール中は隠し、上へ戻すと出す（固定ヘッダーが画面を占有しないように） */
+  @media (max-width:1240px){
+    .nav-in{flex-wrap:wrap;gap:4px 12px;padding:6px 16px 0}
+    .nav-in img{height:34px}
+    .nav-in .btn.small{margin-left:auto;padding:6px 14px;font-size:13px;white-space:nowrap}
+    .nav-links{
+      order:3;width:100%;margin-left:0;flex-wrap:nowrap;gap:20px;
+      overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 0 8px;
+      -webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);
+    }
+    .nav-links::-webkit-scrollbar{display:none}
+    .nav-links a{white-space:nowrap;flex:none}
+    .nav-links a:last-child{padding-right:28px}
+    nav.nav-hidden{transform:translateY(-100%)}
+    .lang{margin-left:auto}
+    .nav-in .lang + .btn.small{margin-left:0}
+  }
+  .nav-links a.new::after{
+    content:"NEW";font-family:"Segoe UI",system-ui,sans-serif;font-size:9.5px;font-weight:700;
+    color:#fff;background:var(--sig-pink);border-radius:3px;padding:0 4px;margin-left:5px;vertical-align:2px;
+  }
+  .btn{
+    display:inline-block;color:#fff;text-decoration:none;
+    background:linear-gradient(135deg,#0d6fd1,#00a7d0);
+    padding:10px 26px;border-radius:4px;font-weight:700;letter-spacing:.04em;
+    box-shadow:0 6px 22px -8px rgba(0,140,190,.65);
+    transition:filter .15s,transform .15s;
+  }
+  .btn:hover{filter:brightness(1.12)}
+  .btn.small{padding:7px 18px;font-size:13.5px}
+  .btn.big{padding:15px 44px;font-size:17px}
+
+  /* ---- 言語の切り替え（ナビのドロップダウン＋フッターの一覧） ---- */
+  .lang{position:relative;flex:none}
+  .lang summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;min-height:34px;box-sizing:border-box;
+    padding:4px 10px;border:1px solid var(--line);border-radius:4px;background:var(--paper);
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;
+  }
+  .lang summary::-webkit-details-marker{display:none}
+  .lang summary svg{width:16px;height:16px;flex:none}
+  .lang summary::after{content:"";border:4px solid transparent;border-top-color:currentColor;margin:4px 0 0 1px}
+  .lang summary:hover{border-color:var(--accent);color:var(--accent)}
+  .lang ul{
+    position:absolute;right:0;top:calc(100% + 6px);z-index:60;margin:0;padding:6px 0;list-style:none;min-width:200px;
+    background:var(--paper);border:1px solid var(--line);border-radius:6px;box-shadow:0 14px 36px -14px rgba(16,35,54,.4);
+  }
+  .lang li a{display:block;padding:9px 18px;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.5}
+  .lang li a:hover{background:var(--wash);color:var(--accent)}
+  .lang li a[aria-current]{color:var(--accent);font-weight:700}
+  footer .langs{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;margin:-8px 0 28px}
+  footer .langs a{padding:4px 0}
+  footer .langs a[aria-current]{color:#fff;font-weight:700}
+
+  /* ---- section furniture ---- */
+  section{padding:88px 0}
+  section.wash{background:var(--wash)}
+  .eyebrow{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size:11.5px;font-weight:600;letter-spacing:.22em;color:var(--accent);
+    text-transform:uppercase;margin:0 0 10px;
+  }
+  h1,h2,h3{line-height:1.35;text-wrap:balance;margin:0}
+  h2{font-size:34px;font-weight:800;letter-spacing:.01em}
+  h3{font-size:21px;font-weight:700}
+  .lead{color:var(--sub);max-width:38em}
+
+  /* 駅ドット区切り：CTC盤面モチーフ（軌道回路の在線表示風に色分け） */
+  .trackline{
+    display:flex;align-items:center;gap:0;margin:26px 0 0;height:10px;
+  }
+  .trackline .rail{height:2px;background:var(--line);flex:1}
+  .trackline .st{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--accent);margin:0 4px;flex:none;
+  }
+  .trackline .st.fill{background:var(--accent)}
+  .trackline .st.c{border-color:var(--sig-cyan);background:var(--sig-cyan)}
+  .trackline .st.a{border-color:var(--sig-amber);background:var(--sig-amber)}
+  .trackline .st.r{border-color:var(--sig-red);background:var(--sig-red)}
+
+  /* ---- hero：CTC盤面フルブリード＋オーバーレイ ---- */
+  .hero{position:relative;background:#0b1218;color:#fff;overflow:hidden}
+  .hero-img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 22%;
+  }
+  .hero-shade{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(11,18,24,.30) 0%,rgba(11,18,24,.22) 34%,rgba(11,18,24,.68) 68%,rgba(11,18,24,.92) 100%);
+  }
+  .hero-content{position:relative;padding-top:210px;padding-bottom:72px}
+  .hero-news{
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:20px;
+    background:rgba(11,18,24,.62);border:1px solid rgba(255,255,255,.22);border-radius:999px;
+    padding:6px 16px 6px 6px;color:#fff;text-decoration:none;font-size:13.5px;
+    backdrop-filter:blur(4px);
+  }
+  .hero-news b{
+    background:var(--sig-pink);border-radius:999px;padding:1px 10px;font-size:11.5px;
+    font-family:"Segoe UI",system-ui,sans-serif;letter-spacing:.08em;
+  }
+  .hero-news:hover{border-color:rgba(255,255,255,.5)}
+  .hero .eyebrow{
+    color:#6fe0ef;letter-spacing:.3em;
+    text-shadow:0 1px 3px rgba(0,0,0,.9),0 2px 14px rgba(0,0,0,.8);
+  }
+  .hero h1{
+    font-size:clamp(40px,6.2vw,64px);font-weight:800;letter-spacing:.02em;
+    text-shadow:0 2px 26px rgba(0,0,0,.6);
+  }
+  .hero .lead{
+    color:#cfdae2;font-size:17.5px;margin:22px 0 32px;max-width:34em;
+    text-shadow:0 1px 14px rgba(0,0,0,.55);
+  }
+  .hero-cta{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .hero-cta .sub{font-size:13px;color:#a4b6c1;line-height:1.6}
+  .price{font-family:"Segoe UI",system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#fff;font-weight:700}
+
+  /* ---- concept ---- */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+  .vs-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:28px 30px;
+  }
+  .vs-card.pro{border-color:var(--accent);border-width:2px}
+  .vs-card .tag{
+    font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--sub);
+    font-family:"Segoe UI",system-ui,sans-serif;
+  }
+  .vs-card.pro .tag{color:var(--accent)}
+  .vs-card h3{margin:8px 0 10px}
+  .vs-card p{margin:0;color:var(--sub);font-size:14.5px}
+
+  /* ---- features ---- */
+  .feat{
+    display:grid;grid-template-columns:5fr 6fr;gap:54px;align-items:center;
+    padding:58px 0;
+  }
+  .feat + .feat{border-top:1px solid var(--line)}
+  .feat.rev .feat-txt{order:2}
+  .feat.rev .feat-img{order:1}
+  .feat-no{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size:12px;font-weight:600;letter-spacing:.2em;color:var(--accent);
+    display:inline-flex;align-items:center;gap:9px;
+  }
+  /* 各特徴に信号灯モチーフ（該当スクショの色と対応） */
+  .feat-no::before{
+    content:"";width:9px;height:9px;border-radius:50%;background:var(--lamp,var(--accent));
+    box-shadow:0 0 8px color-mix(in srgb,var(--lamp,var(--accent)) 60%,transparent);
+  }
+  .feat h3{font-size:26px;margin:8px 0 16px}
+  .feat p{color:var(--sub);margin:0;font-size:15.5px}
+  .feat-img img,.ph{
+    border-radius:6px;border:1px solid var(--line);
+    box-shadow:0 18px 44px -18px rgba(16,35,54,.35);
+  }
+  .ph{
+    aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(-45deg,#f6f8fa 0 14px,#eef2f5 14px 28px);
+    color:var(--sub);font-size:13.5px;letter-spacing:.06em;
+    border-style:dashed;box-shadow:none;text-align:center;line-height:1.7;
+  }
+
+  /* ---- how to play ---- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+  .step{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 28px;
+  }
+  /* 遊び方の丸数字＝信号現示（赤→黄→青）で進行していく */
+  .step-badge{
+    width:44px;height:44px;border-radius:50%;
+    border:3px solid var(--accent);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:19px;font-weight:700;
+    margin-bottom:16px;
+  }
+  .step.s1 .step-badge{border-color:var(--sig-red);color:var(--sig-red)}
+  .step.s2 .step-badge{border-color:var(--sig-amber);color:var(--sig-amber)}
+  .step.s3 .step-badge{border-color:var(--sig-green);color:var(--sig-green)}
+  .step h3{font-size:18px;margin-bottom:8px}
+  .step p{margin:0;color:var(--sub);font-size:14px}
+  .flow-note{
+    margin:40px auto 0;text-align:center;color:var(--accent);font-weight:700;
+    font-size:17px;letter-spacing:.06em;
+  }
+
+  /* ---- systems（輸送障害と指令） ---- */
+  .inc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+  .inc-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:22px 24px;border-left:4px solid var(--inc,var(--accent));
+  }
+  .inc-card h3{font-size:17px;margin:0 0 6px}
+  .inc-card p{margin:0;color:var(--sub);font-size:13.8px}
+  .sandbox-note{
+    margin-top:22px;background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    padding:20px 26px;font-size:14.5px;
+  }
+  .sandbox-note b{color:var(--accent)}
+  .cmd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+  .cmd-card.tall{grid-column:2;grid-row:1 / span 2}
+  .cmd-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px 24px;
+  }
+  .cmd-card h3{
+    font-size:15px;margin:0 0 14px;display:flex;align-items:center;gap:9px;
+  }
+  .cmd-card h3::before{
+    content:"";width:9px;height:9px;border-radius:50%;background:var(--cg,var(--accent));flex:none;
+  }
+  .cmd-list{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .cmd-list li{
+    background:var(--wash);border:1px solid var(--line);border-radius:999px;
+    padding:5px 14px;font-size:13px;font-weight:600;
+  }
+  .cmd-note{margin:18px 0 0;color:var(--sub);font-size:13px}
+
+  /* ---- routes & scenarios ---- */
+  .tut-box{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 34px;margin-top:44px;
+  }
+  .tut-box h3{margin-bottom:6px}
+  .tut-box>p{margin:0 0 18px;color:var(--sub);font-size:14.5px}
+  .tut-list{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+  .tut-list li{
+    background:var(--paper);border:1px solid var(--line);border-radius:999px;
+    padding:7px 18px;font-size:13.5px;font-weight:600;
+  }
+  .tut-list li b{color:var(--accent);font-family:"Segoe UI",system-ui,sans-serif;margin-right:6px}
+  .route{
+    display:grid;grid-template-columns:5fr 6fr;gap:34px;align-items:start;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 32px;margin-top:22px;border-top:3px solid var(--rc,var(--accent));
+  }
+  .route-img img{
+    border-radius:5px;border:1px solid var(--line);background:#373c43;cursor:zoom-in;
+  }
+  .route .kicker{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:600;
+    letter-spacing:.2em;color:var(--rc,var(--accent));
+  }
+  .route .stars{color:var(--sig-amber);letter-spacing:.08em;margin-left:8px;font-size:12px}
+  .route h3{font-size:22px;margin:6px 0 6px}
+  .route .facts{margin:0 0 12px;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+  .route .facts b{color:var(--ink);font-weight:700}
+  .route>div>p{margin:0 0 16px;color:var(--sub);font-size:14.5px}
+  .sc-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+  .sc-list li{
+    display:grid;grid-template-columns:44px 1fr;gap:8px;
+    padding:9px 2px;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.65;
+  }
+  .sc-list .lv{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11.5px;font-weight:700;color:var(--sig-amber);
+    white-space:nowrap;padding-top:2px;
+  }
+  .sc-list b{display:block;font-size:14.5px}
+  .sc-list span{color:var(--sub)}
+  .cond-box{margin-top:48px}
+  .cond-box h3{margin-bottom:12px}
+  .cond-chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 12px}
+  .cond-chips span{
+    border:1.5px solid var(--sig-green);color:var(--sig-green);
+    border-radius:4px;padding:6px 14px;font-size:13.5px;font-weight:700;
+  }
+  .cond-chips span.f{border-color:var(--sig-red);color:var(--sig-red)}
+  .cond-box p{color:var(--sub);font-size:14.5px;margin:0;max-width:44em}
+
+  /* ---- map maker ---- */
+  .mm-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
+  .mm-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:26px 28px;
+  }
+  .mm-card .tag{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;
+    color:var(--mc,var(--accent));
+  }
+  .mm-card h3{font-size:19px;margin:6px 0 10px}
+  .mm-card p{margin:0 0 14px;color:var(--sub);font-size:14px}
+  .mm-shots{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  .mm-shots img{border-radius:6px;border:1px solid var(--line);cursor:zoom-in}
+  .mm-more{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 0;padding:0;list-style:none;
+  }
+  .mm-more li{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px 18px;font-size:13.5px;
+    color:var(--sub);line-height:1.7;
+  }
+  .mm-more b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  .mm-note{
+    margin-top:30px;background:var(--amber-bg);border:1px solid #ecd9ad;border-left:4px solid var(--sig-amber);
+    border-radius:8px;padding:22px 28px;font-size:14.5px;
+  }
+  .mm-note h3{font-size:17px;margin:0 0 10px;color:var(--amber)}
+  .mm-note ul{margin:0;padding-left:1.2em}
+  .mm-note li{margin:3px 0}
+  .mm-note p{margin:12px 0 0}
+
+  /* ---- co-op（オンライン協力プレイ） ---- */
+  .coop-head{display:grid;grid-template-columns:6fr 5fr;gap:48px;align-items:center}
+  .coop-art{
+    background:#0f171e;border-radius:8px;padding:26px 22px 20px;margin:0;
+    box-shadow:0 18px 44px -18px rgba(16,35,54,.45);
+  }
+  .coop-art svg{width:100%;height:auto;display:block}
+  .coop-art .cap{margin:10px 2px 0;color:#7f919d;font-size:11.5px;letter-spacing:.04em}
+  .coop-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+  .coop-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:24px 24px 22px;
+    border-top:3px solid var(--cc,var(--accent));
+  }
+  .coop-card .no{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;
+    color:var(--cc,var(--accent));
+  }
+  .coop-card h3{font-size:18px;margin:6px 0 10px}
+  .coop-card p{margin:0;color:var(--sub);font-size:14px}
+  .coop-card kbd{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:12px;font-weight:700;
+    border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 6px;background:var(--wash);color:var(--ink);
+  }
+  .coop-note{
+    margin-top:22px;background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    padding:18px 24px;font-size:14px;color:var(--sub);
+  }
+  .coop-note b{color:var(--ink)}
+  .coop-note ul{margin:0;padding-left:1.2em}
+  .coop-note li{margin:2px 0}
+
+  /* ---- workshop（マップ作成の中） ---- */
+  .ws{
+    margin-top:34px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:26px 28px;
+    border-left:4px solid var(--sig-pink);
+  }
+  .ws h3{font-size:19px;margin:0 0 8px}
+  .ws>p{margin:0 0 18px;color:var(--sub);font-size:14.5px}
+  .ws-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0;padding:0;list-style:none}
+  .ws-steps li{background:var(--wash);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:13.5px;color:var(--sub);line-height:1.7}
+  .ws-steps b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  .ws-steps i{font-style:normal;font-family:"Segoe UI",system-ui,sans-serif;font-weight:700;color:var(--sig-pink);margin-right:6px}
+
+  /* ---- gallery ---- */
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+  .gal img,.gal .ph{border-radius:5px;box-shadow:none;width:100%}
+  .gal .ph{aspect-ratio:16/9;font-size:12px}
+  .gal img{transition:transform .18s;border:1px solid var(--line)}
+  .gal img:hover{transform:scale(1.025)}
+
+  /* ---- lightbox（スクショのクリック拡大） ---- */
+  .feat-img img,.gal img{cursor:zoom-in}
+  .lightbox{
+    position:fixed;inset:0;z-index:100;background:rgba(10,16,22,.93);
+    display:flex;align-items:center;justify-content:center;
+    padding:3vmin;cursor:zoom-out;
+  }
+  .lightbox[hidden]{display:none}
+  .lightbox img{
+    max-width:100%;max-height:100%;width:auto;height:auto;
+    border-radius:6px;box-shadow:0 24px 80px rgba(0,0,0,.6);
+  }
+
+  /* ---- product info ---- */
+  .spec{
+    margin-top:44px;border-top:1px solid var(--line);
+  }
+  .spec-row{
+    display:grid;grid-template-columns:180px 1fr;gap:20px;
+    padding:16px 4px;border-bottom:1px solid var(--line);font-size:15px;
+  }
+  .spec-row dt{color:var(--sub);font-weight:600;margin:0}
+  .spec-row dd{margin:0;font-variant-numeric:tabular-nums}
+  .roadmap{display:flex;gap:0;margin-top:52px;align-items:flex-start}
+  .rm{flex:1;position:relative;padding:26px 12px 0 0}
+  .rm::before{
+    content:"";position:absolute;top:5px;left:0;right:0;height:2px;background:var(--line);
+  }
+  .rm.done::before,.rm.now::before{background:var(--accent)}
+  .rm::after{
+    content:"";position:absolute;top:0;left:0;width:12px;height:12px;border-radius:50%;
+    background:var(--paper);border:3px solid var(--accent);box-sizing:border-box;
+  }
+  .rm.done::after{background:var(--accent)}
+  .rm.now::after{background:var(--sig-pink);border-color:var(--sig-pink);box-shadow:0 0 0 4px color-mix(in srgb,var(--sig-pink) 25%,transparent)}
+  .rm b{display:block;font-size:15px}
+  .rm i{font-style:normal;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-left:6px}
+  .rm.now i{color:var(--sig-pink)}
+  .rm span{font-size:13px;color:var(--sub)}
+
+  /* ---- sister ---- */
+  .sister{
+    display:flex;gap:30px;align-items:center;margin-top:40px;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:30px 34px;
+  }
+  .sister p{margin:6px 0 14px;color:var(--sub);font-size:14.5px}
+
+  /* ---- faq ---- */
+  .faq{margin-top:40px;border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line);padding:4px 2px}
+  .faq summary{
+    cursor:pointer;font-weight:700;padding:14px 4px;list-style:none;
+    display:flex;align-items:center;gap:12px;font-size:15.5px;
+  }
+  .faq summary::before{content:"Q";color:var(--accent);font-family:"Segoe UI",system-ui,sans-serif;font-weight:700}
+  .faq details p{margin:0 4px 16px 30px;color:var(--sub);font-size:14.5px}
+
+  /* ---- footer ---- */
+  footer{background:var(--dark);color:#aebbc4;padding:64px 0 40px}
+  footer img{height:46px;width:auto;margin-bottom:22px}
+  footer .links{display:flex;gap:24px;font-size:13.5px;flex-wrap:wrap;margin-bottom:30px}
+  footer a{color:#aebbc4;text-decoration:none}
+  footer a:hover{color:#fff}
+  footer .copy{font-size:12px;color:#6d7d89}
+
+  @media (max-width:820px){
+    h2{font-size:27px}
+    .hero-content{padding-top:64px;padding-bottom:56px}
+    .hero-news{font-size:13px;line-height:1.5;align-items:flex-start;border-radius:18px}
+    .hero-news b{flex:none;margin-top:1px}
+    .hero .eyebrow{letter-spacing:.14em}
+    .inc-grid{grid-template-columns:1fr}
+    .cmd-grid{grid-template-columns:1fr}
+    .cmd-card.tall{grid-column:auto;grid-row:auto}
+    .tut-box{padding:24px 22px}
+    .route{grid-template-columns:1fr;gap:18px;padding:22px 20px}
+    .mm-grid,.mm-shots{grid-template-columns:1fr}
+    .mm-more{grid-template-columns:1fr}
+    .coop-head{grid-template-columns:1fr;gap:28px}
+    .coop-cards{grid-template-columns:1fr}
+    .ws-steps{grid-template-columns:1fr}
+    .feat{grid-template-columns:1fr;gap:26px;padding:44px 0}
+    .feat.rev .feat-txt{order:1}
+    .feat.rev .feat-img{order:2}
+    .vs{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .gal{grid-template-columns:1fr 1fr}
+    .spec-row{grid-template-columns:1fr;gap:2px}
+    .roadmap{flex-direction:column;gap:18px}
+    .rm{padding:0 0 0 26px}
+    .rm::before{top:0;bottom:-18px;left:5px;right:auto;width:2px;height:auto}
+    .rm:last-child::before{display:none}
+    .sister{flex-direction:column;align-items:flex-start}
+    section{padding:60px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .gal img{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <img src="../assets/img/logo-nav.png" alt="Railway Dispatcher Pro">
+    <div class="nav-links">
+      <a href="#coop" class="new">협동 플레이</a>
+      <a href="#features">특징</a>
+      <a href="#howto">플레이 방법</a>
+      <a href="#systems">장애와 지령</a>
+      <a href="#routes">노선과 시나리오</a>
+      <a href="#mapmaker">맵 제작</a>
+      <a href="#gallery">갤러리</a>
+      <a href="#product">제품 정보</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <details class="lang">
+      <summary aria-label="Language"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.6 2.6 3.9 5.6 3.9 9.2s-1.3 6.6-3.9 9.2M12 2.8C9.4 5.4 8.1 8.4 8.1 12s1.3 6.6 3.9 9.2"/></svg><span>한국어</span></summary>
+      <ul>
+        <li><a href="../" lang="ja" hreflang="ja">日本語</a></li>
+        <li><a href="../en/" lang="en" hreflang="en">English</a></li>
+        <li><a href="../zh-hans/" lang="zh-Hans" hreflang="zh-Hans">简体中文</a></li>
+        <li><a href="../zh-hant/" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a></li>
+        <li><a href="../ko/" lang="ko" hreflang="ko" aria-current="page">한국어</a></li>
+        <li><a href="../de/" lang="de" hreflang="de">Deutsch</a></li>
+        <li><a href="../id/" lang="id" hreflang="id">Bahasa Indonesia</a></li>
+      </ul>
+    </details>
+    <a class="btn small" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steam에서 구매</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <img class="hero-img" src="../assets/img/hero.jpg" alt="노선 전체를 내려다보는 CTC 화면">
+  <div class="hero-shade"></div>
+  <div class="wrap hero-content">
+    <a class="hero-news" href="#product"><b>UPDATE</b>정식판이 출시되었습니다 — 7개 언어와 Mac 지원</a>
+    <p class="eyebrow">Railway Dispatcher Pro — Official Site</p>
+    <h1>역을 다루는 일에서,<br>노선을 총괄하는 일로.</h1>
+    <p class="lead">당신은 관제사입니다. 노선 전체를 내려다보는 관제석에 앉아 수십 편의 열차를 정시에 달리게 하십시오. 흐트러진 운행표를 당신의 지령으로 되찾으십시오.</p>
+    <div class="hero-cta">
+      <a class="btn big" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steam에서 구매하기</a>
+      <div class="sub">
+        <span class="price">정식판 판매 중</span><br>
+        Steam / Windows·Mac / 7개 언어 지원
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="coop">
+  <div class="wrap">
+    <div class="coop-head">
+      <div>
+        <p class="eyebrow">협동 플레이</p>
+        <h2>혼자의 관제석에서,<br>모두의 관제센터로.</h2>
+        <div class="trackline" aria-hidden="true">
+          <span class="st c"></span><span class="rail"></span><span class="st c"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st r"></span>
+        </div>
+        <p class="lead" style="margin-top:26px">Steam 친구와 최대 4명이 같은 노선, 같은 운행표를 함께 관제합니다. 역마다 담당을 정해 나누어 맡고, 핑으로 "여기를 봐 주십시오"라고 서로 알리며 모두 함께 운행을 지킵니다. 혼자서는 감당하기 어려운 아침 러시아워도 서로 소통하면 바로잡을 수 있습니다.</p>
+      </div>
+      <figure class="coop-art">
+        <svg viewBox="0 0 440 200" role="img" aria-label="담당자의 색으로 구분된 역 이름과 세 사람의 커서, 핑의 이미지">
+          <g font-family="Apple SD Gothic Neo,Malgun Gothic,Noto Sans KR,sans-serif" font-size="12" font-weight="700">
+            <line x1="20" y1="96" x2="420" y2="96" stroke="#3b4a55" stroke-width="3"/>
+            <line x1="20" y1="114" x2="420" y2="114" stroke="#3b4a55" stroke-width="3"/>
+            <line x1="40" y1="96" x2="400" y2="96" stroke="#149e62" stroke-width="3" stroke-dasharray="46 22" opacity=".85"/>
+            <rect x="22" y="62" width="62" height="22" rx="3" fill="#1fb6cb" opacity=".22"/><text x="53" y="77" fill="#6fe0ef" text-anchor="middle">역 A</text>
+            <rect x="118" y="62" width="62" height="22" rx="3" fill="#1fb6cb" opacity=".22"/><text x="149" y="77" fill="#6fe0ef" text-anchor="middle">역 B</text>
+            <rect x="214" y="62" width="62" height="22" rx="3" fill="#dfa010" opacity=".22"/><text x="245" y="77" fill="#f3c24a" text-anchor="middle">역 C</text>
+            <rect x="310" y="62" width="62" height="22" rx="3" fill="#e05fa8" opacity=".22"/><text x="341" y="77" fill="#f08cc4" text-anchor="middle">역 D</text>
+            <g fill="#1fb6cb"><path d="M96 128 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="112" y="146" width="44" height="18" rx="3"/><text x="134" y="159" fill="#0f171e" text-anchor="middle" font-size="11">A 님</text></g>
+            <g fill="#dfa010"><path d="M226 134 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="242" y="152" width="44" height="18" rx="3"/><text x="264" y="165" fill="#0f171e" text-anchor="middle" font-size="11">B 님</text></g>
+            <g fill="#e05fa8"><path d="M330 124 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="346" y="142" width="44" height="18" rx="3"/><text x="368" y="155" fill="#0f171e" text-anchor="middle" font-size="11">C 님</text></g>
+            <circle cx="245" cy="105" r="9" fill="none" stroke="#dfa010" stroke-width="2.5"/>
+            <line x1="245" y1="44" x2="245" y2="96" stroke="#dfa010" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <rect x="180" y="20" width="130" height="24" rx="12" fill="#dfa010"/>
+            <text x="245" y="36" fill="#0f171e" text-anchor="middle" font-size="11.5">보류하겠습니다 — B 님</text>
+          </g>
+        </svg>
+        <figcaption class="cap">이미지: 역 이름이 담당자의 색으로 바뀌고, 다른 사람의 커서와 핑이 보입니다.</figcaption>
+      </figure>
+    </div>
+
+    <div class="coop-cards">
+      <div class="coop-card" style="--cc:var(--sig-cyan)">
+        <span class="no">01</span>
+        <h3>방 코드로 바로 모이기</h3>
+        <p>방을 만들면 6자리 방 코드가 표시됩니다. 코드를 알려 주기만 하면 들어올 수 있으며, Steam 친구가 아니어도 괜찮습니다. Steam 초대로도 참가할 수 있고, 플레이 중인 방에도 나중에 합류할 수 있습니다.</p>
+      </div>
+      <div class="coop-card" style="--cc:var(--sig-amber)">
+        <span class="no">02</span>
+        <h3>담당을 정해 분담하기</h3>
+        <p>호스트가 역마다 담당자를 정하면 맵의 역 이름이 그 사람의 색으로 바뀝니다. 다른 사람의 마우스 커서도 이름과 함께 보이므로, 누가 어디를 보고 있는지 한눈에 알 수 있습니다.</p>
+      </div>
+      <div class="coop-card" style="--cc:var(--sig-pink)">
+        <span class="no">03</span>
+        <h3>핑으로 서로 알리기</h3>
+        <p><kbd>Q</kbd>를 누른 채 맵을 클릭하면 "여기를 봐 주십시오", "보류하겠습니다", "진로를 구성하겠습니다" 등의 빠른 메시지 핑이 모든 사람의 화면에 표시됩니다.</p>
+      </div>
+    </div>
+
+    <div class="coop-note">
+      <ul>
+        <li>협동 플레이는 <b>자유 운전(샌드박스)</b>에서 즐길 수 있습니다. 게임에 수록된 노선은 물론, <b>창작마당의 노선</b>으로도 플레이할 수 있습니다(노선이 없는 사람은 참가할 때 구독할 수 있습니다).</li>
+        <li>참가하는 <b>모든 사람이 이 게임을 보유하고 있어야</b> 합니다. <b>Windows와 Mac 사용자끼리도</b> 함께 플레이할 수 있습니다.</li>
+        <li>레버, 진로, 보류, 운행표 변경 등의 지령은 누구나 내릴 수 있습니다. 배속 변경, 돌발 상황 발생, 저장은 호스트가 담당합니다.</li>
+        <li>게임 내 음성 채팅은 없습니다. Discord 등과 함께 즐겨 주십시오. 플레이 방법은 <a href="https://tadimaru.com/pro-support/coop.en.html" target="_blank" rel="noopener">설명서(협동 플레이 편, 영어)</a>에 정리되어 있습니다.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="concept">
+  <div class="wrap">
+    <p class="eyebrow">Concept</p>
+    <h2>한 역에서, 전 노선으로.</h2>
+    <div class="trackline" aria-hidden="true">
+      <span class="st c"></span><span class="rail"></span><span class="st r"></span><span class="rail"></span><span class="st"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st fill"></span>
+    </div>
+    <p class="lead" style="margin-top:26px">'Railway Dispatcher'에서 역 구내의 신호 취급을 익혔다면, 다음은 그 위의 레이어입니다. Pro가 맡기는 것은 하나의 역이 아니라 <b>노선의 모든 것</b>. 신호, 진로, 운행표, 차량 운용——모든 것이 당신의 판 위에 있습니다.</p>
+    <div class="vs">
+      <div class="vs-card">
+        <span class="tag">Railway Dispatcher</span>
+        <h3>역을 다루다.</h3>
+        <p>역 구내의 신호와 진로를 수동으로 조작해 열차를 정시에 내보내는 '신호 취급소'의 체험.</p>
+      </div>
+      <div class="vs-card pro">
+        <span class="tag">PRO — 본작</span>
+        <h3>노선을 총괄하다.</h3>
+        <p>노선 전체를 내려다보고 다이어그램을 읽으며, 운전정리 지령으로 혼란을 수습하는 '수송 관제센터'의 체험.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <p class="eyebrow">특징</p>
+    <h2>관제석 위에, 모든 것이 있다.</h2>
+
+    <div class="feat" style="margin-top:20px">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-cyan)">FEATURE 01</span>
+        <h3>전 노선을 한눈에.</h3>
+        <p>노선 전체의 열차 점유, 신호, 개통된 진로를 실시간으로 보여 주는 CTC 표시반. 어느 역에서 열차가 밀리고, 지연이 어디로 번져 가는지 표시반이 모든 것을 알려 줍니다. 열차를 클릭하면 그 열차가 앞으로 지나갈 진로가 주황색으로 표시됩니다.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-overview.jpg" alt="CTC 표시반으로 노선 전체를 내려다보는 모습" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-pink)">FEATURE 02</span>
+        <h3>운행선을 읽다.</h3>
+        <p>관제사의 무기는 다이어그램입니다. 계획 운행선에 지연을 반영한 예측, 그리고 실적이 겹쳐 그려지므로 혼란이 어디로 향할지 미리 읽을 수 있습니다. 표시반과 운행선, 두 화면을 오가며 다음 한 수를 짜는 것——그것이 관제의 묘미입니다.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-diagram.jpg" alt="다이어그램 화면" loading="lazy"></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-red)">FEATURE 03</span>
+        <h3>지령으로 흐름을 되찾다.</h3>
+        <p>차량고장——아침 러시아워의 본선 위에서. 그런 최악의 순간부터 관제의 일은 시작됩니다. 보류, 지연 출발, 임시정차, 임시통과, 회차, 단축 운행. 운전정리의 패를 꺼내 무너져 가는 운행표를 바로잡아 주십시오.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-incident.jpg" alt="차량고장 발생 시의 지령 화면" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-amber)">FEATURE 04</span>
+        <h3>결과는 숫자로 돌아온다.</h3>
+        <p>각 시나리오에는 클리어 조건과 평가가 있으며, 지연을 얼마나 억제했는지, 얼마나 많은 열차를 지켜 냈는지가 숫자로 표시됩니다. 같은 혼란이라도 지령이 다르면 결과가 달라집니다. 몇 번이고 도전해 최선의 운전정리를 찾아보십시오.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-result.jpg" alt="시나리오 종료 시의 평가 요약" loading="lazy"></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-green)">FEATURE 05</span>
+        <h3>운행표는 직접 짤 수 있다.</h3>
+        <p>운행표 편집 기능으로 운행선을 하나하나 직접 설계할 수 있습니다. 정차시간, 교행, 회차 운용까지 자유자재로 다룰 수 있습니다. '나만의 운행표'가 수백 편의 열차가 되어 달리기 시작하는 순간은 더할 나위 없는 쾌감입니다.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-edit.jpg" alt="운행표 편집 화면" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-cyan)">FEATURE 06</span>
+        <h3>원하는 시간대부터 관제석에.</h3>
+        <p>샌드박스에서는 노선과 운행표를 고르면 '첫 열차부터'는 물론, 1시간 단위로 원하는 시간대부터 시작할 수 있습니다. 저녁 러시아워만 반복해서 연습하거나, 심야의 입고만 지켜볼 수도 있습니다——배속으로 수십 분씩 기다릴 필요가 없습니다. 장애도 원하는 장소에 직접 일으킬 수 있습니다.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-sandbox.jpg" alt="샌드박스의 시작 시각 선택 화면" loading="lazy"></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="wash" id="howto">
+  <div class="wrap">
+    <p class="eyebrow">플레이 방법</p>
+    <h2>관제사의 일은 세 가지.</h2>
+    <p class="lead" style="margin-top:14px">어려운 조작은 없습니다. 보고, 정하고, 지령한다. 그 반복이 곧 운행 관리의 재미입니다.</p>
+    <div class="steps">
+      <div class="step s1">
+        <div class="step-badge">1</div>
+        <h3>보기</h3>
+        <p>CTC 표시반과 다이어그램으로 상황을 파악합니다. 어디에서 지연이 생기고, 어디로 퍼지려 하는지. 열차를 선택하면 그 앞의 진로도 한눈에 알 수 있습니다.</p>
+      </div>
+      <div class="step s2">
+        <div class="step-badge">2</div>
+        <h3>정하기</h3>
+        <p>어느 열차를 먼저 보낼지, 어디에서 회차할지. 정답은 하나가 아닙니다. 당신의 판단이 운행표가 됩니다.</p>
+      </div>
+      <div class="step s3">
+        <div class="step-badge">3</div>
+        <h3>지령하기</h3>
+        <p>보류, 지연 출발, 임시정차, 회차——지령 메뉴에서 즉시 실행합니다. 열차들이 응답해 줍니다.</p>
+      </div>
+    </div>
+    <p class="flow-note">보기 → 정하기 → 지령하기. 그리고 운행표가 회복되어 갑니다.</p>
+  </div>
+</section>
+
+<section id="systems">
+  <div class="wrap">
+    <p class="eyebrow">장애와 지령</p>
+    <h2>일어나는 장애와, 둘 수 있는 수.</h2>
+    <p class="lead" style="margin-top:14px">관제사의 일은 장애와 패의 지혜 겨루기입니다. 본작에는 4종류의 수송 장애와, 실제 운전정리를 재현한 다양한 지령이 수록되어 있습니다.</p>
+
+    <h3 style="margin-top:44px">4가지 수송 장애</h3>
+    <div class="inc-grid">
+      <div class="inc-card" style="--inc:var(--sig-red)">
+        <h3>차량고장</h3>
+        <p>열차가 본선 위에서 제어 불능 상태로 정지합니다. 복구될 때까지 1밀리미터도 움직일 수 없습니다. 고밀도 운행표라면 몇 분의 정지가 전 노선의 혼란으로 바뀝니다.</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-amber)">
+        <h3>선로·신호 고장(궤도회로 통행 불가)</h3>
+        <p>선로전환기 전환 불능이나 선로 지장으로 특정 구간을 지날 수 없게 되어 진로를 구성할 수 없습니다. 한정된 번선을 어떻게 운용하는지가 시험대에 오릅니다.</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-cyan)">
+        <h3>구간 속도제한</h3>
+        <p>폭우나 강풍으로 역간에 서행 제한이 걸립니다. 일부 열차의 지연에 그치지 않고, 간격과 접속을 흐트러뜨리며 서서히 전 노선으로 번져 갑니다.</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-pink)">
+        <h3>구간 운행 중지</h3>
+        <p>강풍이나 정전으로 역간이 진입 금지가 됩니다. 노선은 분단되고, 양쪽에서 각각 회차 운전을 꾸리는 대규모 운전정리가 시작됩니다.</p>
+      </div>
+    </div>
+    <div class="sandbox-note">
+      장애는 시나리오에서만 닥쳐오는 것이 아닙니다. <b>메뉴의 '돌발 상황 발령'에서 원하는 장소, 원하는 시점에 직접 일으킬 수도 있습니다</b>. 고장 낼 열차도, 속도제한 구간과 제한값도 자유롭습니다. '최악의 하루'를 직접 설계해 관제 실력을 시험하는 플레이도 가능합니다. 시나리오의 규정 시간이 지난 뒤에는 장애를 수동으로 해제할 수 있으므로, 운행표가 원래대로 돌아올 때까지 지령을 계속할 수도 있습니다.
+    </div>
+
+    <h3 style="margin-top:52px">지령의 패</h3>
+    <div class="cmd-grid">
+      <div class="cmd-card" style="--cg:var(--sig-amber)">
+        <h3>세우기·늦추기</h3>
+        <ul class="cmd-list">
+          <li>보류(지정 역에서 대기)</li>
+          <li>방면을 지정해 일괄 보류</li>
+          <li>전 열차 일괄 보류</li>
+          <li>지연 출발(초 단위로 더한 뒤 확정)</li>
+          <li>통지운전(정시 이후, 다음 역이 비는 대로 출발)</li>
+        </ul>
+      </div>
+      <div class="cmd-card" style="--cg:var(--sig-pink)">
+        <h3>정차역 바꾸기</h3>
+        <ul class="cmd-list">
+          <li>임시정차</li>
+          <li>임시통과</li>
+          <li>운행표대로 되돌리기</li>
+        </ul>
+        <p class="cmd-note">달리고 있는 열차는 현재 속도와 남은 거리에 따라 정지가 가능한지가 달라집니다. 판단은 서둘러 주십시오.</p>
+      </div>
+      <div class="cmd-card tall" style="--cg:var(--sig-cyan)">
+        <h3>운용 재편성하기</h3>
+        <ul class="cmd-list">
+          <li>이 역에서 단축 운행(종착으로 변경)</li>
+          <li>회차 운용 새로 만들기</li>
+          <li>계속 운행(같은 방향) 운용 새로 만들기</li>
+          <li>다른 운용에 연결</li>
+          <li>연결 해제(다음 운용 취소)</li>
+          <li>미출발 운용 인수</li>
+          <li>남은 구간의 분기·정차 초 편집</li>
+        </ul>
+        <p class="cmd-note">단축 운행한 차량은 그 역의 번선에 남습니다. 치우는 것도 관제의 일입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="routes">
+  <div class="wrap">
+    <p class="eyebrow">노선과 시나리오</p>
+    <h2>5개 노선, 22가지 '혼란'.</h2>
+    <p class="lead" style="margin-top:14px">교외의 지방 사철부터 도심의 지하철, 공항 액세스선, 그리고 신칸센까지. 성격이 서로 다른 5개 노선에서, 현실의 철도에서 실제로 일어나는 운행 장애를 모티브로 한 시나리오가 기다리고 있습니다. 모든 노선은 샌드박스에서 자유롭게 관제할 수 있습니다. Steam 창작마당에서는 다른 플레이어가 만든 노선도 플레이할 수 있습니다.</p>
+
+    <div class="tut-box">
+      <h3>먼저 튜토리얼로 관제 데뷔.</h3>
+      <p>철도 지식이 전혀 없어도 괜찮습니다. 5개의 튜토리얼이 기본 조작부터 상급 역 취급까지 단계적으로 안내합니다. <b>화면의 빨간 테두리 가이드가 '다음에 누를 곳'을 그대로 가리켜 주므로</b>, 설명서를 읽지 않아도 손이 기억해 갑니다.</p>
+      <ul class="tut-list">
+        <li><b>1</b>화면과 시간 보는 법</li>
+        <li><b>2</b>보류와 운행 재개</li>
+        <li><b>3</b>지연 출발·임시정차·임시통과</li>
+        <li><b>4</b>단축 운행과 회차</li>
+        <li><b>5</b>역 취급(수동 진로)</li>
+      </ul>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-green)">
+      <div class="route-img"><img src="../assets/img/route-local.png" alt="단선 구간이 있는 교외 지방 사철의 노선 전체" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 01<span class="stars">난이도 ★1</span></span>
+        <h3>단선 구간이 있는, 교외의 지방 사철</h3>
+        <p class="facts"><b>규조마에~센다이~히요리다이 13개 역</b>　/　보통·쾌속 운행표 384편 · 보통 전용 운행표 377편</p>
+        <p>센다이 시내에서 교외로 뻗어 나가는 노선. 이즈미부터는 단선이어서 교행역이 수송의 핵심입니다. 쾌속과 완행의 완급 접속이 매일의 운행표를 만들어 갑니다. 튜토리얼의 무대도 이 노선입니다.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>아침 안개 속 5분</b><span>아침 러시아워의 차량고장. 복구까지 5분——그래도 후속 열차는 순식간에 밀려듭니다.</span></div></li>
+          <li><span class="lv">★2</span><div><b>비의 장막</b><span>폭우로 25km/h 제한. 서행이 완급 접속을 흐트러뜨리며 전 노선으로 번집니다.</span></div></li>
+          <li><span class="lv">★3</span><div><b>닫혀 버린 대피선</b><span>저녁 러시아워, 선로전환기 전환 불능으로 대피선을 쓸 수 없습니다. 수동 진로로 번선을 운용합니다.</span></div></li>
+          <li><span class="lv">★4</span><div><b>북풍, 노선을 끊다</b><span>강풍으로 운행 중지. 분단된 양쪽에 회차 운전을 꾸립니다.</span></div></li>
+          <li><span class="lv">★5</span><div><b>움직이지 않는 쾌속</b><span>단선 구간 입구에서 쾌속이 오도 가도 못합니다. 그 북쪽은 사실상 봉쇄 상태로.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-amber)">
+      <div class="route-img"><img src="../assets/img/route-boso.png" alt="보소 사철의 노선 전체" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 02<span class="stars">난이도 ★2</span></span>
+        <h3>본선과 지선이 갈라지는, 보소의 사철</h3>
+        <p class="facts"><b>지바~아네가사키~핫덴쇼마에 / 아네가사키~골프장 20개 역</b>　/　휴일 360편 · 평일 594편</p>
+        <p>지바에서 보소의 해안을 따라 내려가는 본선과, 아네가사키에서 갈라져 내륙으로 향하는 지선. 쾌속·급행·보통이 오가며, 대피역에서의 추월이 볼거리입니다.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★2</span><div><b>연, 선로를 막다</b><span>지선의 가선에 커다란 연이 걸렸습니다. 직통 쾌속을 아네가사키에서 회차시키고, 지장이 풀리면 원래 운행표로.</span></div></li>
+          <li><span class="lv">★2</span><div><b>첫차, 차량기지를 나서지 못하다</b><span>동트기 전, 출고하는 회송 열차가 차량기지 출구에서 오도 가도 못합니다. 일부 운휴를 감수하면서 운행 편수를 지킵니다.</span></div></li>
+          <li><span class="lv">★3</span><div><b>아네가사키의 분수령</b><span>본선의 역간에서 보통 열차가 멈춰 섰습니다. 아네가사키에서 본선과 지선, 두 방향의 회차를 동시에 돌립니다.</span></div></li>
+          <li><span class="lv">★3</span><div><b>가마토리, 선로전환기가 움직이지 않는다</b><span>저녁 러시아워, 대피선을 쓸 수 없게 되었습니다. 대피역을 옆 역으로 옮겨 우등 열차의 발을 지킵니다.</span></div></li>
+          <li><span class="lv">★5</span><div><b>가즈사무라카미, 10분간의 빨간불</b><span>아침 러시아워에 비상정지장치가 작동. 재개 후의 간격을 지연 출발 정리로 되찾습니다.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-cyan)">
+      <div class="route-img"><img src="../assets/img/route-subway.png" alt="도심을 관통하는 지하철의 노선 전체" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 03<span class="stars">난이도 ★2</span></span>
+        <h3>2분 30초마다 열차가 오는, 도심의 지하철</h3>
+        <p class="facts"><b>히요시~요코하마~가미오오카 25개 역</b>　/　휴일 374편 · 평일 569편</p>
+        <p>히요시에서 요코하마 도심을 지나 가미오오카까지. 아침에는 요코하마 발착 열차가 2분 30초 간격——회차할 수 있는 역이 한정된 고빈도 노선에서, 간격을 지키는 지령이 요구됩니다.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>쓰루미, 북쪽을 잃다</b><span>북쪽 종점을 지날 수 없게 되었습니다. 쓰루미에서 회차시키고, 복구 후에는 갇혀 버린 북쪽을 원래대로.</span></div></li>
+          <li><span class="lv">★2</span><div><b>사쿠라기초, 20분의 공백</b><span>도심의 한 구간이 운행 중지. 요코하마와 간나이, 두 역에서 양쪽 회차를 돌립니다.</span></div></li>
+          <li><span class="lv">★3</span><div><b>가미오오카, 돌려보낼 수 없는 저녁</b><span>4분 간격의 저녁 러시아워, 선로전환기 전환 불능으로 종점의 회차가 막힙니다.</span></div></li>
+          <li><span class="lv">★4</span><div><b>요코하마, 13분의 문</b><span>출입문 고장으로 13분. 세우고, 받아 내고, 흘려보낸다——운전정리의 정석을 정면으로.</span></div></li>
+          <li><span class="lv">★5</span><div><b>2분 30초의 아침</b><span>하루 중 가장 팽팽한 아침에, 작은 균열이 잇달아 생겼다가 사라집니다.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-red)">
+      <div class="route-img"><img src="../assets/img/route-airport.png" alt="공항 액세스선의 노선 전체" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 04<span class="stars">난이도 ★3</span></span>
+        <h3>지하철도 복복선도 단선도 있는, 공항 액세스선</h3>
+        <p class="facts"><b>삿포로~신치토세 공항~시코쓰호 온천 30개 역</b>　/　휴일 655편 · 평일 732편</p>
+        <p>삿포로에서 신치토세 공항을 거쳐 시코쓰호 온천까지. 도중에 지하철로 직결 운행하고, 기타히로시마까지는 복복선, 온천 쪽은 단선으로, 하나의 노선에 온갖 선형이 담겨 있습니다. 평일에는 하루 732편이 달리는 최대 규모의 노선입니다.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>스이메이쿄, 엇갈리지 못하다</b><span>단선의 교행역에서 한쪽 번선을 쓸 수 없습니다. 남은 1선으로 모든 열차를 소화해 냅니다.</span></div></li>
+          <li><span class="lv">★2</span><div><b>기요타, 바깥 선로를 잃다</b><span>복복선의 급행선을 지날 수 없습니다. 4개 선로를 3개로 처리하는 45분.</span></div></li>
+          <li><span class="lv">★3</span><div><b>지하철 삿포로, 건너지 못하는 아침</b><span>아침 러시아워, 지하철 구간 종점에서 건넘선이 고장. 본선으로 돌려 도심으로의 수송력을 지킵니다.</span></div></li>
+          <li><span class="lv">★4</span><div><b>비어가든, 어둠 속에서 뛰어든 그림자</b><span>저녁 러시아워, 특급이 동물과 충돌. 기타히로시마의 인상선 3개로 회차를 돌립니다.</span></div></li>
+          <li><span class="lv">★5</span><div><b>쓰키사무, 아침의 응급환자</b><span>응급환자 구호의 9분 사이에, 다른 지장이 잇달아 겹치는 동시다발의 아침.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-pink)">
+      <div class="route-img"><img src="../assets/img/route-shinkansen.png" alt="니혼카이 연안을 달리는 신칸센의 노선 전체" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 05<span class="stars">난이도 ★2</span></span>
+        <h3>니혼카이 연안을 따라 북쪽으로, 풀 규격 신칸센</h3>
+        <p class="facts"><b>가나자와~신아오모리~삿포로 28개 역</b>　/　비수기 운행표 171편</p>
+        <p>가나자와에서 니혼카이 연안을 따라 아오모리로, 그리고 삿포로까지. 275km/h로 달리는 열차를 적색과 녹색의 2현시 신호(ATC)가 지킵니다. 역간이 길고, 지연은 재래선과는 차원이 다른 규모로 쌓여 갑니다——거리도 속도도 스케일이 다른 운전정리입니다.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>사카타, 새벽의 정전</b><span>첫차 시간대에 변전소가 고장 나 상하행 모두 3시간 운행 불가. 차량기지의 예비 차량을 깨워 운용을 재편성합니다.</span></div></li>
+          <li><span class="lv">★2</span><div><b>니혼카이, 바람의 두 시간</b><span>해안 구간에 강풍 속도제한이 2시간. 잇달아 제한에 휘말리는 신칸센의 지연을, 해제 후 1시간 안에 바로잡습니다.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cond-box">
+      <h3>클리어 조건은 관제사의 성적표.</h3>
+      <div class="cond-chips">
+        <span>종료 시 최대 지연 ○분 이내</span>
+        <span class="f">기외정차(역간에서 오도 가도 못하는 상황)를 내지 않기</span>
+        <span>출발 간격을 ○분 이상 벌리지 않기</span>
+        <span>○ 방면 출발 ○편 이상</span>
+      </div>
+      <p>시나리오마다 여러 클리어 조건이 설정되어 있으며, 플레이 중에는 조건 창에 달성 상황이 <b>실시간 수치</b>로 표시됩니다. '앞으로 몇 분의 지연까지 버틸 수 있는가', '앞으로 몇 편을 더 내보내면 수송을 지킬 수 있는가'를 곁눈질하며 지령을 내리는 긴장감——같은 혼란이라도 지령이 다르면 결과도 달라집니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="mapmaker">
+  <div class="wrap">
+    <p class="eyebrow">맵 제작</p>
+    <h2>노선은 직접 만들 수 있다.</h2>
+    <p class="lead" style="margin-top:14px">타이틀 화면의 '맵 제작'에서 노선을 처음부터 만들 수 있습니다. 역을 배치하고 역과 역을 이으면 신호, 레버, 진로까지 자동으로 구성됩니다. 만든 노선은 그대로 샌드박스와 운행표 작성에 표시되므로, 운행표를 짜고 관제석에 앉기까지 한 번에 이어서 즐길 수 있습니다. Steam 창작마당에 업로드하면 다른 플레이어도 플레이할 수 있습니다.</p>
+
+    <div class="mm-grid">
+      <div class="mm-card" style="--mc:var(--sig-green)">
+        <span class="tag">간단</span>
+        <h3>4가지 도구로 노선 하나가 완성된다.</h3>
+        <p>역은 배선을 골라 놓기만 하면 되고, 역과 역 사이는 몇 번 클릭하는 것만으로 선로, 폐색, 신호가 한 번에 깔립니다. 긴 노선은 떨어진 선로끼리 이어 여러 단으로 꺾어 그릴 수 있습니다.</p>
+        <ul class="cmd-list">
+          <li>차량 만들기</li><li>역 만들기</li><li>역과 역 잇기</li><li>떨어진 선로 잇기</li>
+        </ul>
+      </div>
+      <div class="mm-card" style="--mc:var(--accent)">
+        <span class="tag">상세</span>
+        <h3>궤도회로 하나부터 세밀하게 만들 수 있다.</h3>
+        <p>궤도회로, 분기기, 레버, 진로, 신호기를 하나씩 배치하고 수정합니다. 간단 모드로 만든 노선을 세밀하게 다듬는 데에도 쓸 수 있습니다. 두 모드는 오른쪽 위에서 언제든지 전환할 수 있으며, 어느 쪽으로 만들어도 같은 노선이 됩니다.</p>
+        <ul class="cmd-list">
+          <li>궤도회로</li><li>분기기</li><li>레버·진로</li><li>신호기</li><li>좌표 이동</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mm-shots">
+      <img src="../assets/img/mm-easy.jpg" data-full="../assets/img/mm-easy-full.jpg" alt="맵 제작·간단 모드: 배선을 골라 역 만들기" loading="lazy">
+      <img src="../assets/img/mm-advanced.jpg" data-full="../assets/img/mm-advanced-full.jpg" alt="맵 제작·상세 모드: 궤도회로와 분기기를 직접 편집" loading="lazy">
+    </div>
+
+    <ul class="mm-more">
+      <li><b>저장 전의 '남은 작업'</b>사용되지 않는 레버나 참조 대상이 사라진 신호기 등을 목록으로 알려 주고, 해당 위치로 바로 이동할 수 있습니다.</li>
+      <li><b>되돌리기/다시 실행</b>Ctrl+Z / Ctrl+Shift+Z를 지원합니다. 과감하게 시도해 보십시오.</li>
+      <li><b>노선 사진 자동 촬영</b>저장하면 노선 전체의 사진이 찍혀 노선 선택 화면에 표시됩니다.</li>
+    </ul>
+
+    <div class="ws">
+      <h3>Steam 창작마당에서 노선을 공유하다.</h3>
+      <p>만든 노선은 Steam 창작마당에 업로드할 수 있고, 다른 플레이어가 만든 노선은 구독만 하면 노선 선택에 표시됩니다. 창작마당의 노선은 협동 플레이 방에서도 사용할 수 있습니다.</p>
+      <ul class="ws-steps">
+        <li><b><i>1</i>찾기·구독하기</b>게임 안에서 창작마당을 열고 마음에 드는 노선을 구독합니다.</li>
+        <li><b><i>2</i>플레이하기</b>구독한 노선은 샌드박스와 운행표 작성에 그대로 표시됩니다.</li>
+        <li><b><i>3</i>업로드하기</b>직접 만든 노선을 맵 제작에서 창작마당으로. 업데이트도 할 수 있습니다.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="wash" id="gallery">
+  <div class="wrap">
+    <p class="eyebrow">갤러리</p>
+    <h2>스크린샷</h2>
+    <div class="gal">
+      <img src="../assets/img/thumb-routeselect.jpg" data-full="../assets/img/large-routeselect.jpg" alt="노선 선택 화면(노선 사진과 설명 포함)" loading="lazy">
+      <img src="../assets/img/thumb-shinkansen.jpg" data-full="../assets/img/large-shinkansen.jpg" alt="신칸센의 CTC 표시반과 다이어그램" loading="lazy">
+      <img src="../assets/img/thumb-quad.jpg" data-full="../assets/img/large-quad.jpg" alt="복복선 구간이 있는 공항 액세스선의 CTC 표시반" loading="lazy">
+      <img src="../assets/img/thumb-subway.jpg" data-full="../assets/img/large-subway.jpg" alt="고밀도 운행 지하철의 CTC 표시반과 다이어그램" loading="lazy">
+      <img src="../assets/img/thumb-tutorial.jpg" data-full="../assets/img/large-tutorial.jpg" alt="튜토리얼(빨간 테두리 가이드)" loading="lazy">
+      <img src="../assets/img/thumb-help.jpg" data-full="../assets/img/large-help.jpg" alt="시나리오 시작 시의 지령 도움말" loading="lazy">
+      <img src="../assets/img/thumb-conditions.jpg" data-full="../assets/img/large-conditions.jpg" alt="클리어 조건 창" loading="lazy">
+      <img src="../assets/img/thumb-play.jpg" data-full="../assets/img/large-play.jpg" alt="보류·임시정차 지령 중" loading="lazy">
+      <img src="../assets/img/thumb-select.jpg" data-full="../assets/img/large-select.jpg" alt="시나리오 선택 화면" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="wrap">
+    <p class="eyebrow">제품 정보</p>
+    <h2>제품 정보</h2>
+    <dl class="spec">
+      <div class="spec-row"><dt>타이틀</dt><dd>Railway Dispatcher Pro</dd></div>
+      <div class="spec-row"><dt>가격</dt><dd><a href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steam 스토어 페이지</a>를 확인해 주십시오</dd></div>
+      <div class="spec-row"><dt>배포</dt><dd>Steam에서 정식판 판매 중</dd></div>
+      <div class="spec-row"><dt>수록 내용</dt><dd>노선 5개(운행표 9종) / 시나리오 22개 / 튜토리얼 5개<br>샌드박스·운행표 작성·맵 제작·Steam 창작마당(맵 공유)·온라인 협동 플레이(최대 4명)</dd></div>
+      <div class="spec-row"><dt>플랫폼</dt><dd>Steam(Windows·macOS)<br><span style="font-size:13px;color:var(--sub)">협동 플레이는 Windows와 Mac 사용자끼리도 함께 플레이할 수 있습니다. 참가하는 모든 사람이 이 게임을 보유하고 있어야 합니다</span></dd></div>
+      <div class="spec-row"><dt>최소 사양</dt><dd>Windows: Windows 10 / Intel Core i5·AMD Ryzen 5 / DirectX 11 지원 GPU(내장 그래픽 가능·Intel UHD Graphics 이상)<br>Mac: Intel·Apple 실리콘 모두 지원</dd></div>
+      <div class="spec-row"><dt>권장 사양</dt><dd>해상도 1920×1080 이상. 운행표·지령 등의 창은 보조 모니터로 옮길 수 있으므로 듀얼 모니터 환경을 권장합니다</dd></div>
+      <div class="spec-row"><dt>지원 언어</dt><dd>일본어·영어·중국어 간체·중국어 번체·한국어·독일어·인도네시아어<br><span style="font-size:13px;color:var(--sub)">설명서는 일본어와 영어로 제공됩니다</span></dd></div>
+      <div class="spec-row"><dt>개발·배급</dt><dd>Tadimaru LLC</dd></div>
+    </dl>
+    <div class="roadmap">
+      <div class="rm done"><b>2026년 7월 말<i>완료</i></b><span>Steam 출시</span></div>
+      <div class="rm done"><b>2026년 8월~9월<i>완료</i></b><span>노선 4개 추가<br>시나리오 17개 추가</span></div>
+      <div class="rm done"><b>2026년 9월~10월<i>완료</i></b><span>맵 제작<br>Steam 창작마당 연동</span></div>
+      <div class="rm done"><b>2026년 10월<i>완료</i></b><span>온라인 협동 플레이<br>(최대 4명)</span></div>
+      <div class="rm now"><b>정식판<i>NEW</i></b><span>7개 언어 지원<br>Mac 지원</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="sister">
+  <div class="wrap">
+    <p class="eyebrow">Series</p>
+    <h2>자매작</h2>
+    <div class="sister">
+      <div>
+        <h3>Railway Dispatcher</h3>
+        <p>역 구내의 신호와 진로를 수동으로 조작하는 시리즈 첫 번째 작품. 먼저 '역을 다루는' 재미부터 맛보고 싶은 분께 추천합니다. Pro와 함께 즐기면 철도 운행의 모든 레이어가 보이기 시작합니다.</p>
+        <a class="btn small" href="https://store.steampowered.com/app/4282480/?utm_source=official-site" target="_blank" rel="noopener">Steam 스토어 페이지로</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow">FAQ</p>
+    <h2>자주 묻는 질문</h2>
+    <div class="faq">
+      <details>
+        <summary>철도 지식이 없어도 플레이할 수 있나요?</summary>
+        <p>플레이할 수 있습니다. 튜토리얼이 기본 조작부터 차례로 안내하므로 신호나 다이어그램이 처음이어도 괜찮습니다. 익숙해지면 난이도 ★가 높은 노선과 시나리오에 도전해 보십시오. 익숙한 사람과 협동 플레이로 함께 관제해 보는 것도 추천합니다.</p>
+      </details>
+      <details>
+        <summary>전작(Railway Dispatcher)을 플레이하지 않았어도 괜찮나요?</summary>
+        <p>괜찮습니다. 본작은 독립된 작품이며, 스토리나 데이터 이어받기는 없습니다.</p>
+      </details>
+      <details>
+        <summary>노선을 직접 만들 수 있나요?</summary>
+        <p>만들 수 있습니다. 타이틀 화면의 '맵 제작'에서 역과 선로를 배치해 노선을 만들고, 그대로 운행표를 짜서 관제할 수 있습니다. 공식 맵과 같은 노선을 만들 수 있지만, 기점과 종점이 같은 역인 순환선 등 만들 수 없는 배선도 있습니다. 버그나 요청 사항은 설명서의 <a href="https://tadimaru.com/pro-support/contact.en.html" target="_blank" rel="noopener">'문의하기'(영어)</a>에서 보내 주십시오.</p>
+      </details>
+      <details>
+        <summary>만든 노선을 다른 사람과 공유할 수 있나요?</summary>
+        <p>할 수 있습니다. 맵 제작에서 Steam 창작마당에 업로드하면 다른 플레이어가 구독해서 플레이할 수 있습니다. 창작마당에 업로드한 노선은 협동 플레이 방에서도 사용할 수 있습니다.</p>
+      </details>
+      <details>
+        <summary>친구와 함께 플레이할 수 있나요?</summary>
+        <p>플레이할 수 있습니다. 온라인 협동 플레이로 Steam 친구와 최대 4명까지 같은 노선, 같은 운행표를 함께 관제할 수 있습니다. 타이틀의 '협동 플레이'에서 방을 만들고, 6자리 방 코드나 Steam 초대로 불러 주십시오(방 코드라면 Steam 친구가 아니어도 들어올 수 있습니다). 참가하는 모든 사람이 이 게임을 보유하고 있어야 합니다. Windows와 Mac 사용자끼리도 함께 플레이할 수 있습니다. 게임 내 음성 채팅은 없으므로 Discord 등과 함께 즐겨 주십시오.</p>
+      </details>
+      <details>
+        <summary>협동 플레이로 즐길 수 있는 노선은 무엇인가요?</summary>
+        <p>게임에 수록된 5개 노선과 Steam 창작마당의 노선입니다. 모드는 자유 운전(샌드박스)이며, 시나리오와 튜토리얼은 1인용입니다. 호스트가 창작마당의 노선을 골랐을 때 그 노선이 없는 사람은 참가할 때 그 자리에서 구독할 수 있습니다.</p>
+      </details>
+      <details>
+        <summary>실황·방송을 해도 되나요?</summary>
+        <p>동영상 방송, 실황, 클립 편집, 수익 창출은 모두 사전 허락 없이 자유롭게 하실 수 있습니다. 수익은 모두 방송인의 것입니다. Steam 멤버십 한정 방송도 괜찮습니다.</p>
+      </details>
+      <details>
+        <summary>Mac에서도 플레이할 수 있나요?</summary>
+        <p>플레이할 수 있습니다. Steam에서 Windows와 macOS(Intel·Apple 실리콘 모두)를 지원합니다. 협동 플레이도 Windows와 Mac 사용자끼리 함께 즐길 수 있습니다.</p>
+      </details>
+      <details>
+        <summary>일본어 외의 언어로도 플레이할 수 있나요?</summary>
+        <p>플레이할 수 있습니다. 일본어·영어·중국어 간체·중국어 번체·한국어·독일어·인도네시아어의 7개 언어를 지원합니다. 설명서는 일본어와 영어로 제공됩니다.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="../assets/img/logo-footer.png" alt="Railway Dispatcher Pro">
+    <div class="links">
+      <a href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steam 스토어 페이지</a>
+      <a href="https://x.com/tadi_maru" target="_blank" rel="noopener">X(개발 소식, 일본어)</a>
+      <a href="https://www.youtube.com/@tadimaru-san" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://note.com/tadimaru" target="_blank" rel="noopener">note(개발 일지, 일본어)</a>
+      <a href="https://tadimaru.com/pro-support/index.en.html" target="_blank" rel="noopener">지원·설명서(영어)</a>
+    </div>
+    <div class="langs" aria-label="Language">
+      <a href="../" lang="ja" hreflang="ja">日本語</a>
+      <a href="../en/" lang="en" hreflang="en">English</a>
+      <a href="../zh-hans/" lang="zh-Hans" hreflang="zh-Hans">简体中文</a>
+      <a href="../zh-hant/" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a>
+      <a href="../ko/" lang="ko" hreflang="ko" aria-current="page">한국어</a>
+      <a href="../de/" lang="de" hreflang="de">Deutsch</a>
+      <a href="../id/" lang="id" hreflang="id">Bahasa Indonesia</a>
+    </div>
+    <p class="copy">© Tadimaru LLC</p>
+  </div>
+</footer>
+<div class="lightbox" id="lightbox" hidden><img alt=""></div>
+<script>
+(function () {
+  var lb = document.getElementById('lightbox');
+  var im = lb.querySelector('img');
+  function close() { lb.hidden = true; im.src = ''; document.body.style.overflow = ''; }
+  document.querySelectorAll('.feat-img img, .gal img, .route-img img, .mm-shots img').forEach(function (el) {
+    el.addEventListener('click', function () {
+      im.src = el.getAttribute('data-full') || el.src;
+      lb.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  lb.addEventListener('click', close);
+
+  // 狭い画面では、下へスクロールしている間ナビを隠し、上へ戻すと出す
+  var nav = document.querySelector('nav');
+  // 言語メニューは外をクリックしたら閉じる
+  var lang = document.querySelector('details.lang');
+  document.addEventListener('click', function (e) { if (lang && lang.open && !lang.contains(e.target)) lang.open = false; });
+  var narrow = window.matchMedia('(max-width:1240px)');
+  var lastY = window.scrollY, ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY;
+      if (Math.abs(y - lastY) < 6) { ticking = false; return; }
+      var hide = narrow.matches && y > nav.offsetHeight && y > lastY;
+      nav.classList.toggle('nav-hidden', hide);
+      if (hide && lang) lang.open = false;
+      lastY = y;
+      ticking = false;
+    });
+  }, { passive: true });
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); if (lang) lang.open = false; } });
+})();
+</script>
+
+</body>
+</html>

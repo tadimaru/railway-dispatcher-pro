@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Simulator manajemen operasional kereta api: dari meja kendali yang memantau seluruh lintas, Anda mengatur puluhan kereta. Lima lintas dan 22 skenario, pembuatan Gapeka, pembuat peta dengan Steam Workshop, serta co-op daring bersama teman Steam hingga empat pemain. Tersedia dalam 7 bahasa termasuk Jepang dan Inggris, untuk Windows dan Mac. Kini tersedia di Steam.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Railway Dispatcher Pro - Situs Resmi">
+<meta property="og:description" content="Simulator manajemen operasional kereta api: dari meja kendali yang memantau seluruh lintas, Anda mengatur puluhan kereta. Lima lintas dan 22 skenario, pembuatan Gapeka, pembuat peta dengan Steam Workshop, serta co-op daring bersama teman Steam hingga empat pemain. Tersedia dalam 7 bahasa termasuk Jepang dan Inggris, untuk Windows dan Mac. Kini tersedia di Steam.">
+<meta property="og:url" content="https://tadimaru.com/railway-dispatcher-pro/id/">
+<meta property="og:locale" content="id_ID">
+<meta property="og:image" content="https://tadimaru.com/railway-dispatcher-pro/assets/img/ogp.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://tadimaru.com/railway-dispatcher-pro/id/">
+<link rel="alternate" hreflang="ja" href="https://tadimaru.com/railway-dispatcher-pro/">
+<link rel="alternate" hreflang="en" href="https://tadimaru.com/railway-dispatcher-pro/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://tadimaru.com/railway-dispatcher-pro/zh-hans/">
+<link rel="alternate" hreflang="zh-Hant" href="https://tadimaru.com/railway-dispatcher-pro/zh-hant/">
+<link rel="alternate" hreflang="ko" href="https://tadimaru.com/railway-dispatcher-pro/ko/">
+<link rel="alternate" hreflang="de" href="https://tadimaru.com/railway-dispatcher-pro/de/">
+<link rel="alternate" hreflang="id" href="https://tadimaru.com/railway-dispatcher-pro/id/">
+<link rel="alternate" hreflang="x-default" href="https://tadimaru.com/railway-dispatcher-pro/en/">
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+<title>Railway Dispatcher Pro - Situs Resmi</title>
+<style>
+  :root{
+    --paper:#ffffff;
+    --wash:#f2f5f8;
+    --ink:#17232d;
+    --sub:#5a6b76;
+    --line:#dbe2e8;
+    --accent:#0a5cab;
+    --accent-deep:#084a8a;
+    --amber:#b97708;
+    --amber-bg:#fdf4e3;
+    --dark:#10181f;
+    /* ゲーム画面由来のシグナルカラー */
+    --sig-cyan:#1fb6cb;
+    --sig-amber:#dfa010;
+    --sig-red:#d9433a;
+    --sig-green:#149e62;
+    --sig-pink:#e05fa8;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.85;
+    margin:0;
+    font-size:16px;
+  }
+  img{max-width:100%;display:block}
+  a{color:var(--accent)}
+
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+  /* ---- nav ---- */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
+    border-bottom:1px solid var(--line);backdrop-filter:blur(6px);
+  }
+  .nav-in{
+    max-width:1060px;margin:0 auto;padding:8px 24px;
+    display:flex;align-items:center;gap:16px;
+  }
+  .nav-in img{height:44px;width:auto}
+  .nav-links{display:flex;gap:16px;margin-left:auto;flex-wrap:nowrap}
+  .nav-links a{
+    color:var(--ink);text-decoration:none;font-size:13.5px;letter-spacing:.04em;white-space:nowrap;
+  }
+  .nav-in .btn.small{white-space:nowrap;flex:none}
+  .nav-links a:hover{color:var(--accent)}
+  nav{transition:transform .25s ease}
+  section[id]{scroll-margin-top:72px}
+  /* 狭い画面: ロゴ＋購入ボタンの1段と、横スクロールのリンク1段にまとめる。
+     下へスクロール中は隠し、上へ戻すと出す（固定ヘッダーが画面を占有しないように） */
+  @media (max-width:1240px){
+    .nav-in{flex-wrap:wrap;gap:4px 12px;padding:6px 16px 0}
+    .nav-in img{height:34px}
+    .nav-in .btn.small{margin-left:auto;padding:6px 14px;font-size:13px;white-space:nowrap}
+    .nav-links{
+      order:3;width:100%;margin-left:0;flex-wrap:nowrap;gap:20px;
+      overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 0 8px;
+      -webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);
+    }
+    .nav-links::-webkit-scrollbar{display:none}
+    .nav-links a{white-space:nowrap;flex:none}
+    .nav-links a:last-child{padding-right:28px}
+    nav.nav-hidden{transform:translateY(-100%)}
+    .lang{margin-left:auto}
+    .nav-in .lang + .btn.small{margin-left:0}
+  }
+  .nav-links a.new::after{
+    content:"NEW";font-family:"Segoe UI",system-ui,sans-serif;font-size:9.5px;font-weight:700;
+    color:#fff;background:var(--sig-pink);border-radius:3px;padding:0 4px;margin-left:5px;vertical-align:2px;
+  }
+  .btn{
+    display:inline-block;color:#fff;text-decoration:none;
+    background:linear-gradient(135deg,#0d6fd1,#00a7d0);
+    padding:10px 26px;border-radius:4px;font-weight:700;letter-spacing:.04em;
+    box-shadow:0 6px 22px -8px rgba(0,140,190,.65);
+    transition:filter .15s,transform .15s;
+  }
+  .btn:hover{filter:brightness(1.12)}
+  .btn.small{padding:7px 18px;font-size:13.5px}
+  .btn.big{padding:15px 44px;font-size:17px}
+
+  /* ---- 言語の切り替え（ナビのドロップダウン＋フッターの一覧） ---- */
+  .lang{position:relative;flex:none}
+  .lang summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;min-height:34px;box-sizing:border-box;
+    padding:4px 10px;border:1px solid var(--line);border-radius:4px;background:var(--paper);
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;
+  }
+  .lang summary::-webkit-details-marker{display:none}
+  .lang summary svg{width:16px;height:16px;flex:none}
+  .lang summary::after{content:"";border:4px solid transparent;border-top-color:currentColor;margin:4px 0 0 1px}
+  .lang summary:hover{border-color:var(--accent);color:var(--accent)}
+  .lang ul{
+    position:absolute;right:0;top:calc(100% + 6px);z-index:60;margin:0;padding:6px 0;list-style:none;min-width:200px;
+    background:var(--paper);border:1px solid var(--line);border-radius:6px;box-shadow:0 14px 36px -14px rgba(16,35,54,.4);
+  }
+  .lang li a{display:block;padding:9px 18px;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.5}
+  .lang li a:hover{background:var(--wash);color:var(--accent)}
+  .lang li a[aria-current]{color:var(--accent);font-weight:700}
+  footer .langs{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;margin:-8px 0 28px}
+  footer .langs a{padding:4px 0}
+  footer .langs a[aria-current]{color:#fff;font-weight:700}
+
+  /* ---- section furniture ---- */
+  section{padding:88px 0}
+  section.wash{background:var(--wash)}
+  .eyebrow{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size:11.5px;font-weight:600;letter-spacing:.22em;color:var(--accent);
+    text-transform:uppercase;margin:0 0 10px;
+  }
+  h1,h2,h3{line-height:1.35;text-wrap:balance;margin:0}
+  h2{font-size:34px;font-weight:800;letter-spacing:.01em}
+  h3{font-size:21px;font-weight:700}
+  .lead{color:var(--sub);max-width:38em}
+
+  /* 駅ドット区切り：CTC盤面モチーフ（軌道回路の在線表示風に色分け） */
+  .trackline{
+    display:flex;align-items:center;gap:0;margin:26px 0 0;height:10px;
+  }
+  .trackline .rail{height:2px;background:var(--line);flex:1}
+  .trackline .st{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--accent);margin:0 4px;flex:none;
+  }
+  .trackline .st.fill{background:var(--accent)}
+  .trackline .st.c{border-color:var(--sig-cyan);background:var(--sig-cyan)}
+  .trackline .st.a{border-color:var(--sig-amber);background:var(--sig-amber)}
+  .trackline .st.r{border-color:var(--sig-red);background:var(--sig-red)}
+
+  /* ---- hero：CTC盤面フルブリード＋オーバーレイ ---- */
+  .hero{position:relative;background:#0b1218;color:#fff;overflow:hidden}
+  .hero-img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 22%;
+  }
+  .hero-shade{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(11,18,24,.30) 0%,rgba(11,18,24,.22) 34%,rgba(11,18,24,.68) 68%,rgba(11,18,24,.92) 100%);
+  }
+  .hero-content{position:relative;padding-top:210px;padding-bottom:72px}
+  .hero-news{
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:20px;
+    background:rgba(11,18,24,.62);border:1px solid rgba(255,255,255,.22);border-radius:999px;
+    padding:6px 16px 6px 6px;color:#fff;text-decoration:none;font-size:13.5px;
+    backdrop-filter:blur(4px);
+  }
+  .hero-news b{
+    background:var(--sig-pink);border-radius:999px;padding:1px 10px;font-size:11.5px;
+    font-family:"Segoe UI",system-ui,sans-serif;letter-spacing:.08em;
+  }
+  .hero-news:hover{border-color:rgba(255,255,255,.5)}
+  .hero .eyebrow{
+    color:#6fe0ef;letter-spacing:.3em;
+    text-shadow:0 1px 3px rgba(0,0,0,.9),0 2px 14px rgba(0,0,0,.8);
+  }
+  .hero h1{
+    font-size:clamp(40px,6.2vw,64px);font-weight:800;letter-spacing:.02em;
+    text-shadow:0 2px 26px rgba(0,0,0,.6);
+  }
+  .hero .lead{
+    color:#cfdae2;font-size:17.5px;margin:22px 0 32px;max-width:34em;
+    text-shadow:0 1px 14px rgba(0,0,0,.55);
+  }
+  .hero-cta{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .hero-cta .sub{font-size:13px;color:#a4b6c1;line-height:1.6}
+  .price{font-family:"Segoe UI",system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#fff;font-weight:700}
+
+  /* ---- concept ---- */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+  .vs-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:28px 30px;
+  }
+  .vs-card.pro{border-color:var(--accent);border-width:2px}
+  .vs-card .tag{
+    font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--sub);
+    font-family:"Segoe UI",system-ui,sans-serif;
+  }
+  .vs-card.pro .tag{color:var(--accent)}
+  .vs-card h3{margin:8px 0 10px}
+  .vs-card p{margin:0;color:var(--sub);font-size:14.5px}
+
+  /* ---- features ---- */
+  .feat{
+    display:grid;grid-template-columns:5fr 6fr;gap:54px;align-items:center;
+    padding:58px 0;
+  }
+  .feat + .feat{border-top:1px solid var(--line)}
+  .feat.rev .feat-txt{order:2}
+  .feat.rev .feat-img{order:1}
+  .feat-no{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size:12px;font-weight:600;letter-spacing:.2em;color:var(--accent);
+    display:inline-flex;align-items:center;gap:9px;
+  }
+  /* 各特徴に信号灯モチーフ（該当スクショの色と対応） */
+  .feat-no::before{
+    content:"";width:9px;height:9px;border-radius:50%;background:var(--lamp,var(--accent));
+    box-shadow:0 0 8px color-mix(in srgb,var(--lamp,var(--accent)) 60%,transparent);
+  }
+  .feat h3{font-size:26px;margin:8px 0 16px}
+  .feat p{color:var(--sub);margin:0;font-size:15.5px}
+  .feat-img img,.ph{
+    border-radius:6px;border:1px solid var(--line);
+    box-shadow:0 18px 44px -18px rgba(16,35,54,.35);
+  }
+  .ph{
+    aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(-45deg,#f6f8fa 0 14px,#eef2f5 14px 28px);
+    color:var(--sub);font-size:13.5px;letter-spacing:.06em;
+    border-style:dashed;box-shadow:none;text-align:center;line-height:1.7;
+  }
+
+  /* ---- how to play ---- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+  .step{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 28px;
+  }
+  /* 遊び方の丸数字＝信号現示（赤→黄→青）で進行していく */
+  .step-badge{
+    width:44px;height:44px;border-radius:50%;
+    border:3px solid var(--accent);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:19px;font-weight:700;
+    margin-bottom:16px;
+  }
+  .step.s1 .step-badge{border-color:var(--sig-red);color:var(--sig-red)}
+  .step.s2 .step-badge{border-color:var(--sig-amber);color:var(--sig-amber)}
+  .step.s3 .step-badge{border-color:var(--sig-green);color:var(--sig-green)}
+  .step h3{font-size:18px;margin-bottom:8px}
+  .step p{margin:0;color:var(--sub);font-size:14px}
+  .flow-note{
+    margin:40px auto 0;text-align:center;color:var(--accent);font-weight:700;
+    font-size:17px;letter-spacing:.06em;
+  }
+
+  /* ---- systems（輸送障害と指令） ---- */
+  .inc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+  .inc-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:22px 24px;border-left:4px solid var(--inc,var(--accent));
+  }
+  .inc-card h3{font-size:17px;margin:0 0 6px}
+  .inc-card p{margin:0;color:var(--sub);font-size:13.8px}
+  .sandbox-note{
+    margin-top:22px;background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    padding:20px 26px;font-size:14.5px;
+  }
+  .sandbox-note b{color:var(--accent)}
+  .cmd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+  .cmd-card.tall{grid-column:2;grid-row:1 / span 2}
+  .cmd-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px 24px;
+  }
+  .cmd-card h3{
+    font-size:15px;margin:0 0 14px;display:flex;align-items:center;gap:9px;
+  }
+  .cmd-card h3::before{
+    content:"";width:9px;height:9px;border-radius:50%;background:var(--cg,var(--accent));flex:none;
+  }
+  .cmd-list{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .cmd-list li{
+    background:var(--wash);border:1px solid var(--line);border-radius:999px;
+    padding:5px 14px;font-size:13px;font-weight:600;
+  }
+  .cmd-note{margin:18px 0 0;color:var(--sub);font-size:13px}
+
+  /* ---- routes & scenarios ---- */
+  .tut-box{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 34px;margin-top:44px;
+  }
+  .tut-box h3{margin-bottom:6px}
+  .tut-box>p{margin:0 0 18px;color:var(--sub);font-size:14.5px}
+  .tut-list{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+  .tut-list li{
+    background:var(--paper);border:1px solid var(--line);border-radius:999px;
+    padding:7px 18px;font-size:13.5px;font-weight:600;
+  }
+  .tut-list li b{color:var(--accent);font-family:"Segoe UI",system-ui,sans-serif;margin-right:6px}
+  .route{
+    display:grid;grid-template-columns:5fr 6fr;gap:34px;align-items:start;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 32px;margin-top:22px;border-top:3px solid var(--rc,var(--accent));
+  }
+  .route-img img{
+    border-radius:5px;border:1px solid var(--line);background:#373c43;cursor:zoom-in;
+  }
+  .route .kicker{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:600;
+    letter-spacing:.2em;color:var(--rc,var(--accent));
+  }
+  .route .stars{color:var(--sig-amber);letter-spacing:.08em;margin-left:8px;font-size:12px}
+  .route h3{font-size:22px;margin:6px 0 6px}
+  .route .facts{margin:0 0 12px;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+  .route .facts b{color:var(--ink);font-weight:700}
+  .route>div>p{margin:0 0 16px;color:var(--sub);font-size:14.5px}
+  .sc-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+  .sc-list li{
+    display:grid;grid-template-columns:44px 1fr;gap:8px;
+    padding:9px 2px;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.65;
+  }
+  .sc-list .lv{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11.5px;font-weight:700;color:var(--sig-amber);
+    white-space:nowrap;padding-top:2px;
+  }
+  .sc-list b{display:block;font-size:14.5px}
+  .sc-list span{color:var(--sub)}
+  .cond-box{margin-top:48px}
+  .cond-box h3{margin-bottom:12px}
+  .cond-chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 12px}
+  .cond-chips span{
+    border:1.5px solid var(--sig-green);color:var(--sig-green);
+    border-radius:4px;padding:6px 14px;font-size:13.5px;font-weight:700;
+  }
+  .cond-chips span.f{border-color:var(--sig-red);color:var(--sig-red)}
+  .cond-box p{color:var(--sub);font-size:14.5px;margin:0;max-width:44em}
+
+  /* ---- map maker ---- */
+  .mm-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
+  .mm-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:26px 28px;
+  }
+  .mm-card .tag{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;
+    color:var(--mc,var(--accent));
+  }
+  .mm-card h3{font-size:19px;margin:6px 0 10px}
+  .mm-card p{margin:0 0 14px;color:var(--sub);font-size:14px}
+  .mm-shots{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  .mm-shots img{border-radius:6px;border:1px solid var(--line);cursor:zoom-in}
+  .mm-more{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 0;padding:0;list-style:none;
+  }
+  .mm-more li{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px 18px;font-size:13.5px;
+    color:var(--sub);line-height:1.7;
+  }
+  .mm-more b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  .mm-note{
+    margin-top:30px;background:var(--amber-bg);border:1px solid #ecd9ad;border-left:4px solid var(--sig-amber);
+    border-radius:8px;padding:22px 28px;font-size:14.5px;
+  }
+  .mm-note h3{font-size:17px;margin:0 0 10px;color:var(--amber)}
+  .mm-note ul{margin:0;padding-left:1.2em}
+  .mm-note li{margin:3px 0}
+  .mm-note p{margin:12px 0 0}
+
+  /* ---- co-op（オンライン協力プレイ） ---- */
+  .coop-head{display:grid;grid-template-columns:6fr 5fr;gap:48px;align-items:center}
+  .coop-art{
+    background:#0f171e;border-radius:8px;padding:26px 22px 20px;margin:0;
+    box-shadow:0 18px 44px -18px rgba(16,35,54,.45);
+  }
+  .coop-art svg{width:100%;height:auto;display:block}
+  .coop-art .cap{margin:10px 2px 0;color:#7f919d;font-size:11.5px;letter-spacing:.04em}
+  .coop-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+  .coop-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:24px 24px 22px;
+    border-top:3px solid var(--cc,var(--accent));
+  }
+  .coop-card .no{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;
+    color:var(--cc,var(--accent));
+  }
+  .coop-card h3{font-size:18px;margin:6px 0 10px}
+  .coop-card p{margin:0;color:var(--sub);font-size:14px}
+  .coop-card kbd{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:12px;font-weight:700;
+    border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 6px;background:var(--wash);color:var(--ink);
+  }
+  .coop-note{
+    margin-top:22px;background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    padding:18px 24px;font-size:14px;color:var(--sub);
+  }
+  .coop-note b{color:var(--ink)}
+  .coop-note ul{margin:0;padding-left:1.2em}
+  .coop-note li{margin:2px 0}
+
+  /* ---- workshop（マップ作成の中） ---- */
+  .ws{
+    margin-top:34px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:26px 28px;
+    border-left:4px solid var(--sig-pink);
+  }
+  .ws h3{font-size:19px;margin:0 0 8px}
+  .ws>p{margin:0 0 18px;color:var(--sub);font-size:14.5px}
+  .ws-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0;padding:0;list-style:none}
+  .ws-steps li{background:var(--wash);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:13.5px;color:var(--sub);line-height:1.7}
+  .ws-steps b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  .ws-steps i{font-style:normal;font-family:"Segoe UI",system-ui,sans-serif;font-weight:700;color:var(--sig-pink);margin-right:6px}
+
+  /* ---- gallery ---- */
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+  .gal img,.gal .ph{border-radius:5px;box-shadow:none;width:100%}
+  .gal .ph{aspect-ratio:16/9;font-size:12px}
+  .gal img{transition:transform .18s;border:1px solid var(--line)}
+  .gal img:hover{transform:scale(1.025)}
+
+  /* ---- lightbox（スクショのクリック拡大） ---- */
+  .feat-img img,.gal img{cursor:zoom-in}
+  .lightbox{
+    position:fixed;inset:0;z-index:100;background:rgba(10,16,22,.93);
+    display:flex;align-items:center;justify-content:center;
+    padding:3vmin;cursor:zoom-out;
+  }
+  .lightbox[hidden]{display:none}
+  .lightbox img{
+    max-width:100%;max-height:100%;width:auto;height:auto;
+    border-radius:6px;box-shadow:0 24px 80px rgba(0,0,0,.6);
+  }
+
+  /* ---- product info ---- */
+  .spec{
+    margin-top:44px;border-top:1px solid var(--line);
+  }
+  .spec-row{
+    display:grid;grid-template-columns:180px 1fr;gap:20px;
+    padding:16px 4px;border-bottom:1px solid var(--line);font-size:15px;
+  }
+  .spec-row dt{color:var(--sub);font-weight:600;margin:0}
+  .spec-row dd{margin:0;font-variant-numeric:tabular-nums}
+  .roadmap{display:flex;gap:0;margin-top:52px;align-items:flex-start}
+  .rm{flex:1;position:relative;padding:26px 12px 0 0}
+  .rm::before{
+    content:"";position:absolute;top:5px;left:0;right:0;height:2px;background:var(--line);
+  }
+  .rm.done::before,.rm.now::before{background:var(--accent)}
+  .rm::after{
+    content:"";position:absolute;top:0;left:0;width:12px;height:12px;border-radius:50%;
+    background:var(--paper);border:3px solid var(--accent);box-sizing:border-box;
+  }
+  .rm.done::after{background:var(--accent)}
+  .rm.now::after{background:var(--sig-pink);border-color:var(--sig-pink);box-shadow:0 0 0 4px color-mix(in srgb,var(--sig-pink) 25%,transparent)}
+  .rm b{display:block;font-size:15px}
+  .rm i{font-style:normal;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-left:6px}
+  .rm.now i{color:var(--sig-pink)}
+  .rm span{font-size:13px;color:var(--sub)}
+
+  /* ---- sister ---- */
+  .sister{
+    display:flex;gap:30px;align-items:center;margin-top:40px;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:30px 34px;
+  }
+  .sister p{margin:6px 0 14px;color:var(--sub);font-size:14.5px}
+
+  /* ---- faq ---- */
+  .faq{margin-top:40px;border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line);padding:4px 2px}
+  .faq summary{
+    cursor:pointer;font-weight:700;padding:14px 4px;list-style:none;
+    display:flex;align-items:center;gap:12px;font-size:15.5px;
+  }
+  .faq summary::before{content:"Q";color:var(--accent);font-family:"Segoe UI",system-ui,sans-serif;font-weight:700}
+  .faq details p{margin:0 4px 16px 30px;color:var(--sub);font-size:14.5px}
+
+  /* ---- footer ---- */
+  footer{background:var(--dark);color:#aebbc4;padding:64px 0 40px}
+  footer img{height:46px;width:auto;margin-bottom:22px}
+  footer .links{display:flex;gap:24px;font-size:13.5px;flex-wrap:wrap;margin-bottom:30px}
+  footer a{color:#aebbc4;text-decoration:none}
+  footer a:hover{color:#fff}
+  footer .copy{font-size:12px;color:#6d7d89}
+
+  @media (max-width:820px){
+    h2{font-size:27px}
+    .hero-content{padding-top:64px;padding-bottom:56px}
+    .hero-news{font-size:13px;line-height:1.5;align-items:flex-start;border-radius:18px}
+    .hero-news b{flex:none;margin-top:1px}
+    .hero .eyebrow{letter-spacing:.14em}
+    .inc-grid{grid-template-columns:1fr}
+    .cmd-grid{grid-template-columns:1fr}
+    .cmd-card.tall{grid-column:auto;grid-row:auto}
+    .tut-box{padding:24px 22px}
+    .route{grid-template-columns:1fr;gap:18px;padding:22px 20px}
+    .mm-grid,.mm-shots{grid-template-columns:1fr}
+    .mm-more{grid-template-columns:1fr}
+    .coop-head{grid-template-columns:1fr;gap:28px}
+    .coop-cards{grid-template-columns:1fr}
+    .ws-steps{grid-template-columns:1fr}
+    .feat{grid-template-columns:1fr;gap:26px;padding:44px 0}
+    .feat.rev .feat-txt{order:1}
+    .feat.rev .feat-img{order:2}
+    .vs{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .gal{grid-template-columns:1fr 1fr}
+    .spec-row{grid-template-columns:1fr;gap:2px}
+    .roadmap{flex-direction:column;gap:18px}
+    .rm{padding:0 0 0 26px}
+    .rm::before{top:0;bottom:-18px;left:5px;right:auto;width:2px;height:auto}
+    .rm:last-child::before{display:none}
+    .sister{flex-direction:column;align-items:flex-start}
+    section{padding:60px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .gal img{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <img src="../assets/img/logo-nav.png" alt="Railway Dispatcher Pro">
+    <div class="nav-links">
+      <a href="#coop" class="new">Co-op</a>
+      <a href="#features">Fitur</a>
+      <a href="#howto">Cara Bermain</a>
+      <a href="#systems">Gangguan &amp; Perintah</a>
+      <a href="#routes">Lintas &amp; Skenario</a>
+      <a href="#mapmaker">Pembuat Peta</a>
+      <a href="#gallery">Galeri</a>
+      <a href="#product">Info Produk</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <details class="lang">
+      <summary aria-label="Language"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.6 2.6 3.9 5.6 3.9 9.2s-1.3 6.6-3.9 9.2M12 2.8C9.4 5.4 8.1 8.4 8.1 12s1.3 6.6 3.9 9.2"/></svg><span>Bahasa Indonesia</span></summary>
+      <ul>
+        <li><a href="../" lang="ja" hreflang="ja">日本語</a></li>
+        <li><a href="../en/" lang="en" hreflang="en">English</a></li>
+        <li><a href="../zh-hans/" lang="zh-Hans" hreflang="zh-Hans">简体中文</a></li>
+        <li><a href="../zh-hant/" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a></li>
+        <li><a href="../ko/" lang="ko" hreflang="ko">한국어</a></li>
+        <li><a href="../de/" lang="de" hreflang="de">Deutsch</a></li>
+        <li><a href="../id/" lang="id" hreflang="id" aria-current="page">Bahasa Indonesia</a></li>
+      </ul>
+    </details>
+    <a class="btn small" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Beli di Steam</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <img class="hero-img" src="../assets/img/hero.jpg" alt="Layar CTC yang memantau seluruh lintas">
+  <div class="hero-shade"></div>
+  <div class="wrap hero-content">
+    <a class="hero-news" href="#product"><b>UPDATE</b>Versi resmi telah dirilis — kini mendukung 7 bahasa dan Mac</a>
+    <p class="eyebrow">Railway Dispatcher Pro — Official Site</p>
+    <h1>Dari satu stasiun,<br>hingga seluruh lintas.</h1>
+    <p class="lead">Anda adalah pengendali perjalanan. Dari meja kendali yang memantau seluruh lintas, jaga puluhan kereta tetap berjalan tepat waktu. Saat Gapeka berantakan, pulihkan dengan perintah Anda.</p>
+    <div class="hero-cta">
+      <a class="btn big" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Beli di Steam</a>
+      <div class="sub">
+        <span class="price">Versi resmi kini tersedia</span><br>
+        Steam / Windows &amp; Mac / 7 bahasa
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="coop">
+  <div class="wrap">
+    <div class="coop-head">
+      <div>
+        <p class="eyebrow">Co-op</p>
+        <h2>Dari meja kendali seorang diri,<br>menjadi pusat kendali bersama.</h2>
+        <div class="trackline" aria-hidden="true">
+          <span class="st c"></span><span class="rail"></span><span class="st c"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st r"></span>
+        </div>
+        <p class="lead" style="margin-top:26px">Kendalikan lintas yang sama dengan Gapeka yang sama bersama teman Steam Anda, hingga empat pemain. Bagi tugas per stasiun, kirim ping untuk memberi tahu "Lihat ke sini", dan jaga kelancaran perjalanan sebagai satu tim. Jam sibuk pagi yang terlalu berat untuk satu orang pun dapat diatasi bila Anda saling berkoordinasi.</p>
+      </div>
+      <figure class="coop-art">
+        <svg viewBox="0 0 440 200" role="img" aria-label="Ilustrasi nama stasiun yang diwarnai sesuai pemain yang bertugas, kursor tiga pemain, dan sebuah ping">
+          <g font-family="Segoe UI,system-ui,-apple-system,Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="700">
+            <line x1="20" y1="96" x2="420" y2="96" stroke="#3b4a55" stroke-width="3"/>
+            <line x1="20" y1="114" x2="420" y2="114" stroke="#3b4a55" stroke-width="3"/>
+            <line x1="40" y1="96" x2="400" y2="96" stroke="#149e62" stroke-width="3" stroke-dasharray="46 22" opacity=".85"/>
+            <rect x="22" y="62" width="62" height="22" rx="3" fill="#1fb6cb" opacity=".22"/><text x="53" y="77" fill="#6fe0ef" text-anchor="middle">St. A</text>
+            <rect x="118" y="62" width="62" height="22" rx="3" fill="#1fb6cb" opacity=".22"/><text x="149" y="77" fill="#6fe0ef" text-anchor="middle">St. B</text>
+            <rect x="214" y="62" width="62" height="22" rx="3" fill="#dfa010" opacity=".22"/><text x="245" y="77" fill="#f3c24a" text-anchor="middle">St. C</text>
+            <rect x="310" y="62" width="62" height="22" rx="3" fill="#e05fa8" opacity=".22"/><text x="341" y="77" fill="#f08cc4" text-anchor="middle">St. D</text>
+            <g fill="#1fb6cb"><path d="M96 128 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="112" y="146" width="44" height="18" rx="3"/><text x="134" y="159" fill="#0f171e" text-anchor="middle" font-size="11">Andi</text></g>
+            <g fill="#dfa010"><path d="M226 134 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="242" y="152" width="44" height="18" rx="3"/><text x="264" y="165" fill="#0f171e" text-anchor="middle" font-size="11">Budi</text></g>
+            <g fill="#e05fa8"><path d="M330 124 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="346" y="142" width="44" height="18" rx="3"/><text x="368" y="155" fill="#0f171e" text-anchor="middle" font-size="11">Citra</text></g>
+            <circle cx="245" cy="105" r="9" fill="none" stroke="#dfa010" stroke-width="2.5"/>
+            <line x1="245" y1="44" x2="245" y2="96" stroke="#dfa010" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <rect x="180" y="20" width="130" height="24" rx="12" fill="#dfa010"/>
+            <text x="245" y="36" fill="#0f171e" text-anchor="middle" font-size="11.5">Saya tahan — Budi</text>
+          </g>
+        </svg>
+        <figcaption class="cap">Ilustrasi: nama stasiun berwarna sesuai pemain yang bertugas, dan kursor serta ping pemain lain terlihat.</figcaption>
+      </figure>
+    </div>
+
+    <div class="coop-cards">
+      <div class="coop-card" style="--cc:var(--sig-cyan)">
+        <span class="no">01</span>
+        <h3>Berkumpul dengan kode ruang</h3>
+        <p>Saat Anda membuat ruang, kode ruang enam digit akan muncul. Cukup bagikan kode tersebut — tidak perlu berteman di Steam. Undangan Steam juga dapat digunakan, dan pemain dapat bergabung ke ruang yang permainannya sedang berlangsung.</p>
+      </div>
+      <div class="coop-card" style="--cc:var(--sig-amber)">
+        <span class="no">02</span>
+        <h3>Bagi tugas</h3>
+        <p>Host menetapkan pemain yang bertugas di setiap stasiun, dan nama stasiun di peta akan berwarna sesuai warna pemain tersebut. Kursor tetikus pemain lain ditampilkan beserta namanya, sehingga Anda dapat melihat sekilas siapa sedang memantau bagian mana.</p>
+      </div>
+      <div class="coop-card" style="--cc:var(--sig-pink)">
+        <span class="no">03</span>
+        <h3>Saling memberi tahu dengan ping</h3>
+        <p>Tahan <kbd>Q</kbd> lalu klik peta untuk memasang ping berisi pesan cepat — "Lihat ke sini", "Saya tahan", "Saya bentuk rute", dan lainnya — di layar semua pemain.</p>
+      </div>
+    </div>
+
+    <div class="coop-note">
+      <ul>
+        <li>Co-op dimainkan dalam <b>mode bebas (Sandbox)</b>. Selain lintas bawaan, Anda juga dapat bermain dengan <b>lintas dari Workshop</b> (pemain yang belum memilikinya dapat berlangganan saat bergabung).</li>
+        <li><b>Setiap pemain harus memiliki gim ini</b>. <b>Pengguna Windows dan Mac</b> dapat bermain bersama.</li>
+        <li>Siapa pun dapat memberi perintah seperti tuas, rute, penahanan, dan perubahan Gapeka. Perubahan kecepatan, pemicuan insiden, dan penyimpanan dilakukan oleh host.</li>
+        <li>Tidak ada obrolan suara di dalam gim, jadi gunakan Discord atau aplikasi serupa. Cara bermain dijelaskan dalam <a href="https://tadimaru.com/pro-support/coop.en.html" target="_blank" rel="noopener">panduan (Co-op, bahasa Inggris)</a>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="concept">
+  <div class="wrap">
+    <p class="eyebrow">Concept</p>
+    <h2>Dari satu stasiun, ke seluruh lintas.</h2>
+    <div class="trackline" aria-hidden="true">
+      <span class="st c"></span><span class="rail"></span><span class="st r"></span><span class="rail"></span><span class="st"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st fill"></span>
+    </div>
+    <p class="lead" style="margin-top:26px">Jika Anda telah menguasai pengoperasian sinyal di dalam stasiun pada "Railway Dispatcher", saatnya naik ke tingkat berikutnya. Yang dipercayakan kepada Anda di Pro bukan satu stasiun, melainkan <b>seluruh lintas</b>. Sinyal, rute, Gapeka, hingga tugas perjalanan sarana — semuanya ada di papan Anda.</p>
+    <div class="vs">
+      <div class="vs-card">
+        <span class="tag">Railway Dispatcher</span>
+        <h3>Mengatur stasiun.</h3>
+        <p>Pengalaman di "pos pengoperasian sinyal": mengoperasikan sinyal dan rute di dalam stasiun secara manual, lalu memberangkatkan kereta tepat waktu.</p>
+      </div>
+      <div class="vs-card pro">
+        <span class="tag">PRO — Gim ini</span>
+        <h3>Mengendalikan lintas.</h3>
+        <p>Pengalaman di "pusat kendali perjalanan": memantau seluruh lintas, membaca grafik perjalanan, dan meredam gangguan dengan perintah rekayasa perjalanan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <p class="eyebrow">Fitur</p>
+    <h2>Semuanya ada di meja kendali.</h2>
+
+    <div class="feat" style="margin-top:20px">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-cyan)">FEATURE 01</span>
+        <h3>Seluruh lintas dalam satu pandangan.</h3>
+        <p>Panel CTC menampilkan posisi setiap kereta, sinyal, dan rute yang terbentuk di seluruh lintas secara waktu nyata. Di stasiun mana kereta mulai menumpuk, ke mana keterlambatan akan menjalar — panel memberi tahu Anda segalanya. Klik sebuah kereta untuk menyorot rute yang akan dilaluinya dengan warna oranye.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-overview.jpg" alt="Memantau seluruh lintas di panel CTC" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-pink)">FEATURE 02</span>
+        <h3>Membaca garis perjalanan.</h3>
+        <p>Senjata pengendali perjalanan adalah grafik perjalanan. Garis rencana, prakiraan yang memperhitungkan keterlambatan, dan realisasi digambar bertumpuk, sehingga Anda dapat membaca arah gangguan sebelum terjadi. Berpindah antara panel dan grafik untuk menyusun langkah berikutnya — itulah inti pengendalian perjalanan.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-diagram.jpg" alt="Layar grafik perjalanan" loading="lazy"></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-red)">FEATURE 03</span>
+        <h3>Pulihkan kelancaran dengan perintah.</h3>
+        <p>Kerusakan sarana — di jalur utama, pada puncak jam sibuk pagi. Dari saat terburuk seperti itulah tugas pengendali perjalanan dimulai. Tahan, tunda keberangkatan, berhenti luar biasa, lewat langsung, balik arah, akhiri lebih awal. Mainkan kartu rekayasa perjalanan Anda dan pulihkan Gapeka yang mulai runtuh.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-incident.jpg" alt="Layar perintah saat terjadi kerusakan sarana" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-amber)">FEATURE 04</span>
+        <h3>Hasilnya kembali dalam angka.</h3>
+        <p>Setiap skenario memiliki sasaran dan penilaian. Seberapa jauh keterlambatan berhasil ditekan dan berapa banyak perjalanan yang terjaga ditunjukkan dalam angka. Gangguan yang sama, perintah yang berbeda, hasil yang berbeda. Tantang berulang kali dan temukan rekayasa perjalanan terbaik.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-result.jpg" alt="Ringkasan penilaian di akhir skenario" loading="lazy"></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-green)">FEATURE 05</span>
+        <h3>Susun Gapeka Anda sendiri.</h3>
+        <p>Dengan fitur edit Gapeka, Anda dapat merancang setiap garis perjalanan sendiri: waktu berhenti, persilangan, hingga pola balik arah. Menyaksikan "Gapeka Anda sendiri" berubah menjadi ratusan kereta yang mulai berjalan adalah kepuasan yang tiada duanya.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-edit.jpg" alt="Layar edit Gapeka" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-cyan)">FEATURE 06</span>
+        <h3>Mulai bertugas dari jam berapa saja.</h3>
+        <p>Di Sandbox, setelah memilih lintas dan Gapeka, Anda dapat memulai bukan hanya "dari kereta pertama", tetapi juga dari jam mana pun dengan kelipatan satu jam. Latih jam sibuk sore saja berulang kali, atau saksikan kereta masuk dipo larut malam — tanpa perlu menunggu puluhan menit dengan percepatan waktu. Anda juga dapat memicu gangguan sendiri di lokasi mana pun.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-sandbox.jpg" alt="Layar pemilihan waktu mulai di Sandbox" loading="lazy"></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="wash" id="howto">
+  <div class="wrap">
+    <p class="eyebrow">Cara Bermain</p>
+    <h2>Tugas pengendali perjalanan ada tiga.</h2>
+    <p class="lead" style="margin-top:14px">Tidak ada pengoperasian yang rumit. Amati, putuskan, beri perintah. Pengulangan itulah daya tarik manajemen operasional kereta api.</p>
+    <div class="steps">
+      <div class="step s1">
+        <div class="step-badge">1</div>
+        <h3>Amati</h3>
+        <p>Pahami situasi lewat panel CTC dan grafik perjalanan. Di mana keterlambatan muncul, dan ke mana ia akan menyebar? Pilih sebuah kereta, dan rute di depannya langsung terlihat.</p>
+      </div>
+      <div class="step s2">
+        <div class="step-badge">2</div>
+        <h3>Putuskan</h3>
+        <p>Kereta mana yang didahulukan? Di mana harus balik arah? Tidak ada satu jawaban yang benar. Keputusan Anda menjadi Gapeka.</p>
+      </div>
+      <div class="step s3">
+        <div class="step-badge">3</div>
+        <h3>Beri perintah</h3>
+        <p>Tahan, tunda keberangkatan, berhenti luar biasa, balik arah — jalankan seketika dari menu perintah. Kereta-kereta akan merespons.</p>
+      </div>
+    </div>
+    <p class="flow-note">Amati → putuskan → beri perintah. Lalu Gapeka pun pulih.</p>
+  </div>
+</section>
+
+<section id="systems">
+  <div class="wrap">
+    <p class="eyebrow">Gangguan &amp; Perintah</p>
+    <h2>Gangguan yang terjadi, dan langkah yang bisa diambil.</h2>
+    <p class="lead" style="margin-top:14px">Tugas pengendali perjalanan adalah adu siasat antara gangguan dan kartu di tangan. Gim ini memuat empat jenis gangguan operasional dan beragam perintah yang mereplikasi rekayasa perjalanan sungguhan.</p>
+
+    <h3 style="margin-top:44px">Empat jenis gangguan operasional</h3>
+    <div class="inc-grid">
+      <div class="inc-card" style="--inc:var(--sig-red)">
+        <h3>Kerusakan sarana</h3>
+        <p>Kereta berhenti di jalur utama dan tidak dapat dikendalikan. Hingga pulih, kereta itu tidak bisa digerakkan sedikit pun. Pada Gapeka yang padat, berhenti beberapa menit saja dapat mengacaukan seluruh lintas.</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-amber)">
+        <h3>Gangguan rel/sinyal (sirkuit rel tidak dapat dilalui)</h3>
+        <p>Wesel yang gagal bergerak atau gangguan pada rel membuat petak tertentu tidak dapat dilalui, sehingga rute tidak dapat dibentuk. Kemampuan Anda mengatur jalur yang terbatas akan diuji.</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-cyan)">
+        <h3>Pembatasan kecepatan petak</h3>
+        <p>Hujan lebat atau angin kencang memaksa kereta berjalan pelan di antarstasiun. Dampaknya tidak berhenti pada keterlambatan beberapa kereta — interval dan sambungan ikut terganggu, dan perlahan menjalar ke seluruh lintas.</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-pink)">
+        <h3>Perjalanan petak dihentikan</h3>
+        <p>Angin kencang atau pemadaman listrik menutup suatu petak antarstasiun. Lintas terputus, dan dimulailah rekayasa perjalanan berskala besar dengan menyiapkan perjalanan balik arah di kedua sisi.</p>
+      </div>
+    </div>
+    <div class="sandbox-note">
+      Gangguan tidak hanya datang dari skenario. <b>Melalui "Picu insiden…" di menu, Anda dapat memicunya sendiri, di mana saja dan kapan saja</b>. Kereta yang rusak, petak pembatasan kecepatan, dan nilai batasnya bebas Anda tentukan. Anda bahkan dapat merancang "hari terburuk" sendiri untuk menguji kemampuan Anda sebagai pengendali perjalanan. Setelah waktu yang ditentukan skenario berlalu, gangguan dapat dilepas secara manual, sehingga Anda dapat terus memberi perintah hingga Gapeka kembali normal.
+    </div>
+
+    <h3 style="margin-top:52px">Kartu perintah di tangan Anda</h3>
+    <div class="cmd-grid">
+      <div class="cmd-card" style="--cg:var(--sig-amber)">
+        <h3>Menahan &amp; menunda</h3>
+        <ul class="cmd-list">
+          <li>Tahan (menahan kereta di stasiun yang ditentukan)</li>
+          <li>Tahan semua kereta ke arah tertentu sekaligus</li>
+          <li>Tahan semua kereta</li>
+          <li>Tunda keberangkatan (tambahkan per detik, lalu konfirmasi)</li>
+          <li>Berangkat setelah aman (setelah jadwal, berangkat begitu stasiun berikutnya kosong)</li>
+        </ul>
+      </div>
+      <div class="cmd-card" style="--cg:var(--sig-pink)">
+        <h3>Mengubah stasiun pemberhentian</h3>
+        <ul class="cmd-list">
+          <li>Berhenti luar biasa</li>
+          <li>Lewat langsung</li>
+          <li>Kembali sesuai Gapeka</li>
+        </ul>
+        <p class="cmd-note">Untuk kereta yang sedang berjalan, sempat atau tidaknya berhenti bergantung pada kecepatan dan sisa jaraknya. Putuskan secepatnya.</p>
+      </div>
+      <div class="cmd-card tall" style="--cg:var(--sig-cyan)">
+        <h3>Menyusun ulang tugas perjalanan</h3>
+        <ul class="cmd-list">
+          <li>Akhiri lebih awal di stasiun ini (jadikan stasiun akhir)</li>
+          <li>Buat tugas perjalanan balik arah baru</li>
+          <li>Buat tugas perjalanan lanjut (searah) baru</li>
+          <li>Sambung ke tugas lain</li>
+          <li>Lepas sambungan (batalkan tugas berikutnya)</li>
+          <li>Ambil alih tugas perjalanan yang belum berangkat</li>
+          <li>Edit wesel &amp; detik berhenti sisa petak</li>
+        </ul>
+        <p class="cmd-note">Sarana yang perjalanannya diakhiri lebih awal tetap tinggal di jalur stasiun itu. Memindahkannya juga tugas pengendali perjalanan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="routes">
+  <div class="wrap">
+    <p class="eyebrow">Lintas &amp; Skenario</p>
+    <h2>Lima lintas, 22 "gangguan".</h2>
+    <p class="lead" style="margin-top:14px">Dari kereta regional di pinggiran kota, kereta bawah tanah di pusat kota, kereta bandara, hingga Shinkansen. Lima lintas dengan karakter yang berbeda menanti Anda, masing-masing dengan skenario yang terinspirasi dari gangguan operasional yang benar-benar terjadi di perkeretaapian nyata. Setiap lintas dapat Anda kendalikan dengan bebas di Sandbox. Di Steam Workshop, Anda juga dapat memainkan lintas buatan pemain lain.</p>
+
+    <div class="tut-box">
+      <h3>Mulailah debut Anda lewat tutorial.</h3>
+      <p>Tidak perlu pengetahuan perkeretaapian. Lima tutorial memandu Anda secara bertahap, dari pengoperasian dasar hingga kendali stasiun tingkat lanjut. <b>Bingkai panduan merah di layar menunjukkan tepat apa yang harus ditekan berikutnya</b>, sehingga tangan Anda akan terbiasa tanpa perlu membaca panduan.</p>
+      <ul class="tut-list">
+        <li><b>1</b>Membaca Layar dan Waktu</li>
+        <li><b>2</b>Tahan dan Lanjutkan Perjalanan</li>
+        <li><b>3</b>Tunda Keberangkatan, Berhenti Luar Biasa, Lewat Langsung</li>
+        <li><b>4</b>Akhiri Lebih Awal dan Balik Arah</li>
+        <li><b>5</b>Kendali Stasiun (Rute Manual)</li>
+      </ul>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-green)">
+      <div class="route-img"><img src="../assets/img/route-local.png" alt="Seluruh lintas kereta regional pinggiran kota dengan petak jalur tunggal" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 01<span class="stars">Kesulitan ★1</span></span>
+        <h3>Kereta regional pinggiran kota dengan petak jalur tunggal</h3>
+        <p class="facts"><b>Kyujo-mae – Sendai – Hiyoridai, 13 stasiun</b>　/　Gapeka Lokal &amp; Rapid 384 perjalanan · Gapeka Lokal Saja 377 perjalanan</p>
+        <p>Lintas yang membentang dari kota Sendai ke pinggiran. Selepas Izumi, lintas menjadi jalur tunggal, dan stasiun persilangan menjadi kunci angkutan. Sambungan antara kereta rapid dan lokal membentuk Gapeka setiap hari. Lintas ini juga menjadi panggung tutorial.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>Lima Menit dalam Kabut Pagi</b><span>Kerusakan sarana di jam sibuk pagi. Pulih dalam lima menit — namun kereta di belakangnya cepat sekali menumpuk.</span></div></li>
+          <li><span class="lv">★2</span><div><b>Tirai Hujan</b><span>Pembatasan 25 km/jam karena hujan lebat. Perjalanan pelan mengacaukan sambungan rapid–lokal dan menjalar ke seluruh lintas.</span></div></li>
+          <li><span class="lv">★3</span><div><b>Jalur Penyusulan yang Terkunci</b><span>Jam sibuk sore, wesel gagal bergerak dan jalur penyusulan tidak bisa dipakai. Atur jalur dengan rute manual.</span></div></li>
+          <li><span class="lv">★4</span><div><b>Angin Utara Memutus Lintas</b><span>Perjalanan dihentikan karena angin kencang. Siapkan perjalanan balik arah di kedua sisi yang terputus.</span></div></li>
+          <li><span class="lv">★5</span><div><b>Rapid yang Tak Bergerak</b><span>Kereta rapid tertahan di pintu masuk petak jalur tunggal. Bagian utara nyaris tertutup sama sekali.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-amber)">
+      <div class="route-img"><img src="../assets/img/route-boso.png" alt="Seluruh lintas kereta swasta Semenanjung Boso" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 02<span class="stars">Kesulitan ★2</span></span>
+        <h3>Kereta swasta Semenanjung Boso dengan jalur utama dan cabang</h3>
+        <p class="facts"><b>Chiba – Anegasaki – Hatsudensho-mae / Anegasaki – Lapangan Golf, 20 stasiun</b>　/　Akhir pekan/libur 360 perjalanan · Hari kerja 594 perjalanan</p>
+        <p>Jalur utama yang menyusuri pesisir Boso dari Chiba, dan jalur cabang yang berpisah di Anegasaki menuju pedalaman. Kereta rapid, ekspres, dan lokal saling berlalu-lalang; penyusulan di stasiun penyusulan menjadi daya tarik utamanya.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★2</span><div><b>Layang-layang Menutup Lintas</b><span>Layang-layang besar tersangkut di kawat listrik aliran atas jalur cabang. Balikkan kereta rapid terusan di Anegasaki, lalu kembali ke Gapeka semula setelah gangguan teratasi.</span></div></li>
+          <li><span class="lv">★2</span><div><b>Kereta Pertama, Terkurung di Dipo</b><span>Sebelum fajar, kereta kosongan yang keluar dipo tertahan di pintu keluar dipo. Jaga jumlah perjalanan sambil menerima sebagian pembatalan.</span></div></li>
+          <li><span class="lv">★3</span><div><b>Anegasaki, Garis Pembelah Lintas</b><span>Kereta lokal tertahan di antarstasiun jalur utama. Jalankan balik arah ke dua arah — jalur utama dan cabang — sekaligus di Anegasaki.</span></div></li>
+          <li><span class="lv">★3</span><div><b>Kamatori, Wesel Tak Bergerak</b><span>Jam sibuk sore, jalur penyusulan tidak dapat dipakai. Pindahkan stasiun penyusulan ke stasiun sebelah dan jaga laju kereta kelas atas.</span></div></li>
+          <li><span class="lv">★5</span><div><b>Kazusa-Murakami, Sepuluh Menit Merah</b><span>Tombol berhenti darurat ditekan di jam sibuk pagi. Pulihkan interval setelah perjalanan dilanjutkan dengan menunda keberangkatan.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-cyan)">
+      <div class="route-img"><img src="../assets/img/route-subway.png" alt="Seluruh lintas kereta bawah tanah yang membelah pusat kota" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 03<span class="stars">Kesulitan ★2</span></span>
+        <h3>Kereta bawah tanah pusat kota, kereta tiap dua setengah menit</h3>
+        <p class="facts"><b>Hiyoshi – Yokohama – Kamiooka, 25 stasiun</b>　/　Akhir pekan/libur 374 perjalanan · Hari kerja 569 perjalanan</p>
+        <p>Dari Hiyoshi melintasi pusat kota Yokohama hingga Kamiooka. Pada pagi hari, kereta dari dan ke Yokohama berangkat setiap dua setengah menit — di lintas berfrekuensi tinggi dengan sedikit stasiun yang bisa dipakai untuk balik arah, perintah yang menjaga interval menjadi ujian.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>Tsurumi, Kehilangan Utara</b><span>Terminus utara tidak dapat dilalui. Balikkan kereta di Tsurumi, lalu pulihkan sisi utara yang terkurung setelah gangguan selesai.</span></div></li>
+          <li><span class="lv">★2</span><div><b>Sakuragicho, Dua Puluh Menit Kosong</b><span>Satu petak di pusat kota dihentikan. Jalankan balik arah di dua stasiun yang mengapitnya, Yokohama dan Kannai.</span></div></li>
+          <li><span class="lv">★3</span><div><b>Kamiooka, Senja Tanpa Balik Arah</b><span>Jam sibuk sore dengan interval empat menit, wesel gagal bergerak dan balik arah di terminus tertutup.</span></div></li>
+          <li><span class="lv">★4</span><div><b>Yokohama, Pintu Tiga Belas Menit</b><span>Gangguan pintu selama tiga belas menit. Tahan, terima, alirkan — rekayasa perjalanan klasik secara langsung.</span></div></li>
+          <li><span class="lv">★5</span><div><b>Pagi Dua Setengah Menit</b><span>Di pagi paling menegangkan dalam sehari, retakan kecil muncul dan hilang silih berganti.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-red)">
+      <div class="route-img"><img src="../assets/img/route-airport.png" alt="Seluruh lintas kereta bandara" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 04<span class="stars">Kesulitan ★3</span></span>
+        <h3>Kereta bandara dengan kereta bawah tanah, jalur dwiganda, dan jalur tunggal</h3>
+        <p class="facts"><b>Sapporo – Bandara New Chitose – Onsen Danau Shikotsu, 30 stasiun</b>　/　Akhir pekan/libur 655 perjalanan · Hari kerja 732 perjalanan</p>
+        <p>Dari Sapporo melalui Bandara New Chitose hingga Onsen Danau Shikotsu. Di tengah jalan ada layanan terusan ke kereta bawah tanah, jalur dwiganda (empat jalur) hingga Kitahiroshima, dan jalur tunggal di sisi onsen — segala bentuk lintas terkumpul dalam satu lintas. Dengan 732 perjalanan pada hari kerja, inilah lintas terbesar.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>Suimeikyo, Tak Bisa Bersilang</b><span>Salah satu jalur di stasiun persilangan jalur tunggal tidak dapat dipakai. Layani semua kereta dengan satu jalur yang tersisa.</span></div></li>
+          <li><span class="lv">★2</span><div><b>Kiyota, Kehilangan Jalur Luar</b><span>Jalur ekspres di petak jalur dwiganda tidak dapat dilalui. Empat puluh lima menit mengatur empat jalur dengan tiga.</span></div></li>
+          <li><span class="lv">★3</span><div><b>Sapporo (Subway), Pagi Tanpa Jalur Silang</b><span>Jam sibuk pagi, jalur silang di terminus petak kereta bawah tanah rusak. Alihkan ke jalur utama dan jaga kapasitas angkut ke pusat kota.</span></div></li>
+          <li><span class="lv">★4</span><div><b>Beer Garden, Bayangan Melompat dari Kegelapan</b><span>Jam sibuk sore, kereta ekspres terbatas menabrak hewan. Jalankan balik arah dengan tiga sepur langsir di Kitahiroshima.</span></div></li>
+          <li><span class="lv">★5</span><div><b>Tsukisamu, Penumpang Sakit di Pagi Hari</b><span>Selama sembilan menit pertolongan penumpang sakit, gangguan lain datang bertubi-tubi — pagi dengan insiden serentak.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-pink)">
+      <div class="route-img"><img src="../assets/img/route-shinkansen.png" alt="Seluruh lintas Shinkansen di pesisir Laut Jepang" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 05<span class="stars">Kesulitan ★2</span></span>
+        <h3>Shinkansen standar penuh yang melaju ke utara menyusuri Laut Jepang</h3>
+        <p class="facts"><b>Kanazawa – Shin-Aomori – Sapporo, 28 stasiun</b>　/　Gapeka Musim Sepi 171 perjalanan</p>
+        <p>Dari Kanazawa menyusuri pesisir Laut Jepang ke Aomori, lalu terus hingga Sapporo. Kereta yang melaju 275 km/jam dijaga oleh sinyal ATC dua aspek merah dan hijau. Jarak antarstasiun panjang, dan keterlambatan menumpuk dalam skala yang jauh melampaui kereta konvensional — rekayasa perjalanan dengan jarak dan kecepatan berskala lain.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>Sakata, Padam di Kala Fajar</b><span>Gardu listrik rusak pada jam kereta pertama, kedua arah terputus selama tiga jam. Bangunkan sarana cadangan di dipo dan susun ulang tugas perjalanan.</span></div></li>
+          <li><span class="lv">★2</span><div><b>Laut Jepang, Dua Jam Angin</b><span>Pembatasan kecepatan karena angin kencang di pesisir selama dua jam. Pulihkan keterlambatan Shinkansen yang satu per satu terjebak pembatasan, dalam satu jam setelah pembatasan dicabut.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cond-box">
+      <h3>Sasaran adalah rapor pengendali perjalanan.</h3>
+      <div class="cond-chips">
+        <span>Keterlambatan maksimum saat selesai ≤ ○ menit</span>
+        <span class="f">Tidak ada kereta berhenti di luar stasiun (tertahan di antarstasiun)</span>
+        <span>Interval keberangkatan tidak lebih dari ○ menit</span>
+        <span>Minimal ○ keberangkatan ke arah ○</span>
+      </div>
+      <p>Setiap skenario memiliki beberapa sasaran, dan selama permainan capaiannya ditampilkan di jendela sasaran sebagai <b>angka waktu nyata</b>. Memberi perintah sambil melirik "berapa menit lagi keterlambatan yang masih bisa ditoleransi" dan "berapa perjalanan lagi yang harus diberangkatkan untuk menjaga angkutan" — itulah ketegangannya. Gangguan yang sama, perintah yang berbeda, hasil yang berbeda.</p>
+    </div>
+  </div>
+</section>
+
+<section id="mapmaker">
+  <div class="wrap">
+    <p class="eyebrow">Pembuat Peta</p>
+    <h2>Bangun lintas Anda sendiri.</h2>
+    <p class="lead" style="margin-top:14px">Pilih "Pembuat peta" di layar judul untuk membangun lintas dari nol. Tempatkan stasiun, hubungkan satu sama lain, maka sinyal, tuas, dan rute akan tersusun secara otomatis. Lintas buatan Anda langsung muncul di Sandbox dan Buat Gapeka, sehingga Anda dapat melanjutkan dari menyusun Gapeka hingga mengendalikan perjalanannya tanpa terputus. Unggah ke Steam Workshop, dan pemain lain pun dapat memainkannya.</p>
+
+    <div class="mm-grid">
+      <div class="mm-card" style="--mc:var(--sig-green)">
+        <span class="tag">Mudah</span>
+        <h3>Empat alat, satu lintas utuh.</h3>
+        <p>Cukup pilih tata letak jalur untuk menempatkan stasiun; dengan beberapa klik di antara stasiun, rel, blok, dan sinyal langsung terpasang sekaligus. Lintas yang panjang dapat digambar berlipat dalam beberapa baris dengan menghubungkan rel yang terpisah.</p>
+        <ul class="cmd-list">
+          <li>Buat sarana</li><li>Buat stasiun</li><li>Hubungkan stasiun</li><li>Hubungkan rel terpisah</li>
+        </ul>
+      </div>
+      <div class="mm-card" style="--mc:var(--accent)">
+        <span class="tag">Lengkap</span>
+        <h3>Garap detail hingga tiap sirkuit rel.</h3>
+        <p>Tempatkan dan ubah sirkuit rel, wesel, tuas, rute, dan sinyal satu per satu. Mode ini juga dapat dipakai untuk menyempurnakan lintas yang dibuat dalam mode Mudah. Kedua mode dapat diganti kapan saja dari kanan atas, dan keduanya menghasilkan lintas yang sama.</p>
+        <ul class="cmd-list">
+          <li>Sirkuit rel</li><li>Wesel</li><li>Tuas &amp; rute</li><li>Sinyal</li><li>Pindahkan koordinat</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mm-shots">
+      <img src="../assets/img/mm-easy.jpg" data-full="../assets/img/mm-easy-full.jpg" alt="Pembuat peta, mode Mudah: memilih tata letak jalur untuk membuat stasiun" loading="lazy">
+      <img src="../assets/img/mm-advanced.jpg" data-full="../assets/img/mm-advanced-full.jpg" alt="Pembuat peta, mode Lengkap: mengedit sirkuit rel dan wesel secara langsung" loading="lazy">
+    </div>
+
+    <ul class="mm-more">
+      <li><b>"Sisa pekerjaan" sebelum menyimpan</b>Menampilkan daftar hal seperti tuas yang tidak terpakai atau sinyal yang kehilangan acuannya, dan membawa Anda langsung ke lokasinya.</li>
+      <li><b>Urungkan/ulangi</b>Mendukung Ctrl+Z / Ctrl+Shift+Z. Silakan bereksperimen dengan leluasa.</li>
+      <li><b>Foto lintas otomatis</b>Saat disimpan, foto seluruh lintas diambil dan ditampilkan di layar pemilihan lintas.</li>
+    </ul>
+
+    <div class="ws">
+      <h3>Berbagi lintas di Steam Workshop.</h3>
+      <p>Lintas buatan Anda dapat diunggah ke Steam Workshop, dan lintas buatan pemain lain akan muncul di pilihan lintas cukup dengan berlangganan. Lintas dari Workshop juga dapat digunakan untuk ruang co-op.</p>
+      <ul class="ws-steps">
+        <li><b><i>1</i>Cari &amp; berlangganan</b>Buka Workshop dari dalam gim, lalu berlangganan lintas yang menarik.</li>
+        <li><b><i>2</i>Mainkan</b>Lintas yang Anda langgani langsung muncul di Sandbox dan Buat Gapeka.</li>
+        <li><b><i>3</i>Unggah</b>Kirim lintas buatan Anda dari Pembuat peta ke Workshop. Pembaruan juga dapat dilakukan.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="wash" id="gallery">
+  <div class="wrap">
+    <p class="eyebrow">Galeri</p>
+    <h2>Tangkapan Layar</h2>
+    <div class="gal">
+      <img src="../assets/img/thumb-routeselect.jpg" data-full="../assets/img/large-routeselect.jpg" alt="Layar pemilihan lintas (dengan foto dan deskripsi lintas)" loading="lazy">
+      <img src="../assets/img/thumb-shinkansen.jpg" data-full="../assets/img/large-shinkansen.jpg" alt="Panel CTC dan grafik perjalanan Shinkansen" loading="lazy">
+      <img src="../assets/img/thumb-quad.jpg" data-full="../assets/img/large-quad.jpg" alt="Panel CTC kereta bandara dengan petak jalur dwiganda" loading="lazy">
+      <img src="../assets/img/thumb-subway.jpg" data-full="../assets/img/large-subway.jpg" alt="Panel CTC dan grafik perjalanan kereta bawah tanah berfrekuensi tinggi" loading="lazy">
+      <img src="../assets/img/thumb-tutorial.jpg" data-full="../assets/img/large-tutorial.jpg" alt="Tutorial (bingkai panduan merah)" loading="lazy">
+      <img src="../assets/img/thumb-help.jpg" data-full="../assets/img/large-help.jpg" alt="Bantuan perintah saat skenario dimulai" loading="lazy">
+      <img src="../assets/img/thumb-conditions.jpg" data-full="../assets/img/large-conditions.jpg" alt="Jendela sasaran" loading="lazy">
+      <img src="../assets/img/thumb-play.jpg" data-full="../assets/img/large-play.jpg" alt="Memberi perintah tahan dan berhenti luar biasa" loading="lazy">
+      <img src="../assets/img/thumb-select.jpg" data-full="../assets/img/large-select.jpg" alt="Layar pemilihan skenario" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="wrap">
+    <p class="eyebrow">Info Produk</p>
+    <h2>Info Produk</h2>
+    <dl class="spec">
+      <div class="spec-row"><dt>Judul</dt><dd>Railway Dispatcher Pro</dd></div>
+      <div class="spec-row"><dt>Harga</dt><dd>Silakan lihat <a href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">halaman toko Steam</a></dd></div>
+      <div class="spec-row"><dt>Distribusi</dt><dd>Versi resmi tersedia di Steam</dd></div>
+      <div class="spec-row"><dt>Isi permainan</dt><dd>5 lintas (9 Gapeka) / 22 skenario / 5 tutorial<br>Sandbox · Buat Gapeka · Pembuat peta · Steam Workshop (berbagi peta) · Co-op daring (hingga 4 pemain)</dd></div>
+      <div class="spec-row"><dt>Platform</dt><dd>Steam (Windows &amp; macOS)<br><span style="font-size:13px;color:var(--sub)">Pengguna Windows dan Mac dapat bermain co-op bersama. Setiap pemain harus memiliki gim ini</span></dd></div>
+      <div class="spec-row"><dt>Persyaratan minimum</dt><dd>Windows: Windows 10 / Intel Core i5 atau AMD Ryzen 5 / GPU yang mendukung DirectX 11 (grafis terintegrasi dapat digunakan, Intel UHD Graphics atau lebih tinggi)<br>Mac: mendukung Intel dan Apple silicon</dd></div>
+      <div class="spec-row"><dt>Rekomendasi</dt><dd>Resolusi 1920×1080 atau lebih tinggi. Jendela Gapeka, perintah, dan lainnya dapat dipindahkan ke monitor kedua, sehingga penggunaan dua monitor direkomendasikan</dd></div>
+      <div class="spec-row"><dt>Bahasa</dt><dd>Jepang, Inggris, Tionghoa Sederhana, Tionghoa Tradisional, Korea, Jerman, Indonesia<br><span style="font-size:13px;color:var(--sub)">Panduan tersedia dalam bahasa Jepang dan Inggris</span></dd></div>
+      <div class="spec-row"><dt>Pengembang &amp; penerbit</dt><dd>Tadimaru LLC</dd></div>
+    </dl>
+    <div class="roadmap">
+      <div class="rm done"><b>Akhir Juli 2026<i>Selesai</i></b><span>Rilis di Steam</span></div>
+      <div class="rm done"><b>Agustus–September 2026<i>Selesai</i></b><span>4 lintas baru<br>17 skenario baru</span></div>
+      <div class="rm done"><b>September–Oktober 2026<i>Selesai</i></b><span>Pembuat peta<br>Integrasi Steam Workshop</span></div>
+      <div class="rm done"><b>Oktober 2026<i>Selesai</i></b><span>Co-op daring<br>(hingga 4 pemain)</span></div>
+      <div class="rm now"><b>Versi resmi<i>NEW</i></b><span>Mendukung 7 bahasa<br>Mendukung Mac</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="sister">
+  <div class="wrap">
+    <p class="eyebrow">Series</p>
+    <h2>Seri Pendamping</h2>
+    <div class="sister">
+      <div>
+        <h3>Railway Dispatcher</h3>
+        <p>Judul pertama dalam seri ini, tempat Anda mengoperasikan sinyal dan rute di dalam stasiun secara manual. Cocok bagi Anda yang ingin mulai dari keseruan "mengatur stasiun". Mainkan keduanya bersama Pro, dan seluruh lapisan operasional kereta api akan terlihat.</p>
+        <a class="btn small" href="https://store.steampowered.com/app/4282480/?utm_source=official-site" target="_blank" rel="noopener">Ke halaman toko Steam</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow">FAQ</p>
+    <h2>Pertanyaan Umum</h2>
+    <div class="faq">
+      <details>
+        <summary>Apakah saya bisa bermain tanpa pengetahuan perkeretaapian?</summary>
+        <p>Bisa. Tutorial memandu Anda langkah demi langkah dari pengoperasian dasar, sehingga Anda tidak perlu khawatir meskipun baru pertama kali mengenal sinyal atau grafik perjalanan. Setelah terbiasa, tantang lintas dan skenario dengan tingkat kesulitan ★ yang lebih tinggi. Mengendalikan perjalanan bersama pemain berpengalaman lewat co-op juga sangat kami sarankan.</p>
+      </details>
+      <details>
+        <summary>Apakah saya harus memainkan gim sebelumnya (Railway Dispatcher) terlebih dahulu?</summary>
+        <p>Tidak perlu. Gim ini adalah karya mandiri, dan tidak ada cerita maupun data yang dilanjutkan.</p>
+      </details>
+      <details>
+        <summary>Apakah saya bisa membuat lintas sendiri?</summary>
+        <p>Bisa. Dari "Pembuat peta" di layar judul, tempatkan stasiun dan rel untuk membuat lintas, lalu langsung susun Gapeka dan kendalikan perjalanannya. Anda dapat membuat lintas seperti peta resmi, namun ada tata letak jalur yang tidak dapat dibuat, misalnya lintas melingkar yang stasiun awal dan akhirnya sama. Silakan kirim laporan bug dan permintaan melalui halaman <a href="https://tadimaru.com/pro-support/contact.en.html" target="_blank" rel="noopener">"Kontak" di panduan (bahasa Inggris)</a>.</p>
+      </details>
+      <details>
+        <summary>Apakah lintas buatan saya bisa dibagikan kepada orang lain?</summary>
+        <p>Bisa. Unggah dari Pembuat peta ke Steam Workshop, dan pemain lain dapat berlangganan untuk memainkannya. Lintas yang diunggah ke Workshop juga dapat digunakan untuk ruang co-op.</p>
+      </details>
+      <details>
+        <summary>Apakah saya bisa bermain bersama teman?</summary>
+        <p>Bisa. Dengan co-op daring, Anda dan teman Steam Anda, hingga empat pemain, dapat mengendalikan lintas yang sama dengan Gapeka yang sama. Buat ruang dari "Co-op" di layar judul, lalu undang teman dengan kode ruang enam digit atau undangan Steam (dengan kode ruang, pemain dapat bergabung tanpa harus berteman di Steam). Setiap pemain harus memiliki gim ini. Pengguna Windows dan Mac dapat bermain bersama. Tidak ada obrolan suara di dalam gim, jadi gunakan Discord atau aplikasi serupa.</p>
+      </details>
+      <details>
+        <summary>Lintas apa saja yang bisa dimainkan dalam co-op?</summary>
+        <p>Lima lintas bawaan gim dan lintas dari Steam Workshop. Modenya adalah mode bebas (Sandbox); skenario dan tutorial hanya untuk satu pemain. Jika host memilih lintas dari Workshop, pemain yang belum memilikinya dapat langsung berlangganan saat bergabung.</p>
+      </details>
+      <details>
+        <summary>Bolehkah saya melakukan siaran langsung atau membuat video?</summary>
+        <p>Siaran video, siaran langsung, klip, dan monetisasi semuanya dipersilakan tanpa perlu izin terlebih dahulu. Seluruh pendapatan menjadi milik pembuat konten. Siaran khusus anggota Steam juga diperbolehkan.</p>
+      </details>
+      <details>
+        <summary>Apakah gim ini bisa dimainkan di Mac?</summary>
+        <p>Bisa. Di Steam, gim ini mendukung Windows dan macOS (baik Intel maupun Apple silicon). Pengguna Windows dan Mac juga dapat bermain co-op bersama.</p>
+      </details>
+      <details>
+        <summary>Apakah gim ini bisa dimainkan dalam bahasa selain Jepang?</summary>
+        <p>Bisa. Gim ini mendukung tujuh bahasa: Jepang, Inggris, Tionghoa Sederhana, Tionghoa Tradisional, Korea, Jerman, dan Indonesia. Panduan tersedia dalam bahasa Jepang dan Inggris.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="../assets/img/logo-footer.png" alt="Railway Dispatcher Pro">
+    <div class="links">
+      <a href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Halaman toko Steam</a>
+      <a href="https://x.com/tadi_maru" target="_blank" rel="noopener">X (info pengembangan, bahasa Jepang)</a>
+      <a href="https://www.youtube.com/@tadimaru-san" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://note.com/tadimaru" target="_blank" rel="noopener">note (blog pengembangan, bahasa Jepang)</a>
+      <a href="https://tadimaru.com/pro-support/index.en.html" target="_blank" rel="noopener">Dukungan &amp; panduan (bahasa Inggris)</a>
+    </div>
+    <div class="langs" aria-label="Language">
+      <a href="../" lang="ja" hreflang="ja">日本語</a>
+      <a href="../en/" lang="en" hreflang="en">English</a>
+      <a href="../zh-hans/" lang="zh-Hans" hreflang="zh-Hans">简体中文</a>
+      <a href="../zh-hant/" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a>
+      <a href="../ko/" lang="ko" hreflang="ko">한국어</a>
+      <a href="../de/" lang="de" hreflang="de">Deutsch</a>
+      <a href="../id/" lang="id" hreflang="id" aria-current="page">Bahasa Indonesia</a>
+    </div>
+    <p class="copy">© Tadimaru LLC</p>
+  </div>
+</footer>
+<div class="lightbox" id="lightbox" hidden><img alt=""></div>
+<script>
+(function () {
+  var lb = document.getElementById('lightbox');
+  var im = lb.querySelector('img');
+  function close() { lb.hidden = true; im.src = ''; document.body.style.overflow = ''; }
+  document.querySelectorAll('.feat-img img, .gal img, .route-img img, .mm-shots img').forEach(function (el) {
+    el.addEventListener('click', function () {
+      im.src = el.getAttribute('data-full') || el.src;
+      lb.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  lb.addEventListener('click', close);
+
+  // 狭い画面では、下へスクロールしている間ナビを隠し、上へ戻すと出す
+  var nav = document.querySelector('nav');
+  // 言語メニューは外をクリックしたら閉じる
+  var lang = document.querySelector('details.lang');
+  document.addEventListener('click', function (e) { if (lang && lang.open && !lang.contains(e.target)) lang.open = false; });
+  var narrow = window.matchMedia('(max-width:1240px)');
+  var lastY = window.scrollY, ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY;
+      if (Math.abs(y - lastY) < 6) { ticking = false; return; }
+      var hide = narrow.matches && y > nav.offsetHeight && y > lastY;
+      nav.classList.toggle('nav-hidden', hide);
+      if (hide && lang) lang.open = false;
+      lastY = y;
+      ticking = false;
+    });
+  }, { passive: true });
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); if (lang) lang.open = false; } });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="坐在俯瞰全线的调度台前，指挥几十列列车的铁路运行管理模拟游戏。5 条线路与 22 个场景、运行图编制、地图编辑器与 Steam 创意工坊，还有与 Steam 好友最多 4 人一起调度的在线合作模式。支持日语、英语等 7 种语言，支持 Windows 与 Mac。现已在 Steam 发售。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Railway Dispatcher Pro 官方网站">
+<meta property="og:description" content="坐在俯瞰全线的调度台前，指挥几十列列车的铁路运行管理模拟游戏。5 条线路与 22 个场景、运行图编制、地图编辑器与 Steam 创意工坊，还有与 Steam 好友最多 4 人一起调度的在线合作模式。支持日语、英语等 7 种语言，支持 Windows 与 Mac。现已在 Steam 发售。">
+<meta property="og:url" content="https://tadimaru.com/railway-dispatcher-pro/zh-hans/">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tadimaru.com/railway-dispatcher-pro/assets/img/ogp.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://tadimaru.com/railway-dispatcher-pro/zh-hans/">
+<link rel="alternate" hreflang="ja" href="https://tadimaru.com/railway-dispatcher-pro/">
+<link rel="alternate" hreflang="en" href="https://tadimaru.com/railway-dispatcher-pro/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://tadimaru.com/railway-dispatcher-pro/zh-hans/">
+<link rel="alternate" hreflang="zh-Hant" href="https://tadimaru.com/railway-dispatcher-pro/zh-hant/">
+<link rel="alternate" hreflang="ko" href="https://tadimaru.com/railway-dispatcher-pro/ko/">
+<link rel="alternate" hreflang="de" href="https://tadimaru.com/railway-dispatcher-pro/de/">
+<link rel="alternate" hreflang="id" href="https://tadimaru.com/railway-dispatcher-pro/id/">
+<link rel="alternate" hreflang="x-default" href="https://tadimaru.com/railway-dispatcher-pro/en/">
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+<title>Railway Dispatcher Pro 官方网站</title>
+<style>
+  :root{
+    --paper:#ffffff;
+    --wash:#f2f5f8;
+    --ink:#17232d;
+    --sub:#5a6b76;
+    --line:#dbe2e8;
+    --accent:#0a5cab;
+    --accent-deep:#084a8a;
+    --amber:#b97708;
+    --amber-bg:#fdf4e3;
+    --dark:#10181f;
+    /* ゲーム画面由来のシグナルカラー */
+    --sig-cyan:#1fb6cb;
+    --sig-amber:#dfa010;
+    --sig-red:#d9433a;
+    --sig-green:#149e62;
+    --sig-pink:#e05fa8;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+    line-height:1.85;
+    margin:0;
+    font-size:16px;
+  }
+  img{max-width:100%;display:block}
+  a{color:var(--accent)}
+
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+  /* ---- nav ---- */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
+    border-bottom:1px solid var(--line);backdrop-filter:blur(6px);
+  }
+  .nav-in{
+    max-width:1060px;margin:0 auto;padding:8px 24px;
+    display:flex;align-items:center;gap:16px;
+  }
+  .nav-in img{height:44px;width:auto}
+  .nav-links{display:flex;gap:16px;margin-left:auto;flex-wrap:nowrap}
+  .nav-links a{
+    color:var(--ink);text-decoration:none;font-size:13.5px;letter-spacing:.04em;white-space:nowrap;
+  }
+  .nav-in .btn.small{white-space:nowrap;flex:none}
+  .nav-links a:hover{color:var(--accent)}
+  nav{transition:transform .25s ease}
+  section[id]{scroll-margin-top:72px}
+  /* 狭い画面: ロゴ＋購入ボタンの1段と、横スクロールのリンク1段にまとめる。
+     下へスクロール中は隠し、上へ戻すと出す（固定ヘッダーが画面を占有しないように） */
+  @media (max-width:1240px){
+    .nav-in{flex-wrap:wrap;gap:4px 12px;padding:6px 16px 0}
+    .nav-in img{height:34px}
+    .nav-in .btn.small{margin-left:auto;padding:6px 14px;font-size:13px;white-space:nowrap}
+    .nav-links{
+      order:3;width:100%;margin-left:0;flex-wrap:nowrap;gap:20px;
+      overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 0 8px;
+      -webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);
+    }
+    .nav-links::-webkit-scrollbar{display:none}
+    .nav-links a{white-space:nowrap;flex:none}
+    .nav-links a:last-child{padding-right:28px}
+    nav.nav-hidden{transform:translateY(-100%)}
+    .lang{margin-left:auto}
+    .nav-in .lang + .btn.small{margin-left:0}
+  }
+  .nav-links a.new::after{
+    content:"NEW";font-family:"Segoe UI",system-ui,sans-serif;font-size:9.5px;font-weight:700;
+    color:#fff;background:var(--sig-pink);border-radius:3px;padding:0 4px;margin-left:5px;vertical-align:2px;
+  }
+  .btn{
+    display:inline-block;color:#fff;text-decoration:none;
+    background:linear-gradient(135deg,#0d6fd1,#00a7d0);
+    padding:10px 26px;border-radius:4px;font-weight:700;letter-spacing:.04em;
+    box-shadow:0 6px 22px -8px rgba(0,140,190,.65);
+    transition:filter .15s,transform .15s;
+  }
+  .btn:hover{filter:brightness(1.12)}
+  .btn.small{padding:7px 18px;font-size:13.5px}
+  .btn.big{padding:15px 44px;font-size:17px}
+
+  /* ---- 言語の切り替え（ナビのドロップダウン＋フッターの一覧） ---- */
+  .lang{position:relative;flex:none}
+  .lang summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;min-height:34px;box-sizing:border-box;
+    padding:4px 10px;border:1px solid var(--line);border-radius:4px;background:var(--paper);
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;
+  }
+  .lang summary::-webkit-details-marker{display:none}
+  .lang summary svg{width:16px;height:16px;flex:none}
+  .lang summary::after{content:"";border:4px solid transparent;border-top-color:currentColor;margin:4px 0 0 1px}
+  .lang summary:hover{border-color:var(--accent);color:var(--accent)}
+  .lang ul{
+    position:absolute;right:0;top:calc(100% + 6px);z-index:60;margin:0;padding:6px 0;list-style:none;min-width:200px;
+    background:var(--paper);border:1px solid var(--line);border-radius:6px;box-shadow:0 14px 36px -14px rgba(16,35,54,.4);
+  }
+  .lang li a{display:block;padding:9px 18px;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.5}
+  .lang li a:hover{background:var(--wash);color:var(--accent)}
+  .lang li a[aria-current]{color:var(--accent);font-weight:700}
+  footer .langs{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;margin:-8px 0 28px}
+  footer .langs a{padding:4px 0}
+  footer .langs a[aria-current]{color:#fff;font-weight:700}
+
+  /* ---- section furniture ---- */
+  section{padding:88px 0}
+  section.wash{background:var(--wash)}
+  .eyebrow{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size:11.5px;font-weight:600;letter-spacing:.22em;color:var(--accent);
+    text-transform:uppercase;margin:0 0 10px;
+  }
+  h1,h2,h3{line-height:1.35;text-wrap:balance;margin:0}
+  h2{font-size:34px;font-weight:800;letter-spacing:.01em}
+  h3{font-size:21px;font-weight:700}
+  .lead{color:var(--sub);max-width:38em}
+
+  /* 駅ドット区切り：CTC盤面モチーフ（軌道回路の在線表示風に色分け） */
+  .trackline{
+    display:flex;align-items:center;gap:0;margin:26px 0 0;height:10px;
+  }
+  .trackline .rail{height:2px;background:var(--line);flex:1}
+  .trackline .st{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--accent);margin:0 4px;flex:none;
+  }
+  .trackline .st.fill{background:var(--accent)}
+  .trackline .st.c{border-color:var(--sig-cyan);background:var(--sig-cyan)}
+  .trackline .st.a{border-color:var(--sig-amber);background:var(--sig-amber)}
+  .trackline .st.r{border-color:var(--sig-red);background:var(--sig-red)}
+
+  /* ---- hero：CTC盤面フルブリード＋オーバーレイ ---- */
+  .hero{position:relative;background:#0b1218;color:#fff;overflow:hidden}
+  .hero-img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 22%;
+  }
+  .hero-shade{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(11,18,24,.30) 0%,rgba(11,18,24,.22) 34%,rgba(11,18,24,.68) 68%,rgba(11,18,24,.92) 100%);
+  }
+  .hero-content{position:relative;padding-top:210px;padding-bottom:72px}
+  .hero-news{
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:20px;
+    background:rgba(11,18,24,.62);border:1px solid rgba(255,255,255,.22);border-radius:999px;
+    padding:6px 16px 6px 6px;color:#fff;text-decoration:none;font-size:13.5px;
+    backdrop-filter:blur(4px);
+  }
+  .hero-news b{
+    background:var(--sig-pink);border-radius:999px;padding:1px 10px;font-size:11.5px;
+    font-family:"Segoe UI",system-ui,sans-serif;letter-spacing:.08em;
+  }
+  .hero-news:hover{border-color:rgba(255,255,255,.5)}
+  .hero .eyebrow{
+    color:#6fe0ef;letter-spacing:.3em;
+    text-shadow:0 1px 3px rgba(0,0,0,.9),0 2px 14px rgba(0,0,0,.8);
+  }
+  .hero h1{
+    font-size:clamp(40px,6.2vw,64px);font-weight:800;letter-spacing:.02em;
+    text-shadow:0 2px 26px rgba(0,0,0,.6);
+  }
+  .hero .lead{
+    color:#cfdae2;font-size:17.5px;margin:22px 0 32px;max-width:34em;
+    text-shadow:0 1px 14px rgba(0,0,0,.55);
+  }
+  .hero-cta{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .hero-cta .sub{font-size:13px;color:#a4b6c1;line-height:1.6}
+  .price{font-family:"Segoe UI",system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#fff;font-weight:700}
+
+  /* ---- concept ---- */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+  .vs-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:28px 30px;
+  }
+  .vs-card.pro{border-color:var(--accent);border-width:2px}
+  .vs-card .tag{
+    font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--sub);
+    font-family:"Segoe UI",system-ui,sans-serif;
+  }
+  .vs-card.pro .tag{color:var(--accent)}
+  .vs-card h3{margin:8px 0 10px}
+  .vs-card p{margin:0;color:var(--sub);font-size:14.5px}
+
+  /* ---- features ---- */
+  .feat{
+    display:grid;grid-template-columns:5fr 6fr;gap:54px;align-items:center;
+    padding:58px 0;
+  }
+  .feat + .feat{border-top:1px solid var(--line)}
+  .feat.rev .feat-txt{order:2}
+  .feat.rev .feat-img{order:1}
+  .feat-no{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size:12px;font-weight:600;letter-spacing:.2em;color:var(--accent);
+    display:inline-flex;align-items:center;gap:9px;
+  }
+  /* 各特徴に信号灯モチーフ（該当スクショの色と対応） */
+  .feat-no::before{
+    content:"";width:9px;height:9px;border-radius:50%;background:var(--lamp,var(--accent));
+    box-shadow:0 0 8px color-mix(in srgb,var(--lamp,var(--accent)) 60%,transparent);
+  }
+  .feat h3{font-size:26px;margin:8px 0 16px}
+  .feat p{color:var(--sub);margin:0;font-size:15.5px}
+  .feat-img img,.ph{
+    border-radius:6px;border:1px solid var(--line);
+    box-shadow:0 18px 44px -18px rgba(16,35,54,.35);
+  }
+  .ph{
+    aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(-45deg,#f6f8fa 0 14px,#eef2f5 14px 28px);
+    color:var(--sub);font-size:13.5px;letter-spacing:.06em;
+    border-style:dashed;box-shadow:none;text-align:center;line-height:1.7;
+  }
+
+  /* ---- how to play ---- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+  .step{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 28px;
+  }
+  /* 遊び方の丸数字＝信号現示（赤→黄→青）で進行していく */
+  .step-badge{
+    width:44px;height:44px;border-radius:50%;
+    border:3px solid var(--accent);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:19px;font-weight:700;
+    margin-bottom:16px;
+  }
+  .step.s1 .step-badge{border-color:var(--sig-red);color:var(--sig-red)}
+  .step.s2 .step-badge{border-color:var(--sig-amber);color:var(--sig-amber)}
+  .step.s3 .step-badge{border-color:var(--sig-green);color:var(--sig-green)}
+  .step h3{font-size:18px;margin-bottom:8px}
+  .step p{margin:0;color:var(--sub);font-size:14px}
+  .flow-note{
+    margin:40px auto 0;text-align:center;color:var(--accent);font-weight:700;
+    font-size:17px;letter-spacing:.06em;
+  }
+
+  /* ---- systems（輸送障害と指令） ---- */
+  .inc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+  .inc-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:22px 24px;border-left:4px solid var(--inc,var(--accent));
+  }
+  .inc-card h3{font-size:17px;margin:0 0 6px}
+  .inc-card p{margin:0;color:var(--sub);font-size:13.8px}
+  .sandbox-note{
+    margin-top:22px;background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    padding:20px 26px;font-size:14.5px;
+  }
+  .sandbox-note b{color:var(--accent)}
+  .cmd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+  .cmd-card.tall{grid-column:2;grid-row:1 / span 2}
+  .cmd-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px 24px;
+  }
+  .cmd-card h3{
+    font-size:15px;margin:0 0 14px;display:flex;align-items:center;gap:9px;
+  }
+  .cmd-card h3::before{
+    content:"";width:9px;height:9px;border-radius:50%;background:var(--cg,var(--accent));flex:none;
+  }
+  .cmd-list{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .cmd-list li{
+    background:var(--wash);border:1px solid var(--line);border-radius:999px;
+    padding:5px 14px;font-size:13px;font-weight:600;
+  }
+  .cmd-note{margin:18px 0 0;color:var(--sub);font-size:13px}
+
+  /* ---- routes & scenarios ---- */
+  .tut-box{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 34px;margin-top:44px;
+  }
+  .tut-box h3{margin-bottom:6px}
+  .tut-box>p{margin:0 0 18px;color:var(--sub);font-size:14.5px}
+  .tut-list{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+  .tut-list li{
+    background:var(--paper);border:1px solid var(--line);border-radius:999px;
+    padding:7px 18px;font-size:13.5px;font-weight:600;
+  }
+  .tut-list li b{color:var(--accent);font-family:"Segoe UI",system-ui,sans-serif;margin-right:6px}
+  .route{
+    display:grid;grid-template-columns:5fr 6fr;gap:34px;align-items:start;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 32px;margin-top:22px;border-top:3px solid var(--rc,var(--accent));
+  }
+  .route-img img{
+    border-radius:5px;border:1px solid var(--line);background:#373c43;cursor:zoom-in;
+  }
+  .route .kicker{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:600;
+    letter-spacing:.2em;color:var(--rc,var(--accent));
+  }
+  .route .stars{color:var(--sig-amber);letter-spacing:.08em;margin-left:8px;font-size:12px}
+  .route h3{font-size:22px;margin:6px 0 6px}
+  .route .facts{margin:0 0 12px;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+  .route .facts b{color:var(--ink);font-weight:700}
+  .route>div>p{margin:0 0 16px;color:var(--sub);font-size:14.5px}
+  .sc-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+  .sc-list li{
+    display:grid;grid-template-columns:44px 1fr;gap:8px;
+    padding:9px 2px;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.65;
+  }
+  .sc-list .lv{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11.5px;font-weight:700;color:var(--sig-amber);
+    white-space:nowrap;padding-top:2px;
+  }
+  .sc-list b{display:block;font-size:14.5px}
+  .sc-list span{color:var(--sub)}
+  .cond-box{margin-top:48px}
+  .cond-box h3{margin-bottom:12px}
+  .cond-chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 12px}
+  .cond-chips span{
+    border:1.5px solid var(--sig-green);color:var(--sig-green);
+    border-radius:4px;padding:6px 14px;font-size:13.5px;font-weight:700;
+  }
+  .cond-chips span.f{border-color:var(--sig-red);color:var(--sig-red)}
+  .cond-box p{color:var(--sub);font-size:14.5px;margin:0;max-width:44em}
+
+  /* ---- map maker ---- */
+  .mm-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
+  .mm-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:26px 28px;
+  }
+  .mm-card .tag{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;
+    color:var(--mc,var(--accent));
+  }
+  .mm-card h3{font-size:19px;margin:6px 0 10px}
+  .mm-card p{margin:0 0 14px;color:var(--sub);font-size:14px}
+  .mm-shots{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  .mm-shots img{border-radius:6px;border:1px solid var(--line);cursor:zoom-in}
+  .mm-more{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 0;padding:0;list-style:none;
+  }
+  .mm-more li{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px 18px;font-size:13.5px;
+    color:var(--sub);line-height:1.7;
+  }
+  .mm-more b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  .mm-note{
+    margin-top:30px;background:var(--amber-bg);border:1px solid #ecd9ad;border-left:4px solid var(--sig-amber);
+    border-radius:8px;padding:22px 28px;font-size:14.5px;
+  }
+  .mm-note h3{font-size:17px;margin:0 0 10px;color:var(--amber)}
+  .mm-note ul{margin:0;padding-left:1.2em}
+  .mm-note li{margin:3px 0}
+  .mm-note p{margin:12px 0 0}
+
+  /* ---- co-op（オンライン協力プレイ） ---- */
+  .coop-head{display:grid;grid-template-columns:6fr 5fr;gap:48px;align-items:center}
+  .coop-art{
+    background:#0f171e;border-radius:8px;padding:26px 22px 20px;margin:0;
+    box-shadow:0 18px 44px -18px rgba(16,35,54,.45);
+  }
+  .coop-art svg{width:100%;height:auto;display:block}
+  .coop-art .cap{margin:10px 2px 0;color:#7f919d;font-size:11.5px;letter-spacing:.04em}
+  .coop-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+  .coop-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:24px 24px 22px;
+    border-top:3px solid var(--cc,var(--accent));
+  }
+  .coop-card .no{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;
+    color:var(--cc,var(--accent));
+  }
+  .coop-card h3{font-size:18px;margin:6px 0 10px}
+  .coop-card p{margin:0;color:var(--sub);font-size:14px}
+  .coop-card kbd{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:12px;font-weight:700;
+    border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 6px;background:var(--wash);color:var(--ink);
+  }
+  .coop-note{
+    margin-top:22px;background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    padding:18px 24px;font-size:14px;color:var(--sub);
+  }
+  .coop-note b{color:var(--ink)}
+  .coop-note ul{margin:0;padding-left:1.2em}
+  .coop-note li{margin:2px 0}
+
+  /* ---- workshop（マップ作成の中） ---- */
+  .ws{
+    margin-top:34px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:26px 28px;
+    border-left:4px solid var(--sig-pink);
+  }
+  .ws h3{font-size:19px;margin:0 0 8px}
+  .ws>p{margin:0 0 18px;color:var(--sub);font-size:14.5px}
+  .ws-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0;padding:0;list-style:none}
+  .ws-steps li{background:var(--wash);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:13.5px;color:var(--sub);line-height:1.7}
+  .ws-steps b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  .ws-steps i{font-style:normal;font-family:"Segoe UI",system-ui,sans-serif;font-weight:700;color:var(--sig-pink);margin-right:6px}
+
+  /* ---- gallery ---- */
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+  .gal img,.gal .ph{border-radius:5px;box-shadow:none;width:100%}
+  .gal .ph{aspect-ratio:16/9;font-size:12px}
+  .gal img{transition:transform .18s;border:1px solid var(--line)}
+  .gal img:hover{transform:scale(1.025)}
+
+  /* ---- lightbox（スクショのクリック拡大） ---- */
+  .feat-img img,.gal img{cursor:zoom-in}
+  .lightbox{
+    position:fixed;inset:0;z-index:100;background:rgba(10,16,22,.93);
+    display:flex;align-items:center;justify-content:center;
+    padding:3vmin;cursor:zoom-out;
+  }
+  .lightbox[hidden]{display:none}
+  .lightbox img{
+    max-width:100%;max-height:100%;width:auto;height:auto;
+    border-radius:6px;box-shadow:0 24px 80px rgba(0,0,0,.6);
+  }
+
+  /* ---- product info ---- */
+  .spec{
+    margin-top:44px;border-top:1px solid var(--line);
+  }
+  .spec-row{
+    display:grid;grid-template-columns:180px 1fr;gap:20px;
+    padding:16px 4px;border-bottom:1px solid var(--line);font-size:15px;
+  }
+  .spec-row dt{color:var(--sub);font-weight:600;margin:0}
+  .spec-row dd{margin:0;font-variant-numeric:tabular-nums}
+  .roadmap{display:flex;gap:0;margin-top:52px;align-items:flex-start}
+  .rm{flex:1;position:relative;padding:26px 12px 0 0}
+  .rm::before{
+    content:"";position:absolute;top:5px;left:0;right:0;height:2px;background:var(--line);
+  }
+  .rm.done::before,.rm.now::before{background:var(--accent)}
+  .rm::after{
+    content:"";position:absolute;top:0;left:0;width:12px;height:12px;border-radius:50%;
+    background:var(--paper);border:3px solid var(--accent);box-sizing:border-box;
+  }
+  .rm.done::after{background:var(--accent)}
+  .rm.now::after{background:var(--sig-pink);border-color:var(--sig-pink);box-shadow:0 0 0 4px color-mix(in srgb,var(--sig-pink) 25%,transparent)}
+  .rm b{display:block;font-size:15px}
+  .rm i{font-style:normal;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-left:6px}
+  .rm.now i{color:var(--sig-pink)}
+  .rm span{font-size:13px;color:var(--sub)}
+
+  /* ---- sister ---- */
+  .sister{
+    display:flex;gap:30px;align-items:center;margin-top:40px;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:30px 34px;
+  }
+  .sister p{margin:6px 0 14px;color:var(--sub);font-size:14.5px}
+
+  /* ---- faq ---- */
+  .faq{margin-top:40px;border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line);padding:4px 2px}
+  .faq summary{
+    cursor:pointer;font-weight:700;padding:14px 4px;list-style:none;
+    display:flex;align-items:center;gap:12px;font-size:15.5px;
+  }
+  .faq summary::before{content:"Q";color:var(--accent);font-family:"Segoe UI",system-ui,sans-serif;font-weight:700}
+  .faq details p{margin:0 4px 16px 30px;color:var(--sub);font-size:14.5px}
+
+  /* ---- footer ---- */
+  footer{background:var(--dark);color:#aebbc4;padding:64px 0 40px}
+  footer img{height:46px;width:auto;margin-bottom:22px}
+  footer .links{display:flex;gap:24px;font-size:13.5px;flex-wrap:wrap;margin-bottom:30px}
+  footer a{color:#aebbc4;text-decoration:none}
+  footer a:hover{color:#fff}
+  footer .copy{font-size:12px;color:#6d7d89}
+
+  @media (max-width:820px){
+    h2{font-size:27px}
+    .hero-content{padding-top:64px;padding-bottom:56px}
+    .hero-news{font-size:13px;line-height:1.5;align-items:flex-start;border-radius:18px}
+    .hero-news b{flex:none;margin-top:1px}
+    .hero .eyebrow{letter-spacing:.14em}
+    .inc-grid{grid-template-columns:1fr}
+    .cmd-grid{grid-template-columns:1fr}
+    .cmd-card.tall{grid-column:auto;grid-row:auto}
+    .tut-box{padding:24px 22px}
+    .route{grid-template-columns:1fr;gap:18px;padding:22px 20px}
+    .mm-grid,.mm-shots{grid-template-columns:1fr}
+    .mm-more{grid-template-columns:1fr}
+    .coop-head{grid-template-columns:1fr;gap:28px}
+    .coop-cards{grid-template-columns:1fr}
+    .ws-steps{grid-template-columns:1fr}
+    .feat{grid-template-columns:1fr;gap:26px;padding:44px 0}
+    .feat.rev .feat-txt{order:1}
+    .feat.rev .feat-img{order:2}
+    .vs{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .gal{grid-template-columns:1fr 1fr}
+    .spec-row{grid-template-columns:1fr;gap:2px}
+    .roadmap{flex-direction:column;gap:18px}
+    .rm{padding:0 0 0 26px}
+    .rm::before{top:0;bottom:-18px;left:5px;right:auto;width:2px;height:auto}
+    .rm:last-child::before{display:none}
+    .sister{flex-direction:column;align-items:flex-start}
+    section{padding:60px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .gal img{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <img src="../assets/img/logo-nav.png" alt="Railway Dispatcher Pro">
+    <div class="nav-links">
+      <a href="#coop" class="new">合作模式</a>
+      <a href="#features">特色</a>
+      <a href="#howto">玩法</a>
+      <a href="#systems">故障与调度</a>
+      <a href="#routes">线路与场景</a>
+      <a href="#mapmaker">地图编辑器</a>
+      <a href="#gallery">画廊</a>
+      <a href="#product">产品信息</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <details class="lang">
+      <summary aria-label="Language"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.6 2.6 3.9 5.6 3.9 9.2s-1.3 6.6-3.9 9.2M12 2.8C9.4 5.4 8.1 8.4 8.1 12s1.3 6.6 3.9 9.2"/></svg><span>简体中文</span></summary>
+      <ul>
+        <li><a href="../" lang="ja" hreflang="ja">日本語</a></li>
+        <li><a href="../en/" lang="en" hreflang="en">English</a></li>
+        <li><a href="../zh-hans/" lang="zh-Hans" hreflang="zh-Hans" aria-current="page">简体中文</a></li>
+        <li><a href="../zh-hant/" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a></li>
+        <li><a href="../ko/" lang="ko" hreflang="ko">한국어</a></li>
+        <li><a href="../de/" lang="de" hreflang="de">Deutsch</a></li>
+        <li><a href="../id/" lang="id" hreflang="id">Bahasa Indonesia</a></li>
+      </ul>
+    </details>
+    <a class="btn small" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">在 Steam 购买</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <img class="hero-img" src="../assets/img/hero.jpg" alt="俯瞰全线的 CTC 画面">
+  <div class="hero-shade"></div>
+  <div class="wrap hero-content">
+    <a class="hero-news" href="#product"><b>UPDATE</b>正式版推出 — 支持 7 种语言与 Mac</a>
+    <p class="eyebrow">Railway Dispatcher Pro — Official Site</p>
+    <h1>从操作一个车站，<br>到统筹整条线路。</h1>
+    <p class="lead">你就是行车调度员。坐在俯瞰全线的调度台前，让几十列列车准点运行。被打乱的运行图，就靠你的调度夺回秩序。</p>
+    <div class="hero-cta">
+      <a class="btn big" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">在 Steam 购买</a>
+      <div class="sub">
+        <span class="price">正式版 发售中</span><br>
+        Steam / Windows、Mac / 支持 7 种语言
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="coop">
+  <div class="wrap">
+    <div class="coop-head">
+      <div>
+        <p class="eyebrow">合作模式</p>
+        <h2>从一个人的调度台，<br>到大家的调度所。</h2>
+        <div class="trackline" aria-hidden="true">
+          <span class="st c"></span><span class="rail"></span><span class="st c"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st r"></span>
+        </div>
+        <p class="lead" style="margin-top:26px">与 Steam 好友最多 4 人，一起调度同一条线路、同一张运行图。按车站分工负责，用标记互相提醒“请看这里”，齐心协力守住全线运行。一个人顾不过来的早高峰，互相招呼着也能稳住局面。</p>
+      </div>
+      <figure class="coop-art">
+        <svg viewBox="0 0 440 200" role="img" aria-label="按负责人颜色区分的站名、3 名玩家的光标与标记示意图">
+          <g font-family="PingFang SC,Microsoft YaHei,Noto Sans SC,sans-serif" font-size="12" font-weight="700">
+            <line x1="20" y1="96" x2="420" y2="96" stroke="#3b4a55" stroke-width="3"/>
+            <line x1="20" y1="114" x2="420" y2="114" stroke="#3b4a55" stroke-width="3"/>
+            <line x1="40" y1="96" x2="400" y2="96" stroke="#149e62" stroke-width="3" stroke-dasharray="46 22" opacity=".85"/>
+            <rect x="22" y="62" width="62" height="22" rx="3" fill="#1fb6cb" opacity=".22"/><text x="53" y="77" fill="#6fe0ef" text-anchor="middle">A 站</text>
+            <rect x="118" y="62" width="62" height="22" rx="3" fill="#1fb6cb" opacity=".22"/><text x="149" y="77" fill="#6fe0ef" text-anchor="middle">B 站</text>
+            <rect x="214" y="62" width="62" height="22" rx="3" fill="#dfa010" opacity=".22"/><text x="245" y="77" fill="#f3c24a" text-anchor="middle">C 站</text>
+            <rect x="310" y="62" width="62" height="22" rx="3" fill="#e05fa8" opacity=".22"/><text x="341" y="77" fill="#f08cc4" text-anchor="middle">D 站</text>
+            <g fill="#1fb6cb"><path d="M96 128 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="112" y="146" width="44" height="18" rx="3"/><text x="134" y="159" fill="#0f171e" text-anchor="middle" font-size="11">玩家A</text></g>
+            <g fill="#dfa010"><path d="M226 134 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="242" y="152" width="44" height="18" rx="3"/><text x="264" y="165" fill="#0f171e" text-anchor="middle" font-size="11">玩家B</text></g>
+            <g fill="#e05fa8"><path d="M330 124 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="346" y="142" width="44" height="18" rx="3"/><text x="368" y="155" fill="#0f171e" text-anchor="middle" font-size="11">玩家C</text></g>
+            <circle cx="245" cy="105" r="9" fill="none" stroke="#dfa010" stroke-width="2.5"/>
+            <line x1="245" y1="44" x2="245" y2="96" stroke="#dfa010" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <rect x="180" y="20" width="130" height="24" rx="12" fill="#dfa010"/>
+            <text x="245" y="36" fill="#0f171e" text-anchor="middle" font-size="11.5">我来扣车 — 玩家B</text>
+          </g>
+        </svg>
+        <figcaption class="cap">示意图：站名会变成负责人的颜色，还能看到其他玩家的光标和标记。</figcaption>
+      </figure>
+    </div>
+
+    <div class="coop-cards">
+      <div class="coop-card" style="--cc:var(--sig-cyan)">
+        <span class="no">01</span>
+        <h3>凭房间口令，快速集合</h3>
+        <p>创建房间后会显示 6 位数的房间口令。只要告诉对方就能加入，不是 Steam 好友也没关系。也可以通过 Steam 邀请加入。正在进行中的房间，也能中途加入。</p>
+      </div>
+      <div class="coop-card" style="--cc:var(--sig-amber)">
+        <span class="no">02</span>
+        <h3>指定负责人，分工合作</h3>
+        <p>房主为每个车站指定负责人后，地图上的站名会变成该玩家的颜色。其他玩家的鼠标光标也会带着名字显示，谁在看哪里一目了然。</p>
+      </div>
+      <div class="coop-card" style="--cc:var(--sig-pink)">
+        <span class="no">03</span>
+        <h3>用标记，互相提醒</h3>
+        <p>按住 <kbd>Q</kbd> 并点击地图，“请看这里”“我来扣车”“我来排列进路”等快捷消息标记就会出现在所有人的画面上。</p>
+      </div>
+    </div>
+
+    <div class="coop-note">
+      <ul>
+        <li>合作模式在<b>自由运行（沙盒）</b>中游玩。除游戏内置的线路外，也可以使用<b>创意工坊的线路</b>（没有该线路的玩家可在加入时订阅）。</li>
+        <li><b>所有参与者都需要拥有本游戏</b>。<b>Windows 与 Mac 玩家之间</b>也能一起游玩。</li>
+        <li>按钮、进路、扣车、运行图调整等调度操作所有人都能进行；倍率变更、触发事件和存档由房主负责。</li>
+        <li>游戏内没有语音聊天，请搭配 Discord 等工具一起游玩。玩法请参阅<a href="https://tadimaru.com/pro-support/coop.en.html" target="_blank" rel="noopener">说明书（合作模式篇、英文）</a>。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="concept">
+  <div class="wrap">
+    <p class="eyebrow">Concept</p>
+    <h2>从一站，到全线。</h2>
+    <div class="trackline" aria-hidden="true">
+      <span class="st c"></span><span class="rail"></span><span class="st r"></span><span class="rail"></span><span class="st"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st fill"></span>
+    </div>
+    <p class="lead" style="margin-top:26px">在《Railway Dispatcher》中精通了站内的信号操作之后，就迈向更上一层吧。Pro 交到你手上的不是一个车站，而是<b>整条线路</b>。信号、进路、运行图、车辆运用——全都是你的棋盘。</p>
+    <div class="vs">
+      <div class="vs-card">
+        <span class="tag">Railway Dispatcher</span>
+        <h3>掌管车站。</h3>
+        <p>手动操作站内的信号与进路，让列车准点发出——“信号楼”的体验。</p>
+      </div>
+      <div class="vs-card pro">
+        <span class="tag">PRO — 本作</span>
+        <h3>统筹全线。</h3>
+        <p>俯瞰全线、读懂运行图，用运行调整的调度命令平息混乱——“调度所”的体验。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <p class="eyebrow">特色</p>
+    <h2>调度台上，一应俱全。</h2>
+
+    <div class="feat" style="margin-top:20px">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-cyan)">FEATURE 01</span>
+        <h3>全线状况，一目了然。</h3>
+        <p>实时显示全线列车占用、信号和已开通进路的 CTC 控制盘。哪个车站列车在拥堵、晚点会向哪里扩散——控制盘会告诉你一切。点击列车，它接下来要经过的进路就会以橙色高亮显示。</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-overview.jpg" alt="用 CTC 控制盘俯瞰全线" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-pink)">FEATURE 02</span>
+        <h3>读懂运行线。</h3>
+        <p>调度员的武器是运行图。计划运行线、计入晚点的预测和实绩叠加绘制，让你提前看清混乱的走向。在控制盘与运行线两个画面之间往返、构思下一步——这正是调度的乐趣所在。</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-diagram.jpg" alt="运行图画面" loading="lazy"></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-red)">FEATURE 03</span>
+        <h3>用调度，夺回秩序。</h3>
+        <p>车辆故障——就发生在早高峰的正线上。调度的工作，正是从这样最糟糕的瞬间开始的。扣车、推迟发车、临时停车、临时通过、折返、提前终到。打出运行调整的手牌，把接连崩溃的运行图重新稳住。</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-incident.jpg" alt="发生车辆故障时的调度画面" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-amber)">FEATURE 04</span>
+        <h3>结果，用数字说话。</h3>
+        <p>每个场景都设有通关条件和评定，晚点压到了什么程度、守住了多少列车，都会以数字呈现。同样的混乱，调度不同，结果也不同。反复挑战，找出最好的运行调整吧。</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-result.jpg" alt="场景结束时的评定汇总" loading="lazy"></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-green)">FEATURE 05</span>
+        <h3>运行图，由你亲手编写。</h3>
+        <p>运行图编辑功能让你亲手逐条设计运行线。停站时间、会车、折返运用都能自由安排。“自己的运行图”化作几百列列车开始运行的那一刻，是无与伦比的快感。</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-edit.jpg" alt="运行图编辑画面" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-cyan)">FEATURE 06</span>
+        <h3>从任意时段，开始调度。</h3>
+        <p>在沙盒中选好线路和运行图后，不仅可以“从首班车开始”，还能以 1 小时为单位从任意时段开始。反复练习傍晚高峰，或只看深夜的入库——不必倍速等上几十分钟。故障也可以在任意地点自己制造。</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-sandbox.jpg" alt="沙盒的开始时刻选择画面" loading="lazy"></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="wash" id="howto">
+  <div class="wrap">
+    <p class="eyebrow">玩法</p>
+    <h2>调度员的工作，只有 3 件事。</h2>
+    <p class="lead" style="margin-top:14px">没有复杂的操作。观察、决策、下令。这样的循环，本身就是运行管理的乐趣。</p>
+    <div class="steps">
+      <div class="step s1">
+        <div class="step-badge">1</div>
+        <h3>观察</h3>
+        <p>通过 CTC 控制盘和运行图掌握状况。晚点在哪里产生、又将向哪里扩散。选中列车，它前方的进路也一目了然。</p>
+      </div>
+      <div class="step s2">
+        <div class="step-badge">2</div>
+        <h3>决策</h3>
+        <p>先放行哪列车？在哪里折返？正确答案不止一个。你的判断，就会化为运行图。</p>
+      </div>
+      <div class="step s3">
+        <div class="step-badge">3</div>
+        <h3>下令</h3>
+        <p>扣车、推迟发车、临时停车、折返——从调度菜单立即执行。列车们会回应你的命令。</p>
+      </div>
+    </div>
+    <p class="flow-note">观察 → 决策 → 下令。然后，运行图逐渐恢复。</p>
+  </div>
+</section>
+
+<section id="systems">
+  <div class="wrap">
+    <p class="eyebrow">故障与调度</p>
+    <h2>会发生的故障，能出的手牌。</h2>
+    <p class="lead" style="margin-top:14px">调度员的工作，是故障与手牌之间的斗智。本作收录了 4 种运输故障，以及再现真实运行调整的各种调度命令。</p>
+
+    <h3 style="margin-top:44px">4 种运输故障</h3>
+    <div class="inc-grid">
+      <div class="inc-card" style="--inc:var(--sig-red)">
+        <h3>车辆故障</h3>
+        <p>列车因故障停在正线上。修复之前，一毫米也动不了。在高密度运行图下，几分钟的停车就会演变成全线的混乱。</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-amber)">
+        <h3>线路、信号故障（轨道电路无法通行）</h3>
+        <p>道岔无法转换或线路受阻，使特定区间无法通行、进路无法排列。考验你如何调度有限的股道。</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-cyan)">
+        <h3>区间速度限制</h3>
+        <p>暴雨或强风导致站间慢行限速。不只是部分列车晚点，还会打乱间隔与接续，慢慢波及全线。</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-pink)">
+        <h3>区间暂停运营</h3>
+        <p>强风或停电导致站间禁止进入。线路被一分为二，需要在两侧分别组织折返运行，大规模的运行调整就此展开。</p>
+      </div>
+    </div>
+    <div class="sandbox-note">
+      故障不只会在场景中突然来袭。<b>通过菜单中的“触发事件”，你也可以在任意地点、任意时机自己制造故障</b>。让哪列车故障、限速的区间和限速值都可以自由设定。亲手设计“最糟糕的一天”，来检验自己的调度本领，也是一种玩法。场景的规定时间过后，可以手动解除故障，一直调度到运行图恢复原状。
+    </div>
+
+    <h3 style="margin-top:52px">调度的手牌</h3>
+    <div class="cmd-grid">
+      <div class="cmd-card" style="--cg:var(--sig-amber)">
+        <h3>扣停、推迟</h3>
+        <ul class="cmd-list">
+          <li>扣车（在指定车站扣留）</li>
+          <li>指定方向一并扣车</li>
+          <li>全线扣车</li>
+          <li>推迟发车（以秒为单位累加后确定）</li>
+          <li>空闲发车（到点后，下一站一空出即发车）</li>
+        </ul>
+      </div>
+      <div class="cmd-card" style="--cg:var(--sig-pink)">
+        <h3>变更停靠站</h3>
+        <ul class="cmd-list">
+          <li>临时停车</li>
+          <li>临时通过</li>
+          <li>恢复为按运行图</li>
+        </ul>
+        <p class="cmd-note">运行中的列车能否来得及停下，取决于当前速度和剩余距离。请尽早判断。</p>
+      </div>
+      <div class="cmd-card tall" style="--cg:var(--sig-cyan)">
+        <h3>重组运用</h3>
+        <ul class="cmd-list">
+          <li>在此站提前终到（改为终到）</li>
+          <li>新建折返运用</li>
+          <li>新建续行（同方向）运用</li>
+          <li>衔接到其他运用</li>
+          <li>解除衔接（取消下一运用）</li>
+          <li>接管未出发的运用</li>
+          <li>编辑剩余区间的道岔、停车秒数</li>
+        </ul>
+        <p class="cmd-note">提前终到的车辆会留在该站的股道上。把它挪开，也是调度的工作。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="routes">
+  <div class="wrap">
+    <p class="eyebrow">线路与场景</p>
+    <h2>5 条线路，22 种“混乱”。</h2>
+    <p class="lead" style="margin-top:14px">从郊外的地方私铁到市中心的地铁、机场线，再到新干线。性格迥异的 5 条线路上，等待你的是以现实铁路中真实发生的运行故障为原型的场景。每条线路都能在沙盒中自由调度。在 Steam 创意工坊中，还能游玩其他玩家制作的线路。</p>
+
+    <div class="tut-box">
+      <h3>先从教程开始，迈出调度第一步。</h3>
+      <p>零铁路知识也没关系。5 个教程从基本操作到高级的车站控制循序渐进地引导。<b>画面上的红框指引会直接指出“下一步要按的位置”</b>，不看说明书，手也会慢慢记住。</p>
+      <ul class="tut-list">
+        <li><b>1</b>看懂画面与时间</li>
+        <li><b>2</b>扣车与恢复运行</li>
+        <li><b>3</b>推迟发车、临时停车、临时通过</li>
+        <li><b>4</b>提前终到与折返</li>
+        <li><b>5</b>车站控制（手动进路）</li>
+      </ul>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-green)">
+      <div class="route-img"><img src="../assets/img/route-local.png" alt="带单线区间的郊外地方私铁全线图" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 01<span class="stars">难度 ★1</span></span>
+        <h3>带单线区间的郊外地方私铁</h3>
+        <p class="facts"><b>球场前～仙台～日和台 13 站</b>　／　快速＋普通运行图 384 列、纯普通运行图 377 列</p>
+        <p>从仙台市区向郊外延伸的线路。泉站以远为单线，会车站是运输的关键。快速与普通列车的换乘衔接，构成了每天的运行图。教程的舞台也是这条线路。</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>晨雾中的五分钟</b><span>早高峰的车辆故障。修复只需五分钟——后续列车却转眼间越堵越多。</span></div></li>
+          <li><span class="lv">★2</span><div><b>雨幕</b><span>暴雨导致 25km/h 限速。慢行打乱快慢车衔接，波及全线。</span></div></li>
+          <li><span class="lv">★3</span><div><b>被封闭的待避线</b><span>傍晚高峰，道岔无法转换，待避线无法使用。用手动进路调配股道。</span></div></li>
+          <li><span class="lv">★4</span><div><b>北风断线</b><span>强风导致暂停运营。在被分割的两侧分别组织折返运行。</span></div></li>
+          <li><span class="lv">★5</span><div><b>动弹不得的快速</b><span>快速列车在单线区间的入口动弹不得，以北几乎形同封锁。</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-amber)">
+      <div class="route-img"><img src="../assets/img/route-boso.png" alt="房总私铁全线图" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 02<span class="stars">难度 ★2</span></span>
+        <h3>正线与支线分岔的房总私铁</h3>
+        <p class="facts"><b>千叶～姊崎～发电所前／姊崎～高尔夫球场前 20 站</b>　／　休息日 360 列、工作日 594 列</p>
+        <p>从千叶沿房总海岸南下的正线，以及在姊崎分岔、驶向内陆的支线。快速、急行、普通列车往来穿梭，待避站的越行是看点。</p>
+        <ul class="sc-list">
+          <li><span class="lv">★2</span><div><b>风筝缠住线路</b><span>支线的接触网缠上一只大风筝。让直通的快速列车在姊崎折返，障碍排除后再恢复原来的运行图。</span></div></li>
+          <li><span class="lv">★2</span><div><b>始发车，出不了车库</b><span>黎明前，出库的回送列车在车库出口动弹不得。在接受部分停运的同时，守住开行列数。</span></div></li>
+          <li><span class="lv">★3</span><div><b>姊崎的分水岭</b><span>普通列车在正线的站间动弹不得。在姊崎同时运转正线与支线两个方向的折返。</span></div></li>
+          <li><span class="lv">★3</span><div><b>镰取，道岔不动</b><span>傍晚高峰，待避线无法使用。把待避站改到邻站，保住优等列车的速度。</span></div></li>
+          <li><span class="lv">★5</span><div><b>上总村上，十分钟的红灯</b><span>早高峰触发了紧急停车装置。恢复运行后，用推迟发车把间隔调整回来。</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-cyan)">
+      <div class="route-img"><img src="../assets/img/route-subway.png" alt="贯穿市中心的地铁全线图" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 03<span class="stars">难度 ★2</span></span>
+        <h3>每两分半钟一班车的市中心地铁</h3>
+        <p class="facts"><b>日吉～横滨～上大冈 25 站</b>　／　休息日 374 列、工作日 569 列</p>
+        <p>从日吉穿过横滨市中心，驶向上大冈。早上横滨始发、终到的列车每两分半钟一班——在可折返车站有限的高频线路上，考验的是守住间隔的调度。</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>鹤见，失去北方</b><span>北端的终点站无法通行。在鹤见折返，修复后让被困在北侧的列车恢复原状。</span></div></li>
+          <li><span class="lv">★2</span><div><b>樱木町，二十分钟的空白</b><span>市中心的一个区间暂停运营。在横滨和关内两站，从两端组织折返。</span></div></li>
+          <li><span class="lv">★3</span><div><b>上大冈，无法折返的傍晚</b><span>四分钟间隔的傍晚高峰，道岔无法转换，终点的折返被堵死。</span></div></li>
+          <li><span class="lv">★4</span><div><b>横滨，十三分钟的车门</b><span>车门故障十三分钟。扣住、接住、放行——正面迎战运行调整的王道。</span></div></li>
+          <li><span class="lv">★5</span><div><b>两分半的早晨</b><span>在一天中最紧绷的早晨，小小的破绽接连出现，又接连消失。</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-red)">
+      <div class="route-img"><img src="../assets/img/route-airport.png" alt="机场线全线图" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 04<span class="stars">难度 ★3</span></span>
+        <h3>地铁、四线、单线兼备的机场线</h3>
+        <p class="facts"><b>札幌～新千岁机场～支笏湖温泉 30 站</b>　／　休息日 655 列、工作日 732 列</p>
+        <p>从札幌经新千岁机场开往支笏湖温泉。途中直通进入地铁，到北广岛为止是四线，温泉一侧则是单线——一条线路里集齐了各种线形。工作日每天开行 732 列，是规模最大的线路。</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>水明乡，无法会车</b><span>单线会车站的一条股道无法使用。仅凭剩下的 1 条股道处理所有列车。</span></div></li>
+          <li><span class="lv">★2</span><div><b>清田，失去外侧线</b><span>四线区间的急行线无法通行。用 3 条线路顶替 4 条线路的四十五分钟。</span></div></li>
+          <li><span class="lv">★3</span><div><b>札幌（地铁），无法渡线的早晨</b><span>早高峰，地铁区间终点的渡线故障。改走正线，守住通往市中心的运力。</span></div></li>
+          <li><span class="lv">★4</span><div><b>啤酒园，暗处窜出的影子</b><span>傍晚高峰，特急与动物相撞。用北广岛的 3 条牵出线组织折返。</span></div></li>
+          <li><span class="lv">★5</span><div><b>月寒，清晨的急病乘客</b><span>救护急病乘客的 9 分钟里，其他故障接二连三地叠加——多处同时出事的早晨。</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-pink)">
+      <div class="route-img"><img src="../assets/img/route-shinkansen.png" alt="日本海沿岸新干线全线图" loading="lazy"></div>
+      <div>
+        <span class="kicker">ROUTE 05<span class="stars">难度 ★2</span></span>
+        <h3>沿日本海北上的全规格新干线</h3>
+        <p class="facts"><b>金泽～新青森～札幌 28 站</b>　／　淡季运行图 171 列</p>
+        <p>从金泽沿日本海北上青森，再一路通往札幌。以 275km/h 飞驰的列车，由红、绿两种显示的信号（ATC）守护。站间距离长，晚点的累积规模远超普通铁路——这是距离与速度都不在一个量级的运行调整。</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>酒田，黎明的停电</b><span>首班车时段变电所故障，上下行均中断 3 小时。调出车辆段的备用车辆，重组运用。</span></div></li>
+          <li><span class="lv">★2</span><div><b>日本海，风中的两小时</b><span>沿海强风限速持续 2 小时。新干线接连被卷入限速而晚点，要在解除后的 1 小时内扭转局面。</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cond-box">
+      <h3>通关条件，就是调度员的成绩单。</h3>
+      <div class="cond-chips">
+        <span>结束时最大晚点在 ◯ 分钟以内</span>
+        <span class="f">不出现机外停车（在站间动弹不得）</span>
+        <span>发车间隔不超过 ◯ 分钟</span>
+        <span>◯ 方向发车 ◯ 列以上</span>
+      </div>
+      <p>每个场景都设有多个通关条件，游戏中的条件窗口会以<b>实时数值</b>显示达成情况。“还能承受几分钟的晚点”“再发几列车才能守住运输”——一边留意这些，一边下达调度命令的紧张感。同样的混乱，调度不同，结果也不同。</p>
+    </div>
+  </div>
+</section>
+
+<section id="mapmaker">
+  <div class="wrap">
+    <p class="eyebrow">地图编辑器</p>
+    <h2>线路，由你亲手打造。</h2>
+    <p class="lead" style="margin-top:14px">从标题画面的“地图编辑器”即可从零开始打造线路。放置车站、连接车站，信号机、按钮、进路都会自动生成。做好的线路会直接出现在沙盒和运行图编制中，从编制运行图到上岗调度一气呵成。发布到 Steam 创意工坊，还能让其他玩家来玩。</p>
+
+    <div class="mm-grid">
+      <div class="mm-card" style="--mc:var(--sig-green)">
+        <span class="tag">简易</span>
+        <h3>4 个工具，就能做出一条线路。</h3>
+        <p>车站只需选好配线放置，车站之间只需点击几下，轨道、闭塞、信号机就会一次铺好。较长的线路，可以把分离的轨道连接起来，分成几段折行绘制。</p>
+        <ul class="cmd-list">
+          <li>创建车辆</li><li>建车站</li><li>连接车站</li><li>连接分离的轨道</li>
+        </ul>
+      </div>
+      <div class="mm-card" style="--mc:var(--accent)">
+        <span class="tag">详细</span>
+        <h3>从一个轨道电路开始，精雕细琢。</h3>
+        <p>逐个放置和修改轨道电路、道岔、按钮、进路、信号机。也可以用来精修在简易模式中做好的线路。两种模式随时可以在右上角切换，无论用哪种模式制作，得到的都是同一条线路。</p>
+        <ul class="cmd-list">
+          <li>轨道电路</li><li>道岔</li><li>按钮、进路</li><li>信号机</li><li>坐标移动</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mm-shots">
+      <img src="../assets/img/mm-easy.jpg" data-full="../assets/img/mm-easy-full.jpg" alt="地图编辑器、简易模式：选择配线来建车站" loading="lazy">
+      <img src="../assets/img/mm-advanced.jpg" data-full="../assets/img/mm-advanced-full.jpg" alt="地图编辑器、详细模式：直接编辑轨道电路和道岔" loading="lazy">
+    </div>
+
+    <ul class="mm-more">
+      <li><b>保存前的“待办事项”</b>以列表提示未使用的按钮、参照对象已不存在的信号机等，并可直接跳转到对应位置。</li>
+      <li><b>撤销／重做</b>支持 Ctrl+Z／Ctrl+Shift+Z，可以放心大胆地尝试。</li>
+      <li><b>自动拍摄线路照片</b>保存时会拍下整条线路的照片，显示在线路选择画面中。</li>
+    </ul>
+
+    <div class="ws">
+      <h3>在 Steam 创意工坊，分享线路。</h3>
+      <p>做好的线路可以发布到 Steam 创意工坊；其他玩家制作的线路只要订阅，就会出现在线路选择中。创意工坊的线路也能用于合作模式的房间。</p>
+      <ul class="ws-steps">
+        <li><b><i>1</i>查找、订阅</b>在游戏中打开创意工坊，订阅感兴趣的线路。</li>
+        <li><b><i>2</i>游玩</b>订阅的线路会直接出现在沙盒和运行图编制中。</li>
+        <li><b><i>3</i>发布</b>从地图编辑器把自制线路发布到创意工坊，之后也能更新。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="wash" id="gallery">
+  <div class="wrap">
+    <p class="eyebrow">画廊</p>
+    <h2>游戏截图</h2>
+    <div class="gal">
+      <img src="../assets/img/thumb-routeselect.jpg" data-full="../assets/img/large-routeselect.jpg" alt="线路选择画面（附线路照片与说明）" loading="lazy">
+      <img src="../assets/img/thumb-shinkansen.jpg" data-full="../assets/img/large-shinkansen.jpg" alt="新干线的 CTC 控制盘与运行图" loading="lazy">
+      <img src="../assets/img/thumb-quad.jpg" data-full="../assets/img/large-quad.jpg" alt="带四线区间的机场线 CTC 控制盘" loading="lazy">
+      <img src="../assets/img/thumb-subway.jpg" data-full="../assets/img/large-subway.jpg" alt="高密度运行的地铁 CTC 控制盘与运行图" loading="lazy">
+      <img src="../assets/img/thumb-tutorial.jpg" data-full="../assets/img/large-tutorial.jpg" alt="教程（红框指引）" loading="lazy">
+      <img src="../assets/img/thumb-help.jpg" data-full="../assets/img/large-help.jpg" alt="场景开始时的调度提示" loading="lazy">
+      <img src="../assets/img/thumb-conditions.jpg" data-full="../assets/img/large-conditions.jpg" alt="通关条件窗口" loading="lazy">
+      <img src="../assets/img/thumb-play.jpg" data-full="../assets/img/large-play.jpg" alt="正在下达扣车、临时停车命令" loading="lazy">
+      <img src="../assets/img/thumb-select.jpg" data-full="../assets/img/large-select.jpg" alt="场景选择画面" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="wrap">
+    <p class="eyebrow">产品信息</p>
+    <h2>产品信息</h2>
+    <dl class="spec">
+      <div class="spec-row"><dt>名称</dt><dd>Railway Dispatcher Pro</dd></div>
+      <div class="spec-row"><dt>价格</dt><dd>请查看 <a href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steam 商店页面</a></dd></div>
+      <div class="spec-row"><dt>发行</dt><dd>正式版现已在 Steam 发售</dd></div>
+      <div class="spec-row"><dt>收录内容</dt><dd>线路 5 条（运行图 9 套）／场景 22 个／教程 5 个<br>沙盒、运行图编制、地图编辑器、Steam 创意工坊（分享地图）、在线合作模式（最多 4 人）</dd></div>
+      <div class="spec-row"><dt>平台</dt><dd>Steam（Windows、macOS）<br><span style="font-size:13px;color:var(--sub)">Windows 与 Mac 玩家之间也能一起进行合作模式。所有参与者都需要拥有本游戏</span></dd></div>
+      <div class="spec-row"><dt>配置需求</dt><dd>Windows：Windows 10 / Intel Core i5、AMD Ryzen 5 / 支持 DirectX 11 的 GPU（可使用集成显卡，Intel UHD Graphics 同等或以上）<br>Mac：同时支持 Intel 与 Apple 芯片</dd></div>
+      <div class="spec-row"><dt>推荐环境</dt><dd>分辨率 1920×1080 或以上。运行图、调度等窗口可以移到副显示器，因此推荐使用双显示器</dd></div>
+      <div class="spec-row"><dt>支持语言</dt><dd>日语、英语、简体中文、繁体中文、韩语、德语、印尼语<br><span style="font-size:13px;color:var(--sub)">说明书提供日语和英语版</span></dd></div>
+      <div class="spec-row"><dt>开发、发行</dt><dd>Tadimaru LLC</dd></div>
+    </dl>
+    <div class="roadmap">
+      <div class="rm done"><b>2026 年 7 月底<i>已完成</i></b><span>在 Steam 上线</span></div>
+      <div class="rm done"><b>2026 年 8～9 月<i>已完成</i></b><span>追加 4 条线路<br>追加 17 个场景</span></div>
+      <div class="rm done"><b>2026 年 9～10 月<i>已完成</i></b><span>地图编辑器<br>Steam 创意工坊联动</span></div>
+      <div class="rm done"><b>2026 年 10 月<i>已完成</i></b><span>在线合作模式<br>（最多 4 人）</span></div>
+      <div class="rm now"><b>正式版<i>NEW</i></b><span>支持 7 种语言<br>支持 Mac</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="sister">
+  <div class="wrap">
+    <p class="eyebrow">Series</p>
+    <h2>姊妹作</h2>
+    <div class="sister">
+      <div>
+        <h3>Railway Dispatcher</h3>
+        <p>手动操作站内信号与进路的系列第 1 作。想先从“掌管车站”的乐趣入门，就从这里开始吧。两作都玩过之后，铁路运行的每一个层面都会尽收眼底。</p>
+        <a class="btn small" href="https://store.steampowered.com/app/4282480/?utm_source=official-site" target="_blank" rel="noopener">前往 Steam 商店页面</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow">FAQ</p>
+    <h2>常见问题</h2>
+    <div class="faq">
+      <details>
+        <summary>没有铁路知识也能玩吗？</summary>
+        <p>可以。教程会从基本操作开始循序引导，即使第一次接触信号和运行图也没关系。熟悉之后，就去挑战难度★更高的线路和场景吧。也推荐和熟练的玩家一起，用合作模式共同调度。</p>
+      </details>
+      <details>
+        <summary>没玩过前作（Railway Dispatcher）也没关系吗？</summary>
+        <p>没关系。本作是独立的作品，没有剧情或数据的继承。</p>
+      </details>
+      <details>
+        <summary>可以自己制作线路吗？</summary>
+        <p>可以。从标题画面的“地图编辑器”放置车站和轨道来制作线路，接着就能编制运行图并进行调度。可以制作官方地图那样的线路，但部分配线无法制作，例如起点与终点为同一车站的环线。问题和需求，请通过说明书的<a href="https://tadimaru.com/pro-support/contact.en.html" target="_blank" rel="noopener">联系我们（英文）</a>发送给我们。</p>
+      </details>
+      <details>
+        <summary>可以和其他人分享自己做的线路吗？</summary>
+        <p>可以。从地图编辑器发布到 Steam 创意工坊后，其他玩家就能订阅游玩。发布到创意工坊的线路，也能用于合作模式的房间。</p>
+      </details>
+      <details>
+        <summary>可以和朋友一起玩吗？</summary>
+        <p>可以。通过在线合作模式，最多 4 名 Steam 好友能一起调度同一条线路、同一张运行图。在标题画面的“合作模式”中创建房间，再用 6 位数的房间口令或 Steam 邀请叫上朋友（使用房间口令的话，不是 Steam 好友也能加入）。所有参与者都需要拥有本游戏。Windows 与 Mac 玩家之间也能一起游玩。游戏内没有语音聊天，请搭配 Discord 等工具一起游玩。</p>
+      </details>
+      <details>
+        <summary>合作模式可以玩哪些线路？</summary>
+        <p>游戏内置的 5 条线路，以及 Steam 创意工坊的线路。模式为自由运行（沙盒），场景和教程仅限单人游玩。房主选择创意工坊的线路时，没有该线路的玩家可以在加入时当场订阅。</p>
+      </details>
+      <details>
+        <summary>可以直播或做实况视频吗？</summary>
+        <p>视频发布、直播、实况、剪辑和收益化均无需事先许可，可自由进行。收益全部归创作者所有。Steam 会员限定直播也没问题。</p>
+      </details>
+      <details>
+        <summary>Mac 上也能玩吗？</summary>
+        <p>可以。本作在 Steam 上支持 Windows 与 macOS（同时支持 Intel 与 Apple 芯片）。合作模式也能让 Windows 与 Mac 玩家一起游玩。</p>
+      </details>
+      <details>
+        <summary>除了日语，还支持其他语言吗？</summary>
+        <p>支持。本作支持日语、英语、简体中文、繁体中文、韩语、德语、印尼语共 7 种语言。说明书提供日语和英语版。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="../assets/img/logo-footer.png" alt="Railway Dispatcher Pro">
+    <div class="links">
+      <a href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steam 商店页面</a>
+      <a href="https://x.com/tadi_maru" target="_blank" rel="noopener">X（开发动态、日语）</a>
+      <a href="https://www.youtube.com/@tadimaru-san" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://note.com/tadimaru" target="_blank" rel="noopener">note（开发日志、日语）</a>
+      <a href="https://tadimaru.com/pro-support/index.en.html" target="_blank" rel="noopener">支持、说明书（英文）</a>
+    </div>
+    <div class="langs" aria-label="Language">
+      <a href="../" lang="ja" hreflang="ja">日本語</a>
+      <a href="../en/" lang="en" hreflang="en">English</a>
+      <a href="../zh-hans/" lang="zh-Hans" hreflang="zh-Hans" aria-current="page">简体中文</a>
+      <a href="../zh-hant/" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a>
+      <a href="../ko/" lang="ko" hreflang="ko">한국어</a>
+      <a href="../de/" lang="de" hreflang="de">Deutsch</a>
+      <a href="../id/" lang="id" hreflang="id">Bahasa Indonesia</a>
+    </div>
+    <p class="copy">© Tadimaru LLC</p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden><img alt=""></div>
+<script>
+(function () {
+  var lb = document.getElementById('lightbox');
+  var im = lb.querySelector('img');
+  function close() { lb.hidden = true; im.src = ''; document.body.style.overflow = ''; }
+  document.querySelectorAll('.feat-img img, .gal img, .route-img img, .mm-shots img').forEach(function (el) {
+    el.addEventListener('click', function () {
+      im.src = el.getAttribute('data-full') || el.src;
+      lb.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  lb.addEventListener('click', close);
+
+  // 狭い画面では、下へスクロールしている間ナビを隠し、上へ戻すと出す
+  var nav = document.querySelector('nav');
+  // 言語メニューは外をクリックしたら閉じる
+  var lang = document.querySelector('details.lang');
+  document.addEventListener('click', function (e) { if (lang && lang.open && !lang.contains(e.target)) lang.open = false; });
+  var narrow = window.matchMedia('(max-width:1240px)');
+  var lastY = window.scrollY, ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY;
+      if (Math.abs(y - lastY) < 6) { ticking = false; return; }
+      var hide = narrow.matches && y > nav.offsetHeight && y > lastY;
+      nav.classList.toggle('nav-hidden', hide);
+      if (hide && lang) lang.open = false;
+      lastY = y;
+      ticking = false;
+    });
+  }, { passive: true });
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); if (lang) lang.open = false; } });
+})();
+</script>
+
+</body>
+</html>

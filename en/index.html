@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Railway Dispatcher Pro is an operations-management simulator: sit at a dispatch desk overlooking the whole line and keep dozens of trains moving. Five lines and 22 scenarios, a Timetable Builder, a Map Editor with Steam Workshop, and online co-op for up to four Steam friends. Seven languages including English and Japanese, on Windows and Mac. Available now on Steam.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Railway Dispatcher Pro — Official Site">
+<meta property="og:description" content="Railway Dispatcher Pro is an operations-management simulator: sit at a dispatch desk overlooking the whole line and keep dozens of trains moving. Five lines and 22 scenarios, a Timetable Builder, a Map Editor with Steam Workshop, and online co-op for up to four Steam friends. Seven languages including English and Japanese, on Windows and Mac. Available now on Steam.">
+<meta property="og:url" content="https://tadimaru.com/railway-dispatcher-pro/en/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tadimaru.com/railway-dispatcher-pro/assets/img/ogp.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://tadimaru.com/railway-dispatcher-pro/en/">
+<link rel="alternate" hreflang="ja" href="https://tadimaru.com/railway-dispatcher-pro/">
+<link rel="alternate" hreflang="en" href="https://tadimaru.com/railway-dispatcher-pro/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://tadimaru.com/railway-dispatcher-pro/zh-hans/">
+<link rel="alternate" hreflang="zh-Hant" href="https://tadimaru.com/railway-dispatcher-pro/zh-hant/">
+<link rel="alternate" hreflang="ko" href="https://tadimaru.com/railway-dispatcher-pro/ko/">
+<link rel="alternate" hreflang="de" href="https://tadimaru.com/railway-dispatcher-pro/de/">
+<link rel="alternate" hreflang="id" href="https://tadimaru.com/railway-dispatcher-pro/id/">
+<link rel="alternate" hreflang="x-default" href="https://tadimaru.com/railway-dispatcher-pro/en/">
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+<title>Railway Dispatcher Pro — Official Site</title>
+<style>
+  :root{
+    --paper:#ffffff;
+    --wash:#f2f5f8;
+    --ink:#17232d;
+    --sub:#5a6b76;
+    --line:#dbe2e8;
+    --accent:#0a5cab;
+    --accent-deep:#084a8a;
+    --amber:#b97708;
+    --amber-bg:#fdf4e3;
+    --dark:#10181f;
+    /* ゲーム画面由来のシグナルカラー */
+    --sig-cyan:#1fb6cb;
+    --sig-amber:#dfa010;
+    --sig-red:#d9433a;
+    --sig-green:#149e62;
+    --sig-pink:#e05fa8;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.85;
+    margin:0;
+    font-size:16px;
+  }
+  img{max-width:100%;display:block}
+  a{color:var(--accent)}
+
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+  /* ---- nav ---- */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
+    border-bottom:1px solid var(--line);backdrop-filter:blur(6px);
+  }
+  .nav-in{
+    max-width:1060px;margin:0 auto;padding:8px 24px;
+    display:flex;align-items:center;gap:16px;
+  }
+  .nav-in img{height:44px;width:auto}
+  .nav-links{display:flex;gap:16px;margin-left:auto;flex-wrap:nowrap}
+  .nav-links a{
+    color:var(--ink);text-decoration:none;font-size:13.5px;letter-spacing:.04em;white-space:nowrap;
+  }
+  .nav-in .btn.small{white-space:nowrap;flex:none}
+  .nav-links a:hover{color:var(--accent)}
+  nav{transition:transform .25s ease}
+  section[id]{scroll-margin-top:72px}
+  /* 狭い画面: ロゴ＋購入ボタンの1段と、横スクロールのリンク1段にまとめる。
+     下へスクロール中は隠し、上へ戻すと出す（固定ヘッダーが画面を占有しないように） */
+  @media (max-width:1240px){
+    .nav-in{flex-wrap:wrap;gap:4px 12px;padding:6px 16px 0}
+    .nav-in img{height:34px}
+    .nav-in .btn.small{margin-left:auto;padding:6px 14px;font-size:13px;white-space:nowrap}
+    .nav-links{
+      order:3;width:100%;margin-left:0;flex-wrap:nowrap;gap:20px;
+      overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 0 8px;
+      -webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);
+    }
+    .nav-links::-webkit-scrollbar{display:none}
+    .nav-links a{white-space:nowrap;flex:none}
+    .nav-links a:last-child{padding-right:28px}
+    nav.nav-hidden{transform:translateY(-100%)}
+    .lang{margin-left:auto}
+    .nav-in .lang + .btn.small{margin-left:0}
+  }
+  .nav-links a.new::after{
+    content:"NEW";font-family:"Segoe UI",system-ui,sans-serif;font-size:9.5px;font-weight:700;
+    color:#fff;background:var(--sig-pink);border-radius:3px;padding:0 4px;margin-left:5px;vertical-align:2px;
+  }
+  .btn{
+    display:inline-block;color:#fff;text-decoration:none;
+    background:linear-gradient(135deg,#0d6fd1,#00a7d0);
+    padding:10px 26px;border-radius:4px;font-weight:700;letter-spacing:.04em;
+    box-shadow:0 6px 22px -8px rgba(0,140,190,.65);
+    transition:filter .15s,transform .15s;
+  }
+  .btn:hover{filter:brightness(1.12)}
+  .btn.small{padding:7px 18px;font-size:13.5px}
+  .btn.big{padding:15px 44px;font-size:17px}
+
+  /* ---- 言語の切り替え（ナビのドロップダウン＋フッターの一覧） ---- */
+  .lang{position:relative;flex:none}
+  .lang summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;min-height:34px;box-sizing:border-box;
+    padding:4px 10px;border:1px solid var(--line);border-radius:4px;background:var(--paper);
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;
+  }
+  .lang summary::-webkit-details-marker{display:none}
+  .lang summary svg{width:16px;height:16px;flex:none}
+  .lang summary::after{content:"";border:4px solid transparent;border-top-color:currentColor;margin:4px 0 0 1px}
+  .lang summary:hover{border-color:var(--accent);color:var(--accent)}
+  .lang ul{
+    position:absolute;right:0;top:calc(100% + 6px);z-index:60;margin:0;padding:6px 0;list-style:none;min-width:200px;
+    background:var(--paper);border:1px solid var(--line);border-radius:6px;box-shadow:0 14px 36px -14px rgba(16,35,54,.4);
+  }
+  .lang li a{display:block;padding:9px 18px;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.5}
+  .lang li a:hover{background:var(--wash);color:var(--accent)}
+  .lang li a[aria-current]{color:var(--accent);font-weight:700}
+  footer .langs{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;margin:-8px 0 28px}
+  footer .langs a{padding:4px 0}
+  footer .langs a[aria-current]{color:#fff;font-weight:700}
+
+  /* ---- section furniture ---- */
+  section{padding:88px 0}
+  section.wash{background:var(--wash)}
+  .eyebrow{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size:11.5px;font-weight:600;letter-spacing:.22em;color:var(--accent);
+    text-transform:uppercase;margin:0 0 10px;
+  }
+  h1,h2,h3{line-height:1.35;text-wrap:balance;margin:0}
+  h2{font-size:34px;font-weight:800;letter-spacing:.01em}
+  h3{font-size:21px;font-weight:700}
+  .lead{color:var(--sub);max-width:38em}
+
+  /* 駅ドット区切り：CTC盤面モチーフ（軌道回路の在線表示風に色分け） */
+  .trackline{
+    display:flex;align-items:center;gap:0;margin:26px 0 0;height:10px;
+  }
+  .trackline .rail{height:2px;background:var(--line);flex:1}
+  .trackline .st{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--accent);margin:0 4px;flex:none;
+  }
+  .trackline .st.fill{background:var(--accent)}
+  .trackline .st.c{border-color:var(--sig-cyan);background:var(--sig-cyan)}
+  .trackline .st.a{border-color:var(--sig-amber);background:var(--sig-amber)}
+  .trackline .st.r{border-color:var(--sig-red);background:var(--sig-red)}
+
+  /* ---- hero：CTC盤面フルブリード＋オーバーレイ ---- */
+  .hero{position:relative;background:#0b1218;color:#fff;overflow:hidden}
+  .hero-img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 22%;
+  }
+  .hero-shade{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(11,18,24,.30) 0%,rgba(11,18,24,.22) 34%,rgba(11,18,24,.68) 68%,rgba(11,18,24,.92) 100%);
+  }
+  .hero-content{position:relative;padding-top:210px;padding-bottom:72px}
+  .hero-news{
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:20px;
+    background:rgba(11,18,24,.62);border:1px solid rgba(255,255,255,.22);border-radius:999px;
+    padding:6px 16px 6px 6px;color:#fff;text-decoration:none;font-size:13.5px;
+    backdrop-filter:blur(4px);
+  }
+  .hero-news b{
+    background:var(--sig-pink);border-radius:999px;padding:1px 10px;font-size:11.5px;
+    font-family:"Segoe UI",system-ui,sans-serif;letter-spacing:.08em;
+  }
+  .hero-news:hover{border-color:rgba(255,255,255,.5)}
+  .hero .eyebrow{
+    color:#6fe0ef;letter-spacing:.3em;
+    text-shadow:0 1px 3px rgba(0,0,0,.9),0 2px 14px rgba(0,0,0,.8);
+  }
+  .hero h1{
+    font-size:clamp(40px,6.2vw,64px);font-weight:800;letter-spacing:.02em;
+    text-shadow:0 2px 26px rgba(0,0,0,.6);
+  }
+  .hero .lead{
+    color:#cfdae2;font-size:17.5px;margin:22px 0 32px;max-width:34em;
+    text-shadow:0 1px 14px rgba(0,0,0,.55);
+  }
+  .hero-cta{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .hero-cta .sub{font-size:13px;color:#a4b6c1;line-height:1.6}
+  .price{font-family:"Segoe UI",system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#fff;font-weight:700}
+
+  /* ---- concept ---- */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+  .vs-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:28px 30px;
+  }
+  .vs-card.pro{border-color:var(--accent);border-width:2px}
+  .vs-card .tag{
+    font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--sub);
+    font-family:"Segoe UI",system-ui,sans-serif;
+  }
+  .vs-card.pro .tag{color:var(--accent)}
+  .vs-card h3{margin:8px 0 10px}
+  .vs-card p{margin:0;color:var(--sub);font-size:14.5px}
+
+  /* ---- features ---- */
+  .feat{
+    display:grid;grid-template-columns:5fr 6fr;gap:54px;align-items:center;
+    padding:58px 0;
+  }
+  .feat + .feat{border-top:1px solid var(--line)}
+  .feat.rev .feat-txt{order:2}
+  .feat.rev .feat-img{order:1}
+  .feat-no{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    font-size:12px;font-weight:600;letter-spacing:.2em;color:var(--accent);
+    display:inline-flex;align-items:center;gap:9px;
+  }
+  /* 各特徴に信号灯モチーフ（該当スクショの色と対応） */
+  .feat-no::before{
+    content:"";width:9px;height:9px;border-radius:50%;background:var(--lamp,var(--accent));
+    box-shadow:0 0 8px color-mix(in srgb,var(--lamp,var(--accent)) 60%,transparent);
+  }
+  .feat h3{font-size:26px;margin:8px 0 16px}
+  .feat p{color:var(--sub);margin:0;font-size:15.5px}
+  .feat-img img,.ph{
+    border-radius:6px;border:1px solid var(--line);
+    box-shadow:0 18px 44px -18px rgba(16,35,54,.35);
+  }
+  .ph{
+    aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(-45deg,#f6f8fa 0 14px,#eef2f5 14px 28px);
+    color:var(--sub);font-size:13.5px;letter-spacing:.06em;
+    border-style:dashed;box-shadow:none;text-align:center;line-height:1.7;
+  }
+
+  /* ---- how to play ---- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+  .step{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 28px;
+  }
+  /* 遊び方の丸数字＝信号現示（赤→黄→青）で進行していく */
+  .step-badge{
+    width:44px;height:44px;border-radius:50%;
+    border:3px solid var(--accent);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:19px;font-weight:700;
+    margin-bottom:16px;
+  }
+  .step.s1 .step-badge{border-color:var(--sig-red);color:var(--sig-red)}
+  .step.s2 .step-badge{border-color:var(--sig-amber);color:var(--sig-amber)}
+  .step.s3 .step-badge{border-color:var(--sig-green);color:var(--sig-green)}
+  .step h3{font-size:18px;margin-bottom:8px}
+  .step p{margin:0;color:var(--sub);font-size:14px}
+  .flow-note{
+    margin:40px auto 0;text-align:center;color:var(--accent);font-weight:700;
+    font-size:17px;letter-spacing:.06em;
+  }
+
+  /* ---- systems（輸送障害と指令） ---- */
+  .inc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+  .inc-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:22px 24px;border-left:4px solid var(--inc,var(--accent));
+  }
+  .inc-card h3{font-size:17px;margin:0 0 6px}
+  .inc-card p{margin:0;color:var(--sub);font-size:13.8px}
+  .sandbox-note{
+    margin-top:22px;background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    padding:20px 26px;font-size:14.5px;
+  }
+  .sandbox-note b{color:var(--accent)}
+  .cmd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+  .cmd-card.tall{grid-column:2;grid-row:1 / span 2}
+  .cmd-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px 24px;
+  }
+  .cmd-card h3{
+    font-size:15px;margin:0 0 14px;display:flex;align-items:center;gap:9px;
+  }
+  .cmd-card h3::before{
+    content:"";width:9px;height:9px;border-radius:50%;background:var(--cg,var(--accent));flex:none;
+  }
+  .cmd-list{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .cmd-list li{
+    background:var(--wash);border:1px solid var(--line);border-radius:999px;
+    padding:5px 14px;font-size:13px;font-weight:600;
+  }
+  .cmd-note{margin:18px 0 0;color:var(--sub);font-size:13px}
+
+  /* ---- routes & scenarios ---- */
+  .tut-box{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 34px;margin-top:44px;
+  }
+  .tut-box h3{margin-bottom:6px}
+  .tut-box>p{margin:0 0 18px;color:var(--sub);font-size:14.5px}
+  .tut-list{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+  .tut-list li{
+    background:var(--paper);border:1px solid var(--line);border-radius:999px;
+    padding:7px 18px;font-size:13.5px;font-weight:600;
+  }
+  .tut-list li b{color:var(--accent);font-family:"Segoe UI",system-ui,sans-serif;margin-right:6px}
+  .route{
+    display:grid;grid-template-columns:5fr 6fr;gap:34px;align-items:start;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:30px 32px;margin-top:22px;border-top:3px solid var(--rc,var(--accent));
+  }
+  .route-img img{
+    border-radius:5px;border:1px solid var(--line);background:#373c43;cursor:zoom-in;
+  }
+  .route .kicker{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:600;
+    letter-spacing:.2em;color:var(--rc,var(--accent));
+  }
+  .route .stars{color:var(--sig-amber);letter-spacing:.08em;margin-left:8px;font-size:12px}
+  .route h3{font-size:22px;margin:6px 0 6px}
+  .route .facts{margin:0 0 12px;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+  .route .facts b{color:var(--ink);font-weight:700}
+  .route>div>p{margin:0 0 16px;color:var(--sub);font-size:14.5px}
+  .sc-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+  .sc-list li{
+    display:grid;grid-template-columns:44px 1fr;gap:8px;
+    padding:9px 2px;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.65;
+  }
+  .sc-list .lv{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11.5px;font-weight:700;color:var(--sig-amber);
+    white-space:nowrap;padding-top:2px;
+  }
+  .sc-list b{display:block;font-size:14.5px}
+  .sc-list span{color:var(--sub)}
+  .cond-box{margin-top:48px}
+  .cond-box h3{margin-bottom:12px}
+  .cond-chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 12px}
+  .cond-chips span{
+    border:1.5px solid var(--sig-green);color:var(--sig-green);
+    border-radius:4px;padding:6px 14px;font-size:13.5px;font-weight:700;
+  }
+  .cond-chips span.f{border-color:var(--sig-red);color:var(--sig-red)}
+  .cond-box p{color:var(--sub);font-size:14.5px;margin:0;max-width:44em}
+
+  /* ---- map maker ---- */
+  .mm-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
+  .mm-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:26px 28px;
+  }
+  .mm-card .tag{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;
+    color:var(--mc,var(--accent));
+  }
+  .mm-card h3{font-size:19px;margin:6px 0 10px}
+  .mm-card p{margin:0 0 14px;color:var(--sub);font-size:14px}
+  .mm-shots{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  .mm-shots img{border-radius:6px;border:1px solid var(--line);cursor:zoom-in}
+  .mm-more{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 0;padding:0;list-style:none;
+  }
+  .mm-more li{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px 18px;font-size:13.5px;
+    color:var(--sub);line-height:1.7;
+  }
+  .mm-more b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  .mm-note{
+    margin-top:30px;background:var(--amber-bg);border:1px solid #ecd9ad;border-left:4px solid var(--sig-amber);
+    border-radius:8px;padding:22px 28px;font-size:14.5px;
+  }
+  .mm-note h3{font-size:17px;margin:0 0 10px;color:var(--amber)}
+  .mm-note ul{margin:0;padding-left:1.2em}
+  .mm-note li{margin:3px 0}
+  .mm-note p{margin:12px 0 0}
+
+  /* ---- co-op（オンライン協力プレイ） ---- */
+  .coop-head{display:grid;grid-template-columns:6fr 5fr;gap:48px;align-items:center}
+  .coop-art{
+    background:#0f171e;border-radius:8px;padding:26px 22px 20px;margin:0;
+    box-shadow:0 18px 44px -18px rgba(16,35,54,.45);
+  }
+  .coop-art svg{width:100%;height:auto;display:block}
+  .coop-art .cap{margin:10px 2px 0;color:#7f919d;font-size:11.5px;letter-spacing:.04em}
+  .coop-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+  .coop-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:24px 24px 22px;
+    border-top:3px solid var(--cc,var(--accent));
+  }
+  .coop-card .no{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;
+    color:var(--cc,var(--accent));
+  }
+  .coop-card h3{font-size:18px;margin:6px 0 10px}
+  .coop-card p{margin:0;color:var(--sub);font-size:14px}
+  .coop-card kbd{
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:12px;font-weight:700;
+    border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 6px;background:var(--wash);color:var(--ink);
+  }
+  .coop-note{
+    margin-top:22px;background:var(--wash);border:1px solid var(--line);border-radius:8px;
+    padding:18px 24px;font-size:14px;color:var(--sub);
+  }
+  .coop-note b{color:var(--ink)}
+  .coop-note ul{margin:0;padding-left:1.2em}
+  .coop-note li{margin:2px 0}
+
+  /* ---- workshop（マップ作成の中） ---- */
+  .ws{
+    margin-top:34px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:26px 28px;
+    border-left:4px solid var(--sig-pink);
+  }
+  .ws h3{font-size:19px;margin:0 0 8px}
+  .ws>p{margin:0 0 18px;color:var(--sub);font-size:14.5px}
+  .ws-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0;padding:0;list-style:none}
+  .ws-steps li{background:var(--wash);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:13.5px;color:var(--sub);line-height:1.7}
+  .ws-steps b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  .ws-steps i{font-style:normal;font-family:"Segoe UI",system-ui,sans-serif;font-weight:700;color:var(--sig-pink);margin-right:6px}
+
+  /* ---- gallery ---- */
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+  .gal img,.gal .ph{border-radius:5px;box-shadow:none;width:100%}
+  .gal .ph{aspect-ratio:16/9;font-size:12px}
+  .gal img{transition:transform .18s;border:1px solid var(--line)}
+  .gal img:hover{transform:scale(1.025)}
+
+  /* ---- lightbox（スクショのクリック拡大） ---- */
+  .feat-img img,.gal img{cursor:zoom-in}
+  .lightbox{
+    position:fixed;inset:0;z-index:100;background:rgba(10,16,22,.93);
+    display:flex;align-items:center;justify-content:center;
+    padding:3vmin;cursor:zoom-out;
+  }
+  .lightbox[hidden]{display:none}
+  .lightbox img{
+    max-width:100%;max-height:100%;width:auto;height:auto;
+    border-radius:6px;box-shadow:0 24px 80px rgba(0,0,0,.6);
+  }
+
+  /* ---- product info ---- */
+  .spec{
+    margin-top:44px;border-top:1px solid var(--line);
+  }
+  .spec-row{
+    display:grid;grid-template-columns:180px 1fr;gap:20px;
+    padding:16px 4px;border-bottom:1px solid var(--line);font-size:15px;
+  }
+  .spec-row dt{color:var(--sub);font-weight:600;margin:0}
+  .spec-row dd{margin:0;font-variant-numeric:tabular-nums}
+  .roadmap{display:flex;gap:0;margin-top:52px;align-items:flex-start}
+  .rm{flex:1;position:relative;padding:26px 12px 0 0}
+  .rm::before{
+    content:"";position:absolute;top:5px;left:0;right:0;height:2px;background:var(--line);
+  }
+  .rm.done::before,.rm.now::before{background:var(--accent)}
+  .rm::after{
+    content:"";position:absolute;top:0;left:0;width:12px;height:12px;border-radius:50%;
+    background:var(--paper);border:3px solid var(--accent);box-sizing:border-box;
+  }
+  .rm.done::after{background:var(--accent)}
+  .rm.now::after{background:var(--sig-pink);border-color:var(--sig-pink);box-shadow:0 0 0 4px color-mix(in srgb,var(--sig-pink) 25%,transparent)}
+  .rm b{display:block;font-size:15px}
+  .rm i{font-style:normal;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-left:6px}
+  .rm.now i{color:var(--sig-pink)}
+  .rm span{font-size:13px;color:var(--sub)}
+
+  /* ---- sister ---- */
+  .sister{
+    display:flex;gap:30px;align-items:center;margin-top:40px;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:30px 34px;
+  }
+  .sister p{margin:6px 0 14px;color:var(--sub);font-size:14.5px}
+
+  /* ---- faq ---- */
+  .faq{margin-top:40px;border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line);padding:4px 2px}
+  .faq summary{
+    cursor:pointer;font-weight:700;padding:14px 4px;list-style:none;
+    display:flex;align-items:center;gap:12px;font-size:15.5px;
+  }
+  .faq summary::before{content:"Q";color:var(--accent);font-family:"Segoe UI",system-ui,sans-serif;font-weight:700}
+  .faq details p{margin:0 4px 16px 30px;color:var(--sub);font-size:14.5px}
+
+  /* ---- footer ---- */
+  footer{background:var(--dark);color:#aebbc4;padding:64px 0 40px}
+  footer img{height:46px;width:auto;margin-bottom:22px}
+  footer .links{display:flex;gap:24px;font-size:13.5px;flex-wrap:wrap;margin-bottom:30px}
+  footer a{color:#aebbc4;text-decoration:none}
+  footer a:hover{color:#fff}
+  footer .copy{font-size:12px;color:#6d7d89}
+
+  @media (max-width:820px){
+    h2{font-size:27px}
+    .hero-content{padding-top:64px;padding-bottom:56px}
+    .hero-news{font-size:13px;line-height:1.5;align-items:flex-start;border-radius:18px}
+    .hero-news b{flex:none;margin-top:1px}
+    .hero .eyebrow{letter-spacing:.14em}
+    .inc-grid{grid-template-columns:1fr}
+    .cmd-grid{grid-template-columns:1fr}
+    .cmd-card.tall{grid-column:auto;grid-row:auto}
+    .tut-box{padding:24px 22px}
+    .route{grid-template-columns:1fr;gap:18px;padding:22px 20px}
+    .mm-grid,.mm-shots{grid-template-columns:1fr}
+    .mm-more{grid-template-columns:1fr}
+    .coop-head{grid-template-columns:1fr;gap:28px}
+    .coop-cards{grid-template-columns:1fr}
+    .ws-steps{grid-template-columns:1fr}
+    .feat{grid-template-columns:1fr;gap:26px;padding:44px 0}
+    .feat.rev .feat-txt{order:1}
+    .feat.rev .feat-img{order:2}
+    .vs{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .gal{grid-template-columns:1fr 1fr}
+    .spec-row{grid-template-columns:1fr;gap:2px}
+    .roadmap{flex-direction:column;gap:18px}
+    .rm{padding:0 0 0 26px}
+    .rm::before{top:0;bottom:-18px;left:5px;right:auto;width:2px;height:auto}
+    .rm:last-child::before{display:none}
+    .sister{flex-direction:column;align-items:flex-start}
+    section{padding:60px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .gal img{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <img src="../assets/img/logo-nav.png" alt="Railway Dispatcher Pro">
+    <div class="nav-links">
+      <a href="#coop" class="new">Co-op</a>
+      <a href="#features">Features</a>
+      <a href="#howto">How to Play</a>
+      <a href="#systems">Incidents &amp; Orders</a>
+      <a href="#routes">Lines &amp; Scenarios</a>
+      <a href="#mapmaker">Map Editor</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#product">Product Info</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <details class="lang">
+      <summary aria-label="Language"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.6 2.6 3.9 5.6 3.9 9.2s-1.3 6.6-3.9 9.2M12 2.8C9.4 5.4 8.1 8.4 8.1 12s1.3 6.6 3.9 9.2"/></svg><span>English</span></summary>
+      <ul>
+        <li><a href="../" lang="ja" hreflang="ja">日本語</a></li>
+        <li><a href="../en/" lang="en" hreflang="en" aria-current="page">English</a></li>
+        <li><a href="../zh-hans/" lang="zh-Hans" hreflang="zh-Hans">简体中文</a></li>
+        <li><a href="../zh-hant/" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a></li>
+        <li><a href="../ko/" lang="ko" hreflang="ko">한국어</a></li>
+        <li><a href="../de/" lang="de" hreflang="de">Deutsch</a></li>
+        <li><a href="../id/" lang="id" hreflang="id">Bahasa Indonesia</a></li>
+      </ul>
+    </details>
+    <a class="btn small" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Buy on Steam</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <img class="hero-img" src="../assets/img/hero.jpg" alt="CTC screen showing the entire line">
+  <div class="hero-shade"></div>
+  <div class="wrap hero-content">
+    <a class="hero-news" href="#product"><b>UPDATE</b>Version 1.0 is here — now in 7 languages and on Mac</a>
+    <p class="eyebrow">Railway Dispatcher Pro — Official Site</p>
+    <h1>From running a station<br>to commanding the line.</h1>
+    <p class="lead">You are the dispatcher. From a desk overlooking the entire line, you keep dozens of trains running on time. When the timetable falls apart, your orders bring it back.</p>
+    <div class="hero-cta">
+      <a class="btn big" href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Buy on Steam</a>
+      <div class="sub">
+        <span class="price">Out now — Version 1.0</span><br>
+        Steam / Windows &amp; Mac / 7 languages
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="coop">
+  <div class="wrap">
+    <div class="coop-head">
+      <div>
+        <p class="eyebrow">Online Co-op</p>
+        <h2>From one dispatcher’s desk<br>to a shared control room.</h2>
+        <div class="trackline" aria-hidden="true">
+          <span class="st c"></span><span class="rail"></span><span class="st c"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st r"></span>
+        </div>
+        <p class="lead" style="margin-top:26px">Run the same line and the same timetable with up to four friends on Steam. Split the stations between you, send pings to say “Look here”, and keep the whole line moving as a team. A morning rush too big for one dispatcher becomes manageable when you call it out together.</p>
+      </div>
+      <figure class="coop-art">
+        <svg viewBox="0 0 440 200" role="img" aria-label="Illustration: station names colored by the assigned player, three players’ cursors, and a ping">
+          <g font-family="Segoe UI,system-ui,-apple-system,Helvetica Neue,Arial,sans-serif" font-size="12" font-weight="700">
+            <line x1="20" y1="96" x2="420" y2="96" stroke="#3b4a55" stroke-width="3"/>
+            <line x1="20" y1="114" x2="420" y2="114" stroke="#3b4a55" stroke-width="3"/>
+            <line x1="40" y1="96" x2="400" y2="96" stroke="#149e62" stroke-width="3" stroke-dasharray="46 22" opacity=".85"/>
+            <rect x="22" y="62" width="62" height="22" rx="3" fill="#1fb6cb" opacity=".22"/><text x="53" y="77" fill="#6fe0ef" text-anchor="middle">Stn A</text>
+            <rect x="118" y="62" width="62" height="22" rx="3" fill="#1fb6cb" opacity=".22"/><text x="149" y="77" fill="#6fe0ef" text-anchor="middle">Stn B</text>
+            <rect x="214" y="62" width="62" height="22" rx="3" fill="#dfa010" opacity=".22"/><text x="245" y="77" fill="#f3c24a" text-anchor="middle">Stn C</text>
+            <rect x="310" y="62" width="62" height="22" rx="3" fill="#e05fa8" opacity=".22"/><text x="341" y="77" fill="#f08cc4" text-anchor="middle">Stn D</text>
+            <g fill="#1fb6cb"><path d="M96 128 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="112" y="146" width="44" height="18" rx="3"/><text x="134" y="159" fill="#0f171e" text-anchor="middle" font-size="11">Amy</text></g>
+            <g fill="#dfa010"><path d="M226 134 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="242" y="152" width="44" height="18" rx="3"/><text x="264" y="165" fill="#0f171e" text-anchor="middle" font-size="11">Ben</text></g>
+            <g fill="#e05fa8"><path d="M330 124 l0 22 l6 -6 l5 11 l4 -2 l-5 -10 l8 0 z"/><rect x="346" y="142" width="44" height="18" rx="3"/><text x="368" y="155" fill="#0f171e" text-anchor="middle" font-size="11">Cara</text></g>
+            <circle cx="245" cy="105" r="9" fill="none" stroke="#dfa010" stroke-width="2.5"/>
+            <line x1="245" y1="44" x2="245" y2="96" stroke="#dfa010" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <rect x="180" y="20" width="130" height="24" rx="12" fill="#dfa010"/>
+            <text x="245" y="36" fill="#0f171e" text-anchor="middle" font-size="11.5">I’ll hold — Ben</text>
+          </g>
+        </svg>
+        <figcaption class="cap">Illustration: station names take their assigned player’s color, and you can see other players’ cursors and pings.</figcaption>
+      </figure>
+    </div>
+
+    <div class="coop-cards">
+      <div class="coop-card" style="--cc:var(--sig-cyan)">
+        <span class="no">01</span>
+        <h3>Meet up with a room code</h3>
+        <p>Create a room and you get a six-digit room code. Share it and others can join — no need to be Steam friends. Steam invites work too, and players can join a room that is already in progress.</p>
+      </div>
+      <div class="coop-card" style="--cc:var(--sig-amber)">
+        <span class="no">02</span>
+        <h3>Split the work</h3>
+        <p>The host assigns stations to players, and each station name takes that player’s color on the map. Everyone’s mouse cursor is shown with their name, so you can tell at a glance who is watching where.</p>
+      </div>
+      <div class="coop-card" style="--cc:var(--sig-pink)">
+        <span class="no">03</span>
+        <h3>Call it out with pings</h3>
+        <p>Hold <kbd>Q</kbd> and click the map to drop a ping with a quick message — “Look here”, “I’ll hold”, “I’ll set the route” and more — on everyone’s screen.</p>
+      </div>
+    </div>
+
+    <div class="coop-note">
+      <ul>
+        <li>Co-op is played in <b>Sandbox (free play)</b>, on the built-in lines or on <b>Workshop lines</b> (players who don’t have the line can subscribe when they join).</li>
+        <li><b>Every player needs their own copy of the game.</b> <b>Windows and Mac players can play together.</b></li>
+        <li>Anyone can give orders — levers, routes, holds, timetable changes. The host controls game speed, incidents, and saving.</li>
+        <li>There is no in-game voice chat, so use Discord or similar alongside it. See the <a href="https://tadimaru.com/pro-support/coop.en.html" target="_blank" rel="noopener">manual (Co-op, English)</a> for how to play.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="concept">
+  <div class="wrap">
+    <p class="eyebrow">Concept</p>
+    <h2>From one station to the whole line.</h2>
+    <div class="trackline" aria-hidden="true">
+      <span class="st c"></span><span class="rail"></span><span class="st r"></span><span class="rail"></span><span class="st"></span><span class="rail"></span><span class="st a"></span><span class="rail"></span><span class="st fill"></span>
+    </div>
+    <p class="lead" style="margin-top:26px">Mastered the signals of a single station in Railway Dispatcher? Then step up a layer. In Pro you are in charge not of one station but of <b>the entire line</b>. Signals, routes, timetables, rolling stock — it is all on your board.</p>
+    <div class="vs">
+      <div class="vs-card">
+        <span class="tag">RAILWAY DISPATCHER</span>
+        <h3>Run the station.</h3>
+        <p>Work a station’s signals and routes by hand and send every train off on time — life in the signal box.</p>
+      </div>
+      <div class="vs-card pro">
+        <span class="tag">PRO — THIS GAME</span>
+        <h3>Command the line.</h3>
+        <p>Oversee the whole line, read the train diagram, and bring disruptions under control with rescheduling orders — life in the dispatch center.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <p class="eyebrow">Features</p>
+    <h2>Everything is on the dispatch desk.</h2>
+
+    <div class="feat" style="margin-top:20px">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-cyan)">FEATURE 01</span>
+        <h3>The whole line at a glance.</h3>
+        <p>A CTC board shows every train, signal, and cleared route on the line in real time. Where trains are bunching up, where delays are about to spread — the board tells you everything. Click a train to highlight the route it is about to take in orange.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-overview.jpg" alt="Overseeing the whole line on the CTC board" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-pink)">FEATURE 02</span>
+        <h3>Read the diagram.</h3>
+        <p>The dispatcher’s weapon is the train diagram. Planned train paths, delay-adjusted forecasts, and actual performance are drawn on top of each other, so you can see where trouble is heading before it arrives. Working between the board and the diagram to build your next move — that is the heart of dispatching.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-diagram.jpg" alt="Diagram screen" loading="lazy"></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-red)">FEATURE 03</span>
+        <h3>Take back the flow.</h3>
+        <p>A train failure on the main line, in the middle of the morning rush. That worst possible moment is where the dispatcher’s work begins. Holds, delayed departures, extra stops, skipped stops, turnbacks, terminating short — play your rescheduling cards and rebuild a timetable that is collapsing before your eyes.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-incident.jpg" alt="Dispatch screen during a train failure" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-amber)">FEATURE 04</span>
+        <h3>Your results, in numbers.</h3>
+        <p>Every scenario has objectives and a rating, showing in numbers how far you held down the delays and how many trains you kept running. Same disruption, different dispatching, different results. Try again as often as you like and find the best way to reschedule.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-result.jpg" alt="Results summary at the end of a scenario" loading="lazy"></div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-green)">FEATURE 05</span>
+        <h3>Write your own timetable.</h3>
+        <p>With the Timetable Builder you design every train path yourself: dwell times, meets at passing loops, turnback services — all up to you. Watching your own timetable come to life as hundreds of trains is a joy like no other.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-edit.jpg" alt="Timetable Builder screen" loading="lazy"></div>
+    </div>
+
+    <div class="feat rev">
+      <div class="feat-txt">
+        <span class="feat-no" style="--lamp:var(--sig-cyan)">FEATURE 06</span>
+        <h3>Start at any time of day.</h3>
+        <p>In Sandbox, pick a line and a timetable, then start from the first train or from any hour of the day. Practice just the evening rush over and over, or watch only the late-night return to the depot — no waiting through long stretches at high speed. You can also trigger incidents wherever you like.</p>
+      </div>
+      <div class="feat-img"><img src="../assets/img/feature-sandbox.jpg" alt="Choosing a start time in Sandbox" loading="lazy"></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="wash" id="howto">
+  <div class="wrap">
+    <p class="eyebrow">How to Play</p>
+    <h2>The dispatcher’s job, in three steps.</h2>
+    <p class="lead" style="margin-top:14px">No complicated controls. Watch, decide, give orders. That loop is the fun of running a railway.</p>
+    <div class="steps">
+      <div class="step s1">
+        <div class="step-badge">1</div>
+        <h3>Watch</h3>
+        <p>Read the situation on the CTC board and the diagram. Where is a delay starting, and where is it about to spread? Select a train to see the route ahead of it at a glance.</p>
+      </div>
+      <div class="step s2">
+        <div class="step-badge">2</div>
+        <h3>Decide</h3>
+        <p>Which train goes first? Where do you turn back? There is no single right answer. Your decisions become the timetable.</p>
+      </div>
+      <div class="step s3">
+        <div class="step-badge">3</div>
+        <h3>Give orders</h3>
+        <p>Holds, delayed departures, extra stops, turnbacks — carry them out instantly from the orders menu, and the trains respond.</p>
+      </div>
+    </div>
+    <p class="flow-note">Watch → Decide → Give orders. And the timetable recovers.</p>
+  </div>
+</section>
+
+<section id="systems">
+  <div class="wrap">
+    <p class="eyebrow">Incidents &amp; Orders</p>
+    <h2>What goes wrong, and what you can do.</h2>
+    <p class="lead" style="margin-top:14px">Dispatching is a battle of wits between the disruption and the cards in your hand. The game features four types of incident and a full set of orders modeled on real-world rescheduling.</p>
+
+    <h3 style="margin-top:44px">Four types of incident</h3>
+    <div class="inc-grid">
+      <div class="inc-card" style="--inc:var(--sig-red)">
+        <h3>Train failure</h3>
+        <p>A train breaks down on the main line and cannot move an inch until it is fixed. On a dense timetable, a stop of a few minutes turns into disruption across the whole line.</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-amber)">
+        <h3>Track or signal failure (track circuit impassable)</h3>
+        <p>A switch that won’t move or an obstruction on the track closes a section, and routes through it can no longer be set. How well can you juggle the tracks you have left?</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-cyan)">
+        <h3>Section speed restriction</h3>
+        <p>Heavy rain or strong wind forces slow running between stations. It doesn’t stop at delaying a few trains — it upsets intervals and connections and slowly spreads across the whole line.</p>
+      </div>
+      <div class="inc-card" style="--inc:var(--sig-pink)">
+        <h3>Section service suspended</h3>
+        <p>Strong wind or a power failure closes a section to all trains. The line is cut in two, and large-scale rescheduling begins as you set up turnback services on each side.</p>
+      </div>
+    </div>
+    <div class="sandbox-note">
+      Incidents don’t only strike in scenarios. <b>Use “Trigger Incident...” in the menu to cause them yourself — anywhere, any time.</b> Choose which train fails, which section gets a speed restriction and how strict it is. Design your own “worst day ever” and put your dispatching to the test. Once a scenario’s set time has passed, you can clear incidents manually and keep dispatching until the timetable is back to normal.
+    </div>
+
+    <h3 style="margin-top:52px">The cards in your hand</h3>
+    <div class="cmd-grid">
+      <div class="cmd-card" style="--cg:var(--sig-amber)">
+        <h3>Stop and delay</h3>
+        <ul class="cmd-list">
+          <li>Hold (keep a train at a chosen station)</li>
+          <li>Hold all trains in one direction</li>
+          <li>Hold all trains</li>
+          <li>Delay departure (add time in seconds, then confirm)</li>
+          <li>Line-clear departure (leaves after its scheduled time, once the next station is clear)</li>
+        </ul>
+      </div>
+      <div class="cmd-card" style="--cg:var(--sig-pink)">
+        <h3>Change calling points</h3>
+        <ul class="cmd-list">
+          <li>Extra stop</li>
+          <li>Skip stop</li>
+          <li>Restore to timetable</li>
+        </ul>
+        <p class="cmd-note">For a moving train, whether it can still stop in time depends on its current speed and the distance left. Decide early.</p>
+      </div>
+      <div class="cmd-card tall" style="--cg:var(--sig-cyan)">
+        <h3>Rework services</h3>
+        <ul class="cmd-list">
+          <li>Terminate short here (make this the final stop)</li>
+          <li>Create a new turnback service</li>
+          <li>Create a new continue (same-direction) service</li>
+          <li>Link to another service</li>
+          <li>Unlink (cancel the next service)</li>
+          <li>Take over a service that hasn’t departed</li>
+          <li>Edit switches and dwell times for the rest of the run</li>
+        </ul>
+        <p class="cmd-note">A train you terminate short stays on that station’s track. Getting it out of the way is part of the job, too.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="routes">
+  <div class="wrap">
+    <p class="eyebrow">Lines &amp; Scenarios</p>
+    <h2>Five lines, 22 disruptions.</h2>
+    <p class="lead" style="margin-top:14px">From a suburban private railway to a downtown subway, an airport line, and a shinkansen — five lines with very different characters, each with scenarios based on the kinds of disruption real railways face. Every line can be dispatched freely in Sandbox, and on the Steam Workshop you can also play lines made by other players.</p>
+
+    <div class="tut-box">
+      <h3>Start your dispatching career with the tutorials.</h3>
+      <p>No railway knowledge required. Five tutorials take you step by step from the basics up to advanced station control. <b>A red on-screen guide frame points at exactly what to press next</b>, so you learn by doing — no manual needed.</p>
+      <ul class="tut-list">
+        <li><b>1</b>Reading the Screen and the Clock</li>
+        <li><b>2</b>Hold and Resume Service</li>
+        <li><b>3</b>Delay Departure, Extra Stop, Skip Stop</li>
+        <li><b>4</b>Terminate Short and Turn Back</li>
+        <li><b>5</b>Station Control (Manual Routes)</li>
+      </ul>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-green)">
+      <div class="route-img"><img src="../assets/img/route-local.png" alt="Full map of the suburban private railway with a single-track section" loading="lazy"></div>
+      <div>
+        <span class="kicker">LINE 01<span class="stars">DIFFICULTY ★1</span></span>
+        <h3>A suburban private railway with a single-track section</h3>
+        <p class="facts"><b>Kyujo-mae – Sendai – Hiyoridai, 13 stations</b> / Local &amp; Rapid Timetable: 384 trains · Locals-Only Timetable: 377 trains</p>
+        <p>A line running out from the city of Sendai into the suburbs. Beyond Izumi it is single track, and the passing stations where trains meet hold everything together. Connections between rapids and locals shape the daily timetable. The tutorials take place on this line, too.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>Five Minutes in the Morning Mist</b><span>A train failure in the morning rush. Five minutes to recovery — and still the trains behind pile up fast.</span></div></li>
+          <li><span class="lv">★2</span><div><b>Curtain of Rain</b><span>A 25 km/h restriction in heavy rain. Slow running breaks the rapid/local connections and spreads down the line.</span></div></li>
+          <li><span class="lv">★3</span><div><b>The Locked Loop</b><span>Evening rush, and a switch that won’t move puts the passing loop out of use. Juggle the tracks with manual routes.</span></div></li>
+          <li><span class="lv">★4</span><div><b>North Wind Cuts the Line</b><span>Strong wind suspends service. Set up turnback services on both sides of the break.</span></div></li>
+          <li><span class="lv">★5</span><div><b>The Rapid That Won’t Move</b><span>A rapid is stranded at the entrance to the single-track section, all but sealing off the line beyond it.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-amber)">
+      <div class="route-img"><img src="../assets/img/route-boso.png" alt="Full map of the Boso Peninsula private railway" loading="lazy"></div>
+      <div>
+        <span class="kicker">LINE 02<span class="stars">DIFFICULTY ★2</span></span>
+        <h3>A Boso Peninsula private railway with a main line and a branch</h3>
+        <p class="facts"><b>Chiba – Anegasaki – Hatsudensho-mae / Anegasaki – Golf Course, 20 stations</b> / Weekend/Holiday: 360 trains · Weekday: 594 trains</p>
+        <p>A main line running down the Boso coast from Chiba, and a branch that splits off inland at Anegasaki. Rapids, expresses, and locals share the tracks, and overtaking at passing stations is the highlight.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★2</span><div><b>A Kite on the Line</b><span>A large kite tangled in the branch line’s overhead wire. Turn the through rapids back at Anegasaki, then restore the timetable once the line is clear.</span></div></li>
+          <li><span class="lv">★2</span><div><b>First Trains, Trapped in the Depot</b><span>Before dawn, an out-of-service train leaving the depot is stuck at the exit. Accept some cancellations and keep as many trains running as you can.</span></div></li>
+          <li><span class="lv">★3</span><div><b>The Anegasaki Divide</b><span>A local train is stranded between stations on the main line. Run turnbacks in two directions at once at Anegasaki — main line and branch.</span></div></li>
+          <li><span class="lv">★3</span><div><b>Kamatori: The Switch Won’t Move</b><span>Evening rush, and the passing loop is out of use. Move the overtake to the next station and keep the fast trains moving.</span></div></li>
+          <li><span class="lv">★5</span><div><b>Kazusa-Murakami: Ten Minutes of Red</b><span>An emergency stop alarm in the morning rush. Use delayed departures to restore the intervals once service resumes.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-cyan)">
+      <div class="route-img"><img src="../assets/img/route-subway.png" alt="Full map of the subway running through the city center" loading="lazy"></div>
+      <div>
+        <span class="kicker">LINE 03<span class="stars">DIFFICULTY ★2</span></span>
+        <h3>A downtown subway with a train every two and a half minutes</h3>
+        <p class="facts"><b>Hiyoshi – Yokohama – Kamiooka, 25 stations</b> / Weekend/Holiday: 374 trains · Weekday: 569 trains</p>
+        <p>From Hiyoshi through downtown Yokohama to Kamiooka. In the morning, trains to and from Yokohama run every two and a half minutes. On a high-frequency line with only a few stations where trains can turn back, your orders must keep the intervals intact.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>Tsurumi: Losing the North</b><span>The northern terminus is cut off. Turn trains back at Tsurumi, then restore the trapped northern end once it reopens.</span></div></li>
+          <li><span class="lv">★2</span><div><b>Sakuragicho: A Twenty-Minute Gap</b><span>Service is suspended on one downtown section. Run turnbacks on both sides, at Yokohama and Kannai.</span></div></li>
+          <li><span class="lv">★3</span><div><b>Kamiooka: An Evening Without a Turnback</b><span>Evening rush at four-minute intervals, and a switch that won’t move blocks the turnback at the terminus.</span></div></li>
+          <li><span class="lv">★4</span><div><b>Yokohama: The Thirteen-Minute Door</b><span>A door failure costs thirteen minutes. Hold, absorb, and release — textbook rescheduling, head on.</span></div></li>
+          <li><span class="lv">★5</span><div><b>Two and a Half Minutes Apart</b><span>In the tensest hour of the day, small problems keep popping up and fading away, one after another.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-red)">
+      <div class="route-img"><img src="../assets/img/route-airport.png" alt="Full map of the airport line" loading="lazy"></div>
+      <div>
+        <span class="kicker">LINE 04<span class="stars">DIFFICULTY ★3</span></span>
+        <h3>An airport line with subway, quadruple track, and single track</h3>
+        <p class="facts"><b>Sapporo – New Chitose Airport – Lake Shikotsu Onsen, 30 stations</b> / Weekend/Holiday: 655 trains · Weekday: 732 trains</p>
+        <p>From Sapporo via New Chitose Airport to Lake Shikotsu Onsen. Through-running onto a subway, quadruple track as far as Kitahiroshima, and single track out toward the hot springs — every kind of layout packed into one line. With 732 trains a day on weekdays, it is the largest line in the game.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>Suimeikyo: No Place to Pass</b><span>One track is out at a single-line passing station. Get every train through on the one track left.</span></div></li>
+          <li><span class="lv">★2</span><div><b>Kiyota: Losing the Outer Track</b><span>An express track on the quadruple-track section is closed. Forty-five minutes of running four tracks’ worth of trains on three.</span></div></li>
+          <li><span class="lv">★3</span><div><b>Sapporo (Subway): A Morning Without a Crossover</b><span>Morning rush, and the crossover at the end of the subway section fails. Divert trains to the main line and keep capacity into the city.</span></div></li>
+          <li><span class="lv">★4</span><div><b>Beer Garden: A Shadow in the Dark</b><span>Evening rush, and a limited express hits an animal. Run turnbacks using the three headshunts at Kitahiroshima.</span></div></li>
+          <li><span class="lv">★5</span><div><b>Tsukisamu: A Morning Emergency</b><span>During nine minutes of aid for a sick passenger, more trouble piles up one after another — a morning of simultaneous incidents.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--sig-pink)">
+      <div class="route-img"><img src="../assets/img/route-shinkansen.png" alt="Full map of the shinkansen along the Sea of Japan" loading="lazy"></div>
+      <div>
+        <span class="kicker">LINE 05<span class="stars">DIFFICULTY ★2</span></span>
+        <h3>A full-size shinkansen running north along the Sea of Japan</h3>
+        <p class="facts"><b>Kanazawa – Shin-Aomori – Sapporo, 28 stations</b> / Off-Peak Timetable: 171 trains</p>
+        <p>From Kanazawa along the Sea of Japan to Aomori, and on to Sapporo. Trains racing at 275 km/h are protected by two-aspect red/green ATC signals. Stations are far apart, and delays pile up on a scale far beyond any conventional line — rescheduling where distance and speed are on another level.</p>
+        <ul class="sc-list">
+          <li><span class="lv">★1</span><div><b>Sakata: Blackout at Dawn</b><span>A substation fails as the first trains set out, blocking the line in both directions for three hours. Bring out spare trainsets from the depot and rework the services.</span></div></li>
+          <li><span class="lv">★2</span><div><b>Two Hours of Wind on the Sea of Japan</b><span>Two hours of high-wind speed restrictions along the coast. One shinkansen after another gets caught — rebuild the timetable in the hour after the restriction lifts.</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cond-box">
+      <h3>Objectives are the dispatcher’s report card.</h3>
+      <div class="cond-chips">
+        <span>Final max delay within X min</span>
+        <span class="f">No trains stopped outside a station (stranded between stations)</span>
+        <span>No departure gap over X min</span>
+        <span>At least N departures toward X</span>
+      </div>
+      <p>Each scenario sets several objectives, and while you play, the Objectives window tracks your progress with <b>live numbers</b>. How many more minutes of delay can you afford? How many more departures do you need? Giving orders with one eye on those numbers is pure tension — same disruption, different dispatching, different results.</p>
+    </div>
+  </div>
+</section>
+
+<section id="mapmaker">
+  <div class="wrap">
+    <p class="eyebrow">Map Editor</p>
+    <h2>Build your own line.</h2>
+    <p class="lead" style="margin-top:14px">Choose “Map Editor” on the title screen to build a line from scratch. Place stations, connect them, and the signals, levers, and routes are laid out for you. Your line appears in Sandbox and the Timetable Builder, so you can go straight from building it to writing its timetable and dispatching it. Publish it to the Steam Workshop and other players can play it too.</p>
+
+    <div class="mm-grid">
+      <div class="mm-card" style="--mc:var(--sig-green)">
+        <span class="tag">EASY MODE</span>
+        <h3>Four tools are all it takes to build a line.</h3>
+        <p>Pick a track layout to place a station; a few clicks between stations lay the track, blocks, and signals in one go. Long lines can be drawn in several rows that fold back on themselves by connecting separate tracks.</p>
+        <ul class="cmd-list">
+          <li>Create Vehicle</li><li>Build Station</li><li>Connect Stations</li><li>Connect Separate Tracks</li>
+        </ul>
+      </div>
+      <div class="mm-card" style="--mc:var(--accent)">
+        <span class="tag">ADVANCED MODE</span>
+        <h3>Fine-tune down to a single track circuit.</h3>
+        <p>Place and edit track circuits, switches, levers, routes, and signals one by one — or use it to finish off a line you built in Easy mode. Switch between the two modes at any time from the top right; both produce the same line.</p>
+        <ul class="cmd-list">
+          <li>Track circuits</li><li>Switches</li><li>Levers &amp; routes</li><li>Signals</li><li>Moving coordinates</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mm-shots">
+      <img src="../assets/img/mm-easy.jpg" data-full="../assets/img/mm-easy-full.jpg" alt="Map Editor, Easy mode: building a station by choosing a track layout" loading="lazy">
+      <img src="../assets/img/mm-advanced.jpg" data-full="../assets/img/mm-advanced-full.jpg" alt="Map Editor, Advanced mode: editing track circuits and switches directly" loading="lazy">
+    </div>
+
+    <ul class="mm-more">
+      <li><b>To-do list before saving</b>Lists anything left unfinished — unused levers, signals whose references are gone, and more — and takes you straight to each spot.</li>
+      <li><b>Undo / redo</b>Ctrl+Z / Ctrl+Shift+Z supported, so you can experiment freely.</li>
+      <li><b>Automatic line snapshot</b>When you save, a picture of the whole line is taken and shown on the line selection screen.</li>
+    </ul>
+
+    <div class="ws">
+      <h3>Share lines on the Steam Workshop.</h3>
+      <p>Publish your lines to the Steam Workshop, and subscribe to lines other players have made — they appear in line selection. Workshop lines can be used for co-op rooms too.</p>
+      <ul class="ws-steps">
+        <li><b><i>1</i>Browse &amp; subscribe</b>Open the Workshop from inside the game and subscribe to lines that catch your eye.</li>
+        <li><b><i>2</i>Play</b>Subscribed lines appear right away in Sandbox and the Timetable Builder.</li>
+        <li><b><i>3</i>Publish</b>Send your own lines to the Workshop from the Map Editor — and update them later, too.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="wash" id="gallery">
+  <div class="wrap">
+    <p class="eyebrow">Gallery</p>
+    <h2>Screenshots</h2>
+    <div class="gal">
+      <img src="../assets/img/thumb-routeselect.jpg" data-full="../assets/img/large-routeselect.jpg" alt="Line selection screen (with a picture and description of each line)" loading="lazy">
+      <img src="../assets/img/thumb-shinkansen.jpg" data-full="../assets/img/large-shinkansen.jpg" alt="CTC board and diagram of the shinkansen" loading="lazy">
+      <img src="../assets/img/thumb-quad.jpg" data-full="../assets/img/large-quad.jpg" alt="CTC board of the airport line with its quadruple-track section" loading="lazy">
+      <img src="../assets/img/thumb-subway.jpg" data-full="../assets/img/large-subway.jpg" alt="CTC board and diagram of the high-frequency subway" loading="lazy">
+      <img src="../assets/img/thumb-tutorial.jpg" data-full="../assets/img/large-tutorial.jpg" alt="Tutorial (red guide frame)" loading="lazy">
+      <img src="../assets/img/thumb-help.jpg" data-full="../assets/img/large-help.jpg" alt="Dispatch help at the start of a scenario" loading="lazy">
+      <img src="../assets/img/thumb-conditions.jpg" data-full="../assets/img/large-conditions.jpg" alt="Objectives window" loading="lazy">
+      <img src="../assets/img/thumb-play.jpg" data-full="../assets/img/large-play.jpg" alt="Giving hold and extra stop orders" loading="lazy">
+      <img src="../assets/img/thumb-select.jpg" data-full="../assets/img/large-select.jpg" alt="Scenario selection screen" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="wrap">
+    <p class="eyebrow">Product</p>
+    <h2>Product Info</h2>
+    <dl class="spec">
+      <div class="spec-row"><dt>Title</dt><dd>Railway Dispatcher Pro</dd></div>
+      <div class="spec-row"><dt>Price</dt><dd>See the <a href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steam store page</a></dd></div>
+      <div class="spec-row"><dt>Availability</dt><dd>Version 1.0 available now on Steam</dd></div>
+      <div class="spec-row"><dt>What’s included</dt><dd>5 lines (9 timetables) / 22 scenarios / 5 tutorials<br>Sandbox, Timetable Builder, Map Editor, Steam Workshop (map sharing), online co-op (up to 4 players)</dd></div>
+      <div class="spec-row"><dt>Platforms</dt><dd>Steam (Windows, macOS)<br><span style="font-size:13px;color:var(--sub)">Windows and Mac players can play co-op together. Every player needs their own copy of the game.</span></dd></div>
+      <div class="spec-row"><dt>System requirements</dt><dd>Windows: Windows 10 / Intel Core i5 or AMD Ryzen 5 / DirectX 11 capable GPU (integrated graphics OK, Intel UHD Graphics or better)<br>Mac: supports both Intel and Apple silicon</dd></div>
+      <div class="spec-row"><dt>Recommended</dt><dd>Resolution of 1920×1080 or higher. Diagram, orders, and other windows can be moved to a second display, so a dual-monitor setup is recommended</dd></div>
+      <div class="spec-row"><dt>Languages</dt><dd>Japanese, English, Simplified Chinese, Traditional Chinese, Korean, German, Indonesian<br><span style="font-size:13px;color:var(--sub)">The manual is available in Japanese and English</span></dd></div>
+      <div class="spec-row"><dt>Developer / Publisher</dt><dd>Tadimaru LLC</dd></div>
+    </dl>
+    <div class="roadmap">
+      <div class="rm done"><b>Late July 2026<i>DONE</i></b><span>Released on Steam</span></div>
+      <div class="rm done"><b>Aug – Sep 2026<i>DONE</i></b><span>4 lines added<br>17 scenarios added</span></div>
+      <div class="rm done"><b>Sep – Oct 2026<i>DONE</i></b><span>Map Editor<br>Steam Workshop support</span></div>
+      <div class="rm done"><b>Oct 2026<i>DONE</i></b><span>Online co-op<br>(up to 4 players)</span></div>
+      <div class="rm now"><b>Version 1.0<i>NEW</i></b><span>7 languages<br>Mac support</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="sister">
+  <div class="wrap">
+    <p class="eyebrow">Series</p>
+    <h2>Sister Title</h2>
+    <div class="sister">
+      <div>
+        <h3>Railway Dispatcher</h3>
+        <p>The first game in the series, where you work a station’s signals and routes by hand. If you’d like to start with the fun of running a single station, begin here. Play both it and Pro, and you’ll see every layer of how a railway is run.</p>
+        <a class="btn small" href="https://store.steampowered.com/app/4282480/?utm_source=official-site" target="_blank" rel="noopener">View on Steam</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow">FAQ</p>
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Can I play without any railway knowledge?</summary>
+        <p>Yes. The tutorials guide you step by step from the basics, so it’s fine if signals and train diagrams are new to you. Once you’re comfortable, take on lines and scenarios with more difficulty stars. Dispatching together with an experienced player in co-op is a great way to learn, too.</p>
+      </details>
+      <details>
+        <summary>Do I need to have played the earlier game, Railway Dispatcher?</summary>
+        <p>No. Pro is a standalone game, and no story or save data carries over.</p>
+      </details>
+      <details>
+        <summary>Can I build my own lines?</summary>
+        <p>Yes. Choose “Map Editor” on the title screen, place stations and track to build a line, then write its timetable and dispatch it. You can build lines like those in the official maps, though some track layouts cannot be made (for example, loop lines whose start and end are the same station). Please send bugs and requests via <a href="https://tadimaru.com/pro-support/contact.en.html" target="_blank" rel="noopener">Contact (English)</a> in the manual.</p>
+      </details>
+      <details>
+        <summary>Can I share my lines with other players?</summary>
+        <p>Yes. Publish a line to the Steam Workshop from the Map Editor and other players can subscribe to it and play. Lines published to the Workshop can be used for co-op rooms too.</p>
+      </details>
+      <details>
+        <summary>Can I play with friends?</summary>
+        <p>Yes. In online co-op, up to four players on Steam can dispatch the same line and the same timetable together. Create a room from “Co-op” on the title screen and invite others with the six-digit room code or a Steam invite (with a room code, they don’t need to be your Steam friends). Every player needs their own copy of the game, and Windows and Mac players can play together. There is no in-game voice chat, so use Discord or similar alongside it.</p>
+      </details>
+      <details>
+        <summary>Which lines can I play in co-op?</summary>
+        <p>The five built-in lines and lines from the Steam Workshop. Co-op uses Sandbox (free play); scenarios and tutorials are single-player only. If the host picks a Workshop line you don’t have, you can subscribe to it on the spot when you join.</p>
+      </details>
+      <details>
+        <summary>Can I stream or make videos of the game?</summary>
+        <p>Streaming, videos, let’s plays, clips, and monetization are all welcome — no prior permission needed. All revenue is yours. Steam-membership-only streams are fine too.</p>
+      </details>
+      <details>
+        <summary>Can I play on Mac?</summary>
+        <p>Yes. On Steam, the game supports Windows and macOS (both Intel and Apple silicon). Windows and Mac players can also play co-op together.</p>
+      </details>
+      <details>
+        <summary>Which languages are supported?</summary>
+        <p>Seven languages: Japanese, English, Simplified Chinese, Traditional Chinese, Korean, German, and Indonesian. The manual is available in Japanese and English.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="../assets/img/logo-footer.png" alt="Railway Dispatcher Pro">
+    <div class="links">
+      <a href="https://store.steampowered.com/app/4932180/?utm_source=official-site" target="_blank" rel="noopener">Steam Store Page</a>
+      <a href="https://x.com/tadi_maru" target="_blank" rel="noopener">X (dev updates, Japanese)</a>
+      <a href="https://www.youtube.com/@tadimaru-san" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://note.com/tadimaru" target="_blank" rel="noopener">note (dev blog, Japanese)</a>
+      <a href="https://tadimaru.com/pro-support/index.en.html" target="_blank" rel="noopener">Support &amp; Manual (English)</a>
+    </div>
+    <div class="langs" aria-label="Language">
+      <a href="../" lang="ja" hreflang="ja">日本語</a>
+      <a href="../en/" lang="en" hreflang="en" aria-current="page">English</a>
+      <a href="../zh-hans/" lang="zh-Hans" hreflang="zh-Hans">简体中文</a>
+      <a href="../zh-hant/" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a>
+      <a href="../ko/" lang="ko" hreflang="ko">한국어</a>
+      <a href="../de/" lang="de" hreflang="de">Deutsch</a>
+      <a href="../id/" lang="id" hreflang="id">Bahasa Indonesia</a>
+    </div>
+    <p class="copy">© Tadimaru LLC</p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden><img alt=""></div>
+<script>
+(function () {
+  var lb = document.getElementById('lightbox');
+  var im = lb.querySelector('img');
+  function close() { lb.hidden = true; im.src = ''; document.body.style.overflow = ''; }
+  document.querySelectorAll('.feat-img img, .gal img, .route-img img, .mm-shots img').forEach(function (el) {
+    el.addEventListener('click', function () {
+      im.src = el.getAttribute('data-full') || el.src;
+      lb.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  lb.addEventListener('click', close);
+
+  // 狭い画面では、下へスクロールしている間ナビを隠し、上へ戻すと出す
+  var nav = document.querySelector('nav');
+  // 言語メニューは外をクリックしたら閉じる
+  var lang = document.querySelector('details.lang');
+  document.addEventListener('click', function (e) { if (lang && lang.open && !lang.contains(e.target)) lang.open = false; });
+  var narrow = window.matchMedia('(max-width:1240px)');
+  var lastY = window.scrollY, ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY;
+      if (Math.abs(y - lastY) < 6) { ticking = false; return; }
+      var hide = narrow.matches && y > nav.offsetHeight && y > lastY;
+      nav.classList.toggle('nav-hidden', hide);
+      if (hide && lang) lang.open = false;
+      lastY = y;
+      ticking = false;
+    });
+  }, { passive: true });
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); if (lang) lang.open = false; } });
+})();
+</script>
+
+</body>
+</html>
