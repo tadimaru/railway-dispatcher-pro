@@ -61,7 +61,7 @@
     border-bottom:1px solid var(--line);backdrop-filter:blur(6px);
   }
   .nav-in{
-    max-width:1060px;margin:0 auto;padding:8px 24px;
+    max-width:1400px;margin:0 auto;padding:8px 24px; /* 項目の多い言語なので、ほかの言語より広く（DLC を足した 2026-11-27） */
     display:flex;align-items:center;gap:16px;
   }
   .nav-in img{height:44px;width:auto}
@@ -75,7 +75,7 @@
   section[id]{scroll-margin-top:72px}
   /* 狭い画面: ロゴ＋購入ボタンの1段と、横スクロールのリンク1段にまとめる。
      下へスクロール中は隠し、上へ戻すと出す（固定ヘッダーが画面を占有しないように） */
-  @media (max-width:1240px){
+  @media (max-width:1440px){
     .nav-in{flex-wrap:wrap;gap:4px 12px;padding:6px 16px 0}
     .nav-in img{height:34px}
     .nav-in .btn.small{margin-left:auto;padding:6px 14px;font-size:13px;white-space:nowrap}
@@ -533,11 +533,12 @@
   <div class="nav-in">
     <img src="../assets/img/logo-nav.png" alt="Railway Dispatcher Pro">
     <div class="nav-links">
-      <a href="#coop" class="new">Koop</a>
+      <a href="#coop">Koop</a>
       <a href="#features">Funktionen</a>
       <a href="#howto">Spielprinzip</a>
       <a href="#systems">Störungen &amp; Weisungen</a>
       <a href="#routes">Strecken &amp; Szenarien</a>
+      <a href="dlc-niigata/" class="new">DLC</a>
       <a href="#mapmaker">Karteneditor</a>
       <a href="#gallery">Galerie</a>
       <a href="#product">Produktinfo</a>
@@ -563,7 +564,7 @@
   <img class="hero-img" src="../assets/img/hero.jpg" alt="CTC-Übersicht mit Blick über die gesamte Strecke">
   <div class="hero-shade"></div>
   <div class="wrap hero-content">
-    <a class="hero-news" href="#product"><b>UPDATE</b>Jetzt als Vollversion – in 7 Sprachen und für Mac</a>
+    <a class="hero-news" href="dlc-niigata/"><b>COMING SOON</b>DLC „Niigata Chiho Railway“ erscheint bald – mit Vereinigen und Trennen von Zügen</a>
     <p class="eyebrow">Railway Dispatcher Pro — Official Site</p>
     <h1>Vom Bahnhof<br>zur ganzen Strecke.</h1>
     <p class="lead">Sie sind der Disponent. Von einem Arbeitsplatz mit Blick über die gesamte Strecke aus halten Sie Dutzende Züge pünktlich. Bringen Sie den aus dem Takt geratenen Fahrplan mit Ihren Weisungen wieder in Ordnung.</p>
@@ -915,6 +916,17 @@
           <li><span class="lv">★1</span><div><b>Sakata: Stromausfall im Morgengrauen</b><span>Zur Zeit der ersten Züge fällt ein Unterwerk aus: drei Stunden Unterbrechung in beiden Richtungen. Holen Sie Reservefahrzeuge aus dem Betriebswerk und planen Sie die Leistungen um.</span></div></li>
           <li><span class="lv">★2</span><div><b>Zwei Stunden Wind am Japanischen Meer</b><span>Zwei Stunden Langsamfahrt wegen Sturm an der Küste. Ein Shinkansen nach dem anderen gerät hinein – holen Sie die Verspätungen in der Stunde nach der Aufhebung wieder auf.</span></div></li>
         </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--accent)">
+      <div class="route-img"><img src="../assets/img/dlc-niigata/routemap-geo-en-thumb.jpg" data-full="../assets/img/dlc-niigata/routemap-geo-en.png" alt="Streckenkarte der Niigata Chiho Railway" loading="lazy"></div>
+      <div>
+        <span class="kicker">DLC</span>
+        <h3>Niigata Chiho Railway</h3>
+        <p class="facts"><b>5 Strecken, 61 Bahnhöfe</b> / offizielle Fahrpläne für Werktage sowie Wochenenden und Feiertage</p>
+        <p>Eine fiktive Regionalbahn durch die Niigata-Ebene und entlang der Küste des Japanischen Meeres. Ein separat erhältlicher DLC, in dem Sie Züge disponieren, die vereinigt und unterwegs wieder getrennt werden.</p>
+        <a class="btn small" href="dlc-niigata/">Zur DLC-Seite →</a>
       </div>
     </div>
 

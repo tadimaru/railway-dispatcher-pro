@@ -61,7 +61,7 @@
     border-bottom:1px solid var(--line);backdrop-filter:blur(6px);
   }
   .nav-in{
-    max-width:1060px;margin:0 auto;padding:8px 24px;
+    max-width:1400px;margin:0 auto;padding:8px 24px; /* 項目の多い言語なので、ほかの言語より広く（DLC を足した 2026-11-27） */
     display:flex;align-items:center;gap:16px;
   }
   .nav-in img{height:44px;width:auto}
@@ -75,7 +75,7 @@
   section[id]{scroll-margin-top:72px}
   /* 狭い画面: ロゴ＋購入ボタンの1段と、横スクロールのリンク1段にまとめる。
      下へスクロール中は隠し、上へ戻すと出す（固定ヘッダーが画面を占有しないように） */
-  @media (max-width:1240px){
+  @media (max-width:1440px){
     .nav-in{flex-wrap:wrap;gap:4px 12px;padding:6px 16px 0}
     .nav-in img{height:34px}
     .nav-in .btn.small{margin-left:auto;padding:6px 14px;font-size:13px;white-space:nowrap}
@@ -532,11 +532,12 @@
   <div class="nav-in">
     <img src="../assets/img/logo-nav.png" alt="Railway Dispatcher Pro">
     <div class="nav-links">
-      <a href="#coop" class="new">Co-op</a>
+      <a href="#coop">Co-op</a>
       <a href="#features">Fitur</a>
       <a href="#howto">Cara Bermain</a>
       <a href="#systems">Gangguan &amp; Perintah</a>
       <a href="#routes">Lintas &amp; Skenario</a>
+      <a href="dlc-niigata/" class="new">DLC</a>
       <a href="#mapmaker">Pembuat Peta</a>
       <a href="#gallery">Galeri</a>
       <a href="#product">Info Produk</a>
@@ -562,7 +563,7 @@
   <img class="hero-img" src="../assets/img/hero.jpg" alt="Layar CTC yang memantau seluruh lintas">
   <div class="hero-shade"></div>
   <div class="wrap hero-content">
-    <a class="hero-news" href="#product"><b>UPDATE</b>Versi resmi telah dirilis — kini mendukung 7 bahasa dan Mac</a>
+    <a class="hero-news" href="dlc-niigata/"><b>COMING SOON</b>DLC "Niigata Chiho Railway" segera hadir — dengan penggabungan dan pemisahan kereta</a>
     <p class="eyebrow">Railway Dispatcher Pro — Official Site</p>
     <h1>Dari satu stasiun,<br>hingga seluruh lintas.</h1>
     <p class="lead">Anda adalah pengendali perjalanan. Dari meja kendali yang memantau seluruh lintas, jaga puluhan kereta tetap berjalan tepat waktu. Saat Gapeka berantakan, pulihkan dengan perintah Anda.</p>
@@ -914,6 +915,17 @@
           <li><span class="lv">★1</span><div><b>Sakata, Padam di Kala Fajar</b><span>Gardu listrik rusak pada jam kereta pertama, kedua arah terputus selama tiga jam. Bangunkan sarana cadangan di dipo dan susun ulang tugas perjalanan.</span></div></li>
           <li><span class="lv">★2</span><div><b>Laut Jepang, Dua Jam Angin</b><span>Pembatasan kecepatan karena angin kencang di pesisir selama dua jam. Pulihkan keterlambatan Shinkansen yang satu per satu terjebak pembatasan, dalam satu jam setelah pembatasan dicabut.</span></div></li>
         </ul>
+      </div>
+    </div>
+
+    <div class="route" style="--rc:var(--accent)">
+      <div class="route-img"><img src="../assets/img/dlc-niigata/routemap-geo-en-thumb.jpg" data-full="../assets/img/dlc-niigata/routemap-geo-en.png" alt="Peta lintas Niigata Chiho Railway" loading="lazy"></div>
+      <div>
+        <span class="kicker">DLC</span>
+        <h3>Niigata Chiho Railway</h3>
+        <p class="facts"><b>5 lintas, 61 stasiun</b>　/　gapeka resmi hari kerja dan akhir pekan/hari libur</p>
+        <p>Kereta api regional fiktif yang melintasi dataran Niigata dan pesisir Laut Jepang. DLC terpisah tempat Anda mengatur kereta yang digabung dan dipisah di tengah perjalanan.</p>
+        <a class="btn small" href="dlc-niigata/">Lihat halaman DLC →</a>
       </div>
     </div>
 
